@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ishita Sharma — Designer</title>
+<meta name="description" content="Portfolio of Ishita Sharma, a UX/Product and Visual Designer.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css?v=28" />
+</head>
+<body>
+<a href="#home" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#home" aria-label="Home">
+        <img class="rat-logo" src="assets/images/rat.png" alt="Ishita Sharma — home" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#playground">Playground</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-line">
+        Hi,I'm Ishita.&nbsp; I chew through a problem until I find the part that was loose.
+      </p>
+      <p class="hero-tagline">
+        Following the &ldquo;jack of all trades, master of one&rdquo; philosophy.<br>
+        Still figuring out the one.
+      </p>
+      <div class="hero-image">
+        <div class="hero-image-inner" id="heroImageInner">
+          <img src="assets/images/hero-turntable.png" alt="" />
+          <img class="hero-disc-spin" id="heroDiscSpin" src="assets/images/disc-hero.png" alt="" aria-hidden="true" />
+        </div>
+      </div>
+      <p class="hero-hint">
+        <svg class="hero-hint-arrow" viewBox="0 0 74 92" fill="none" aria-hidden="true">
+          <path d="M16 6C48 8 64 32 46 54C37 65 28 70 25 84" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M13 70L25 86L39 75" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M60 19L68 15M63 33L71 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <span>Tap on vinyl to play my favorite song</span>
+      </p>
+      <audio id="heroVinylAudio" src="assets/audio/hero-vinyl-track.mp3" preload="none" loop></audio>
+    </div>
+  </section>
+
+  <!-- ================= SELECTED PROJECTS — pinned carousel ================= -->
+  <section id="projects" class="projects-pin-section">
+    <div class="projects-sticky">
+      <div class="projects-head-fixed">
+        <div class="wrap">
+          <h2 class="section-head" style="margin-bottom:0;">Selected Projects</h2>
+        </div>
+      </div>
+
+      <div class="projects-track" id="projectsTrack">
+
+        <div class="project-slide is-active">
+          <div class="project-slide-inner">
+            <div class="thumb-frame furlenco">
+              <img src="assets/images/thumb-furlenco-vinyl-hd.png" alt="Furlenco project — a person's feet up on a rented leather sofa, styled as a vinyl record sleeve" />
+            </div>
+            <div class="proj-copy">
+              <div class="proj-index">01</div>
+              <div class="proj-meta">UX RESEARCH · UX DESIGN · VISUAL DESIGN</div>
+              <h3 class="proj-name">Furlenco</h3>
+              <p class="proj-desc">A UX study and redesign exploring how furniture rental/shopping experiences can make finding, evaluating and choosing furniture easier.</p>
+              <span class="proj-status">In progress</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-slide">
+          <div class="project-slide-inner">
+            <div class="thumb-frame nazar">
+              <img src="assets/images/thumb-nazar-vinyl-hd.png" alt="Nazar app icon on a phone home screen, styled as a vinyl record sleeve" />
+              <span class="scan-line"></span>
+            </div>
+            <div class="proj-copy">
+              <div class="proj-index">02</div>
+              <div class="proj-meta">BRAND STRATEGY · VISUAL IDENTITY · ART DIRECTION</div>
+              <h3 class="proj-name">Nazar</h3>
+              <p class="proj-desc">A visual identity project built around human attention and the difference between simply being seen and genuinely being acknowledged.</p>
+              <a class="proj-link" href="work/nazar.html">View project
+                <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-slide">
+          <div class="project-slide-inner">
+            <div class="thumb-frame studio">
+              <img src="assets/images/thumb-studio-vinyl-hd.png" alt="Studio coffee machine research illustration — 'And so I got to work.' styled as a vinyl record sleeve" />
+              <span class="steam s1"></span>
+              <span class="steam s2"></span>
+              <span class="steam s3"></span>
+            </div>
+            <div class="proj-copy">
+              <div class="proj-index">03</div>
+              <div class="proj-meta">UX RESEARCH · PRODUCT DESIGN</div>
+              <h3 class="proj-name">Studio</h3>
+              <p class="proj-desc">A coffee machine UX redesign — research into why a simple morning routine kept turning into public confusion.</p>
+              <a class="proj-link" href="work/coffee-machine.html">View project
+                <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="projects-progress">
+        <span class="is-active"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT I DO ================= -->
+  <section id="whatido-section">
+    <div class="wrap">
+      <h2 class="section-head">What I do</h2>
+      <div class="whatido">
+        <ul class="skill-list" id="skillList">
+          <li class="skill-item active" data-skill="0">
+            <h3>UX &amp; Product Design</h3>
+            <p>Researching how people behave, finding friction, and turning it into clearer digital experiences.</p>
+          </li>
+          <li class="skill-item" data-skill="1">
+            <h3>Brand &amp; Visual Design</h3>
+            <p>Building visual identities and systems that give ideas a distinct personality.</p>
+          </li>
+          <li class="skill-item" data-skill="2">
+            <h3>Creative Exploration</h3>
+            <p>Experimenting with AI, motion, photography and visual storytelling to push ideas further.</p>
+          </li>
+        </ul>
+        <div class="skill-visual-col">
+          <div class="skill-visual">
+            <video class="active" data-idx="0" src="assets/videos/whatido-01-ux-product.mp4" muted loop playsinline preload="metadata"></video>
+            <video data-idx="1" src="assets/videos/whatido-03-creative.mp4" muted loop playsinline preload="metadata"></video>
+            <video data-idx="2" src="assets/videos/whatido-02-brand-visual.mp4" muted loop playsinline preload="metadata"></video>
+          </div>
+          <p class="skill-visual-caption">and how i feel about it</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="wrap">
+      <h2 class="section-head">About me</h2>
+      <div class="about-layout">
+        <div class="about-photo">
+          <img src="assets/images/about-portrait-raw.png" alt="Portrait of Ishita Sharma" />
+        </div>
+        <div class="about-copy">
+          <p class="about-stat">Bangalore, 20 years old</p>
+          <p class="about-quote">&ldquo;damn.&rdquo;</p>
+          <div class="about-text">
+            <p>I'm a designer who asks a lot of questions, usually starting with "why?" I enjoy understanding how people think, spotting what isn't working, and finding a better way to move between UX, branding, and visual output, depending on what the idea needs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PLAYGROUND ================= -->
+  <section id="playground">
+    <div class="wrap">
+      <h2 class="section-head">Playground</h2>
+    </div>
+    <div class="pg-strip dir-left">
+      <div class="pg-track" id="pgRowLeft"></div>
+    </div>
+    <div class="pg-strip dir-right">
+      <div class="pg-track" id="pgRowRight"></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-head">Contact me</h2>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-intro">You made it this far. Might as well say hi.</p>
+          <ul class="contact-links">
+            <li><a href="mailto:ishitasharma6562@gmail.com">Email <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/in/ishita-sharma-94436a299" target="_blank" rel="noopener">LinkedIn <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg></a></li>
+            <li><a href="https://www.behance.net/ishitasharma108" target="_blank" rel="noopener">Behance <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg></a></li>
+            <li><a href="assets/docs/Ishita_Sharma_Resume.pdf" target="_blank" rel="noopener">Resume <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg></a></li>
+          </ul>
+        </div>
+        <div class="contact-illustration">
+          <img src="assets/images/contact-rat.png?v=4" alt="Illustration of the rat listening on a tin-can telephone, wire trailing off to the right" />
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="exit-rat-wrap">
+    <span class="exit-crumb" id="exitCrumb"></span>
+    <div class="exit-rat" id="exitRat">
+      <img src="assets/images/rat.png" alt="" />
+    </div>
+  </div>
+  <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
+</footer>
+
+<button type="button" class="sticky-audio-toggle" id="stickyAudioToggle" aria-label="Play song" aria-pressed="false">
+  <svg class="icon-play" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13.5 8L4 13.5V2.5Z" fill="currentColor"/></svg>
+  <svg class="icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3.5" y="2.5" width="3.2" height="11" fill="currentColor"/><rect x="9.3" y="2.5" width="3.2" height="11" fill="currentColor"/></svg>
+</button>
+
+<script src="assets/js/main.js?v=9"></script>
+</body>
+</html>
