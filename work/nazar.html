@@ -1,154 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nazar — Brand Identity Case Study | Ishita Sharma</title>
-<meta name="description" content="Nazar: a brand identity project that flips the fear of attention into an invitation for it — by Ishita Sharma.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖤</text></svg>">
-<link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/case-study.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nazar — Be heard, not just seen | Ishita Sharma</title>
+<meta name="description" content="Nazar: a brand identity for a world where human attention is a luxury. Naming, mark, identity system and applications — by Ishita Sharma." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=30" />
+<link rel="stylesheet" href="../assets/css/nazar.css?v=14" />
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
-<div class="scroll-progress"></div>
 
-<header class="site-header">
-  <a href="../index.html" class="logo">Ishita<span>.</span></a>
-  <nav class="nav-desktop" aria-label="Primary">
-    <a href="../index.html#work">Work</a>
-    <a href="../index.html#about">About</a>
-    <a href="../index.html#achievements">Achievements</a>
-    <a href="../index.html#contact">Contact</a>
-  </nav>
-  <div style="display:flex; align-items:center; gap:1rem;">
-    <a href="../assets/docs/Ishita_Sharma_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Resume ↗</a>
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="../index.html" aria-label="Home">
+        <img class="rat-logo" src="../assets/images/rat.png" alt="Ishita Sharma — home" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#playground">Playground</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </nav>
   </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" aria-label="Close menu">Close ✕</button>
-  <ul>
-    <li><a href="../index.html#work">Work</a></li>
-    <li><a href="../index.html#about">About</a></li>
-    <li><a href="../index.html#achievements">Achievements</a></li>
-    <li><a href="../index.html#contact">Contact</a></li>
-  </ul>
-  <div class="mobile-extra">
-    <a href="../assets/docs/Ishita_Sharma_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Resume ↗</a>
-    <a href="mailto:ishitasharma6562@gmail.com" class="btn btn-ghost btn-sm">Email</a>
-  </div>
-</div>
-
 <main id="main">
 
-  <div class="container cs-hero">
-    <a href="../index.html#work" class="cs-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 7L7 17M7 17H15M7 17V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back to work
-    </a>
-
-    <div class="cs-cats reveal" style="margin-top:1.75rem;">
-      <span class="tag">Brand Strategy</span>
-      <span class="tag">Visual Identity</span>
-      <span class="tag">Art Direction</span>
+  <!-- ============ HERO ============ -->
+  <section class="nz-hero">
+    <div class="wrap">
+      <p class="nz-kicker">Brand Strategy &middot; Visual Identity &middot; Art Direction</p>
+      <h1 class="nz-title">Nazar</h1>
+      <p class="nz-tagline">Be heard. Not just seen.</p>
     </div>
-    <h1 class="reveal">Nazar — making attention feel intentional, not passive.</h1>
-    <p class="lede reveal" style="transition-delay:100ms;">A brand identity built around a cultural idea everyone already knows — the fear of "nazar lagna" — flipped into something you'd actually want more of.</p>
-
-    <dl class="cs-meta reveal" style="transition-delay:150ms;">
-      <div><dt>Role</dt><dd>Brand &amp; Visual Designer</dd></div>
-      <div><dt>Type</dt><dd>Brand identity concept</dd></div>
-      <div><dt>Deliverables</dt><dd>Naming, identity, art direction</dd></div>
-      <div><dt>Tools</dt><dd>Figma, Illustrator, Procreate</dd></div>
-    </dl>
-
-    <div class="cs-cover reveal" style="transition-delay:200ms;">
-      <div class="cs-placeholder">
-        <strong>Image slot</strong>
-        Drop in the Nazar hero shot / app icon closeup here (1600×900 or larger)
-      </div>
+    <!-- The eye is baked into hero.jpg; this is the same disc lifted out and
+         registered exactly on top of it, so it can breathe on its own. -->
+    <div class="nz-hero-img">
+      <img src="../assets/images/nazar-cs/hero.jpg" width="2000" height="1125" alt="The Nazar wordmark over a portrait, lit in deep maroon" />
+      <span class="nz-eye" aria-hidden="true">
+        <img src="../assets/images/nazar-cs/eye-mark.png" width="251" height="251" alt="" />
+      </span>
     </div>
-  </div>
-
-  <!-- CONTEXT -->
-  <section class="cs-section">
-    <div class="container cs-grid">
-      <span class="cs-label reveal">The Idea</span>
-      <div class="cs-content reveal">
-        <h3>Lagne do.</h3>
-        <p>Nazar was the name that made an immediate, cultural connection to attention. We grow up hearing "nazar na lag jaye" — the fear of too many eyes, too much attention, landing on you at once.</p>
-        <p>Nazar takes that same idea and flips it: instead of warding off attention, you're inviting it. What used to be something to protect yourself from is now something you pay for.</p>
-      </div>
+    <div class="wrap">
+      <dl class="nz-meta">
+        <div><dt>Project</dt><dd>Brand identity, college branding elective</dd></div>
+        <div><dt>Brief</dt><dd>A luxury brand for human attention</dd></div>
+        <div><dt>Role</dt><dd>Strategy, naming, identity, applications</dd></div>
+        <div><dt>Timeline</dt><dd>1 week</dd></div>
+        <div><dt>Tools</dt><dd>Illustrator, Photoshop</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- STRATEGY / DARK SECTION -->
-  <section class="cs-section is-dark">
-    <div class="container cs-grid">
-      <span class="cs-label reveal">The Tagline</span>
-      <div class="cs-content reveal">
-        <h3>Seen is easy. Heard is the upgrade.</h3>
-        <p>Nazar already means gaze. But a gaze alone can be empty, passive, meaningless.</p>
-        <p>Out of the tagline options, <strong>"Be heard, not just seen"</strong> was the only one that pushed past just being noticed and pointed to something deeper — being registered, valued, responded to.</p>
-        <p class="cs-pullquote">On Nazar, attention isn't a glance in passing — it's <strong>undivided, paid for, and real</strong>. That's the difference between being seen and being heard.</p>
+  <!-- ============ THE BRIEF ============ -->
+  <section class="nz-sec">
+    <div class="wrap nz-split">
+      <div class="nz-split-head">
+        <span class="nz-num">01</span>
+        <h2>The brief</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- IDENTITY DECISIONS -->
-  <section class="cs-section">
-    <div class="container cs-grid">
-      <span class="cs-label reveal">Visual Identity</span>
-      <div class="cs-content reveal">
-        <h3>An identity built to hold both meanings at once.</h3>
-        <p>The evil-eye motif carries the "nazar" reference directly, while a deep maroon-and-cream palette and a bold, direct type system keep the brand feeling confident rather than superstitious — attention as something intentional, not accidental.</p>
-        <div class="cs-two-col">
-          <div class="cs-feature-card">
-            <h4>Colour &amp; motif</h4>
-            <p>Deep maroon grounds the brand in intensity; warm cream keeps it legible and human. The evil-eye shape recurs as a mark of focus.</p>
-          </div>
-          <div class="cs-feature-card">
-            <h4>Voice</h4>
-            <p>Short, declarative lines ("Lagne do.") that sound like they're daring you to look — matching the brand's core flip on attention.</p>
-          </div>
+      <div class="nz-split-body">
+        <div class="nz-pair">
+          <h3>What I had to deliver</h3>
+          <p>The brief explores a future where human attention becomes a scarce luxury, creating a brand that turns genuine, focused attention into something that can be reserved and exchanged.</p>
+        </div>
+        <div class="nz-pair">
+          <h3>How I read it</h3>
+          <p>I explored attention through our need to be seen and validated, uncovering its darker psychology. The identity had to feel inviting yet subtly unsettling.</p>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="cs-note reveal">
-        <strong>Note:</strong> this is a concept/branding exercise. Full application designs (packaging, app screens, social) can be added here as they're finalised — happy to expand this section with more visuals.
+  </section>
+
+  <!-- ============ REFERENCE ============ -->
+  <section class="nz-sec">
+    <div class="wrap nz-split">
+      <div class="nz-split-head">
+        <span class="nz-num">02</span>
+        <h2>What I looked at first</h2>
+      </div>
+      <div class="nz-split-body">
+        <figure class="nz-figure">
+          <img src="../assets/images/nazar-cs/supreme.jpg" width="2000" height="631" loading="lazy" alt="The Supreme box logo, studied as a reference for scarcity and desire" />
+        </figure>
+        <div class="nz-pair">
+          <h3>What I noticed</h3>
+          <p>I looked at Supreme to understand how scarcity can create desire and increase perceived value. The harder something is to access, the more people want it.</p>
+        </div>
+        <div class="nz-pair">
+          <h3>What I took from it</h3>
+          <p>I brought this into Nazar by treating human attention as limited and valuable, using exclusivity, demand and the desire to be chosen as part of the brand's psychology.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="cs-nextproject container">
-    <a href="coffee-machine.html" style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:1.5rem;">
-      <div>
-        <div class="label">Next project</div>
-        <h3>Coffee Machine UX Redesign</h3>
+  <!-- ============ NAMING ============ -->
+  <section class="nz-sec">
+    <div class="wrap nz-split">
+      <div class="nz-split-head">
+        <span class="nz-num">03</span>
+        <h2>Choosing the name</h2>
       </div>
-      <span class="arrow">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-    </a>
-  </div>
+      <div class="nz-split-body">
+        <ul class="nz-options">
+          <li><span class="nz-opt-name">AOORA</span><span class="nz-opt-why">Too abstract.</span></li>
+          <li><span class="nz-opt-name">Drishti</span><span class="nz-opt-why">More about vision than attention.</span></li>
+          <li><span class="nz-opt-name">Manas</span><span class="nz-opt-why">Too broad and introspective.</span></li>
+          <li><span class="nz-opt-name">Ekaagr</span><span class="nz-opt-why">Too calm and focused.</span></li>
+          <li class="is-chosen"><span class="nz-opt-name">Nazar</span><span class="nz-opt-why">Chosen</span></li>
+        </ul>
+        <p class="nz-callout"><strong>Why Nazar</strong> It captured the duality I wanted; the desire to be noticed and the discomfort of being watched.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAGLINE ============ -->
+  <section class="nz-sec">
+    <div class="wrap nz-split">
+      <div class="nz-split-head">
+        <span class="nz-num">04</span>
+        <h2>Choosing the tagline</h2>
+      </div>
+      <div class="nz-split-body">
+        <ul class="nz-options nz-options--lines">
+          <li><span class="nz-opt-name">Attention is the new currency.</span></li>
+          <li><span class="nz-opt-name">Chosen minds. Real impact.</span></li>
+          <li><span class="nz-opt-name">Attention, reserved for you</span></li>
+          <li><span class="nz-opt-name">Where attention is earned.</span></li>
+          <li class="is-chosen"><span class="nz-opt-name">Be heard. Not just seen.</span><span class="nz-opt-why">Chosen</span></li>
+        </ul>
+        <p class="nz-callout"><strong>Why this one</strong> It makes attention feel scarce, personal and exclusive, reinforcing Nazar's idea that genuine human attention is something valuable that can be deliberately reserved.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOOD BOARD ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">05</span>
+        <h2>Mood board</h2>
+      </div>
+    </div>
+    <figure class="nz-bleed">
+      <img src="../assets/images/nazar-cs/moodboard.jpg" width="2000" height="1045" loading="lazy" alt="Mood board: gaze, isolation, repetition and contrast" />
+    </figure>
+    <div class="wrap">
+      <p class="nz-callout nz-callout--wide"><strong>What this told me</strong> The brand needed to feel observed, desired and slightly uncomfortable, using the gaze, isolation, repetition and contrast to explore the psychology of attention.</p>
+    </div>
+  </section>
+
+  <!-- ============ EXPLORATIONS ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">06</span>
+        <h2>Exploring the mark</h2>
+        <p class="nz-lede">Six directions, each testing a different way to put the idea of a gaze into the name itself.</p>
+      </div>
+      <div class="nz-explore">
+        <img src="../assets/images/nazar-cs/explore-1.jpg?v=2" width="1058" height="596" loading="lazy" alt="Logo exploration 1" />
+        <img src="../assets/images/nazar-cs/explore-2.jpg?v=2" width="1058" height="596" loading="lazy" alt="Logo exploration 2" />
+        <img src="../assets/images/nazar-cs/explore-3.jpg?v=2" width="1058" height="596" loading="lazy" alt="Logo exploration 3" />
+        <img src="../assets/images/nazar-cs/explore-4.jpg?v=2" width="1058" height="596" loading="lazy" alt="Logo exploration 4" />
+        <img src="../assets/images/nazar-cs/explore-5.jpg?v=2" width="1058" height="596" loading="lazy" alt="Logo exploration 5" />
+        <img src="../assets/images/nazar-cs/explore-6.jpg?v=2" width="1058" height="596" loading="lazy" alt="Logo exploration 6" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHORTLIST ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">07</span>
+        <h2>The shortlist</h2>
+      </div>
+      <figure class="nz-figure">
+        <img src="../assets/images/nazar-cs/shortlist.jpg" width="2000" height="1086" loading="lazy" alt="Two shortlisted marks compared side by side" />
+      </figure>
+      <p class="nz-callout nz-callout--wide"><strong>How I chose</strong> I shortlisted the logos based on how well they communicated gaze, attention and intensity, while still feeling distinct, memorable and adaptable as an app identity.</p>
+    </div>
+  </section>
+
+  <!-- ============ FINAL MARK ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">08</span>
+        <h2>The final mark</h2>
+      </div>
+      <figure class="nz-figure">
+        <img src="../assets/images/nazar-cs/final-idea.jpg" width="2000" height="957" loading="lazy" alt="The idea behind the mark: a kaala tikka repositioned as an eye" />
+      </figure>
+    </div>
+    <figure class="nz-bleed nz-bleed--flush">
+      <img src="../assets/images/nazar-cs/final-mark.jpg" width="2000" height="1125" loading="lazy" alt="The final Nazar lockup in cream on deep maroon" />
+    </figure>
+  </section>
+
+  <!-- ============ COLOUR & TYPE ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">09</span>
+        <h2>Colour and typography</h2>
+      </div>
+      <!-- Stacked full width, as in the Figma: the boards already carry their
+           own hex values and typeface names, so no captions are needed. -->
+      <figure class="nz-figure">
+        <img src="../assets/images/nazar-cs/colour.jpg" width="2000" height="1129" loading="lazy" alt="The mark across the four brand colours — maroon, cream, ivory and navy" />
+      </figure>
+      <h3 class="nz-subhead">Typography</h3>
+      <figure class="nz-figure">
+        <img src="../assets/images/nazar-cs/type.jpg" width="2000" height="1129" loading="lazy" alt="Neue Haas Grotesk Display Pro specimens set on each brand colour, with hex values" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ LOCKUPS ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">10</span>
+        <h2>Logo lockups</h2>
+      </div>
+      <figure class="nz-figure">
+        <img src="../assets/images/nazar-cs/lockup-primary.jpg" width="2000" height="1125" loading="lazy" alt="Primary Nazar lockup in cream on navy" />
+        <figcaption>Campaigns &amp; key brand moments</figcaption>
+      </figure>
+      <div class="nz-two">
+        <figure class="nz-figure">
+          <img src="../assets/images/nazar-cs/lockup-wordmark.jpg" width="1058" height="612" loading="lazy" alt="Nazar wordmark without the eye, on maroon" />
+          <figcaption>Formal brand communication</figcaption>
+        </figure>
+        <figure class="nz-figure">
+          <img src="../assets/images/nazar-cs/lockup-symbol.jpg" width="1058" height="612" loading="lazy" alt="The eye symbol on its own" />
+          <figcaption>App icons &amp; small spaces</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLICATIONS ============ -->
+  <section class="nz-sec">
+    <div class="wrap">
+      <div class="nz-head-wide">
+        <span class="nz-num">11</span>
+        <h2>The brand in use</h2>
+      </div>
+      <div class="nz-apps">
+        <img src="../assets/images/nazar-cs/app-poster.jpg" width="1058" height="1402" loading="lazy" alt="Poster: a figure surrounded by eyes, captioned be heard not just seen" />
+        <img src="../assets/images/nazar-cs/app-phone.jpg" width="1058" height="1402" loading="lazy" alt="The Nazar app open on a phone held in one hand" />
+        <img src="../assets/images/nazar-cs/app-icon.jpg" width="1058" height="1402" loading="lazy" alt="The Nazar app icon on a phone home screen" />
+        <img src="../assets/images/nazar-cs/app-ad.jpg" width="1058" height="1402" loading="lazy" alt="Digital ad: the wordmark over a portrait" />
+      </div>
+      <figure class="nz-figure nz-figure--tall">
+        <img src="../assets/images/nazar-cs/app-tote.jpg" width="2000" height="2170" loading="lazy" alt="The Nazar mark printed on a canvas tote bag" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <figure class="nz-bleed nz-bleed--flush nz-closing">
+    <img src="../assets/images/nazar-cs/closing.jpg" width="2000" height="1125" loading="lazy" alt="Nazar — be heard, not just seen" />
+  </figure>
+
+  <section class="nz-outro">
+    <div class="wrap">
+      <a class="nz-back" href="../index.html#projects">
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M11 3L3 11M3 11H10M3 11V4" stroke="currentColor" stroke-width="1.4"/></svg>
+        Back to all projects
+      </a>
+    </div>
+  </section>
 
 </main>
 
-<footer class="site-footer">
-  <p>© <span data-year>2026</span> Ishita Sharma. Built with care.</p>
-  <div class="footer-links">
-    <a href="https://www.linkedin.com/in/ishita-sharma-94436a299" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.behance.net/ishitasharma108" target="_blank" rel="noopener">Behance</a>
-    <a href="mailto:ishitasharma6562@gmail.com">Email</a>
-  </div>
-  <a href="#top" class="back-to-top">Back to top ↑</a>
+<footer>
+  <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
 </footer>
 
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/nazar.js?v=2"></script>
 </body>
 </html>

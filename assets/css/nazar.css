@@ -1,0 +1,223 @@
+/* ============================================================
+   NAZAR CASE STUDY
+   Editorial layout on the portfolio's cream base, punctuated by
+   full-bleed boards in Nazar's own palette.
+   ============================================================ */
+
+:root{
+  --nz-maroon:#31060a;
+  --nz-navy:#21263a;
+  --nz-sand:#f3e9dd;
+  --nz-sec-y: clamp(72px, 8vw, 128px);
+}
+
+/* ---------- hero ---------- */
+.nz-hero{ padding:clamp(32px, 5vw, 64px) 0 var(--nz-sec-y); }
+.nz-kicker{
+  margin:0 0 18px;
+  font-size:11px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--nz-maroon);
+}
+.nz-title{
+  margin:0;
+  font-size:clamp(64px, 12vw, 168px);
+  font-weight:800; line-height:0.92; letter-spacing:-0.04em;
+}
+.nz-tagline{
+  margin:14px 0 clamp(32px, 4vw, 56px);
+  font-size:clamp(20px, 2.4vw, 30px);
+  line-height:1.3; color:var(--graphite);
+}
+.nz-hero-img{ position:relative; }
+.nz-hero-img > img{ width:100%; height:auto; display:block; }
+
+/* Percentages are measured off the 1920x1080 source, so the overlay stays
+   locked to the printed eye at every viewport width. It only ever scales
+   UP from 1 — at rest it sits exactly on the baked-in disc and hides it. */
+/* Two transforms on one element would overwrite each other, so the wrapper
+   owns the rotation and the image inside owns the pulse. Independent timings,
+   deliberately not multiples of each other so they drift rather than sync. */
+.nz-hero-img > .nz-eye{
+  position:absolute;
+  left:33.9948%;
+  top:68.6852%;
+  width:4.3542%;
+  aspect-ratio:1;
+  display:block;
+  transform-origin:center;
+  animation:nzEyeSpin 48s linear infinite;
+  pointer-events:none;
+  will-change:transform;
+}
+.nz-eye img{
+  width:100%; height:100%; display:block;
+  transform-origin:center;
+  animation:nzEyeBreathe 5.5s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes nzEyeSpin{
+  from { transform:rotate(0deg); }
+  to   { transform:rotate(360deg); }
+}
+@keyframes nzEyeBreathe{
+  0%, 100% { transform:scale(1); }
+  50%      { transform:scale(1.09); }
+}
+@media (prefers-reduced-motion: reduce){
+  .nz-hero-img > .nz-eye,
+  .nz-eye img{ animation:none; }
+}
+
+.nz-meta{
+  margin:clamp(32px, 4vw, 56px) 0 0; padding:24px 0 0;
+  border-top:1px solid var(--line);
+  display:grid; grid-template-columns:repeat(5, 1fr); gap:24px;
+}
+.nz-meta div{ min-width:0; }
+.nz-meta dt{
+  margin:0 0 6px;
+  font-size:11px; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--graphite);
+}
+.nz-meta dd{ margin:0; font-size:15px; line-height:1.5; }
+
+/* ---------- section scaffolding ---------- */
+.nz-sec{ padding:var(--nz-sec-y) 0; }
+.nz-num{
+  display:block; margin-bottom:10px;
+  font-size:12px; font-weight:700; letter-spacing:0.14em;
+  color:var(--nz-maroon);
+}
+.nz-sec h2{
+  margin:0;
+  font-size:clamp(28px, 3.4vw, 42px);
+  font-weight:800; line-height:1.15; letter-spacing:-0.015em;
+}
+
+/* Heading parks in a narrow left rail, content runs in the wider right
+   column — keeps a steady spine down the page without feeling like a form. */
+.nz-split{
+  display:grid;
+  grid-template-columns:minmax(200px, 300px) minmax(0, 1fr);
+  gap:clamp(32px, 6vw, 88px);
+  align-items:start;
+}
+.nz-split-head{ position:sticky; top:96px; }
+.nz-split-body{ display:grid; gap:36px; }
+
+.nz-head-wide{ margin-bottom:clamp(28px, 3vw, 44px); max-width:70ch; }
+.nz-lede{
+  margin:14px 0 0;
+  font-size:17px; line-height:1.65; color:var(--graphite); max-width:56ch;
+}
+
+.nz-pair h3{
+  margin:0 0 10px;
+  font-size:14px; font-weight:700; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--graphite);
+}
+.nz-pair p{
+  margin:0;
+  font-size:clamp(17px, 1.5vw, 19px); line-height:1.65; max-width:58ch;
+}
+
+/* ---------- callout ---------- */
+.nz-callout{
+  margin:0;
+  padding:20px 24px;
+  background:var(--nz-sand);
+  border-left:3px solid var(--nz-maroon);
+  font-size:17px; line-height:1.65; max-width:70ch;
+}
+.nz-callout strong{
+  display:block; margin-bottom:6px;
+  font-size:12px; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--nz-maroon);
+}
+.nz-callout--wide{ margin-top:clamp(28px, 3vw, 40px); }
+
+/* ---------- option lists (naming / tagline) ---------- */
+.nz-options{ list-style:none; margin:0; padding:0; display:grid; gap:1px; background:var(--line); }
+.nz-options li{
+  display:flex; align-items:baseline; gap:20px; flex-wrap:wrap;
+  padding:18px 20px; background:var(--cream);
+}
+.nz-opt-name{ font-size:19px; font-weight:600; min-width:150px; }
+.nz-opt-why{ font-size:15px; color:var(--graphite); }
+.nz-options li.is-chosen{ background:var(--nz-maroon); }
+.nz-options li.is-chosen .nz-opt-name{ color:var(--white); }
+.nz-options li.is-chosen .nz-opt-why{
+  color:var(--nz-sand);
+  font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+}
+.nz-options--lines .nz-opt-name{ min-width:0; }
+
+/* Sub-heading between stacked boards, e.g. Colour -> Typography. */
+.nz-subhead{
+  margin:clamp(28px, 3vw, 44px) 0 14px;
+  font-size:14px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--graphite);
+}
+
+/* ---------- media ---------- */
+.nz-figure{ margin:0; }
+.nz-figure img{ width:100%; height:auto; display:block; }
+.nz-figure figcaption{
+  margin-top:12px;
+  font-size:14px; color:var(--graphite);
+}
+.nz-figure + .nz-two,
+.nz-figure--tall{ margin-top:20px; }
+
+/* Full-bleed: break out of .wrap to the viewport edges. */
+.nz-bleed{
+  margin:clamp(28px, 3vw, 44px) 0;
+  width:100%;
+}
+.nz-bleed img{ width:100%; height:auto; display:block; }
+.nz-bleed--flush{ margin-bottom:0; }
+
+.nz-two{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;
+  align-items:start;
+}
+
+.nz-explore{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;
+}
+.nz-explore img{ width:100%; height:auto; display:block; }
+
+.nz-apps{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;
+}
+.nz-apps img{ width:100%; height:auto; display:block; }
+
+.nz-closing{ margin-top:0; }
+
+/* ---------- outro ---------- */
+.nz-outro{ padding:clamp(56px, 6vw, 88px) 0; }
+.nz-back{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:15px; font-weight:600; text-decoration:none;
+  border-bottom:1px solid var(--line); padding-bottom:4px;
+}
+.nz-back:hover{ border-bottom-color:var(--ink); }
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .nz-meta{ grid-template-columns:repeat(3, 1fr); row-gap:28px; }
+}
+@media (max-width:860px){
+  .nz-split{ grid-template-columns:1fr; gap:28px; }
+  .nz-split-head{ position:static; }
+  .nz-explore{ gap:14px; }
+}
+@media (max-width:640px){
+  .nz-meta{ grid-template-columns:1fr; gap:20px; }
+  .nz-explore,
+  .nz-two,
+  .nz-apps{ grid-template-columns:1fr; }
+  .nz-options li{ gap:6px; }
+  .nz-opt-name{ min-width:0; }
+  .nz-callout{ padding:18px 20px; }
+}

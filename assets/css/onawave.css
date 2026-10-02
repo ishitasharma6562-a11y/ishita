@@ -1,0 +1,1054 @@
+/* ============================================================
+   ONAWAVE MEDICAL — CLINICIAN DASHBOARD CASE STUDY
+   Hanging-rail editorial grid on the portfolio's cream base.
+   One spine down the whole page: rail at the left margin,
+   text in the main column, media breaking out to full measure.
+   ============================================================ */
+
+:root{
+  --ow-navy:#16305C;
+  --ow-navy-deep:#0E1F3D;
+  --ow-red:#B6423C;
+  --ow-red-tint:#F7E7E3;
+  --ow-red-wash:#FBF1EF;
+  --ow-amber:#B87F1F;
+  --ow-amber-tint:#F5EBD6;
+  --ow-teal:#2E6E72;
+  --ow-teal-tint:#E4EEEC;
+  --ow-teal-wash:#F0F5F4;
+  --ow-muted:#5B6470;
+
+  /* Blue belongs to the persona meters and nothing else, so it never
+     competes with the red/amber/teal severity code used by the dashboard. */
+  --ow-blue:#3C7BE0;
+  --ow-blue-deep:#1E4FA8;
+  --ow-blue-wash:#EDF1F8;
+
+  --ow-rail:200px;
+  --ow-measure:640px;   /* every run of text in the main column stops here */
+  --ow-gut: clamp(28px, 4vw, 56px);
+
+  /* Vertical rhythm. Five steps, used in this order:
+     s1 inside a component, s2 between a label and its content,
+     s3 between related blocks, s4 between a heading and its media,
+     sec-y between sections. Nothing on this page should invent its own. */
+  --ow-s1:12px;
+  --ow-s2:18px;
+  --ow-s3:32px;
+  --ow-s4: clamp(48px, 5.4vw, 76px);
+  --ow-sec-y: clamp(92px, 9vw, 148px);
+}
+
+/* ---------- section scaffolding ---------- */
+.ow-sec{ padding:0 0 var(--ow-sec-y); }
+/* A section following the white band has no rule above it to space off. */
+.ow-band + .ow-sec{ padding-top:var(--ow-sec-y); }
+.ow-rule{
+  border:0; height:1px; background:var(--line);
+  margin:0;
+}
+/* Body carries the gap between the text grid and any full-measure
+   block below it, so there are no spacer elements in the markup. */
+.ow-body{
+  padding-top:56px;
+  display:grid; gap:var(--ow-s4);
+}
+
+/* Rail + main. Everything on the page hangs off these two edges. */
+.ow-grid{
+  display:grid;
+  grid-template-columns:minmax(0, var(--ow-rail)) minmax(0, 1fr);
+  gap:var(--ow-gut);
+  align-items:start;
+}
+.ow-rail-col{
+  display:grid; gap:12px; align-content:start;
+  position:sticky; top:112px;   /* clears the sticky site header */
+}
+/* Optical: the kicker's cap-height sits higher than the 70px title's,
+   so nudge the hero rail down to put them on one line. */
+/* The rails in the numbered sections are sticky so they travel beside long
+   bodies of text. The hero has nothing to travel past, and stickiness there
+   just dropped the label 86px below the headline it belongs to. */
+.ow-hero .ow-rail-col{ position:static; padding-top:14px; }
+.ow-num{
+  display:block;
+  font-size:46px; font-weight:800; line-height:1;
+  letter-spacing:-0.03em;
+  color:var(--ow-navy); opacity:0.26;
+}
+.ow-label{
+  display:block;
+  font-size:11px; font-weight:700; line-height:1.45;
+  letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ow-navy);
+}
+.ow-main{ display:grid; gap:20px; }
+.ow-main h2{
+  margin:0;
+  font-size:clamp(28px, 3.2vw, 40px);
+  font-weight:800; line-height:1.15; letter-spacing:-0.025em;
+  max-width:var(--ow-measure);
+}
+.ow-lede{
+  margin:0;
+  font-size:clamp(16px, 1.5vw, 18px); line-height:1.66;
+  color:var(--ow-muted); max-width:var(--ow-measure);
+}
+
+/* ---------- hero ---------- */
+/* Ink photograph full-bleed, white type over it, per the Figma hero mock.
+   The source ink is light in patches, so a left-weighted scrim guarantees the
+   title and lede stay legible without flattening the image on the right,
+   where the stat card sits. */
+.ow-hero{
+  /* The ink wrapper is scaled up during its entrance, so without clipping
+     here the page grows a horizontal scrollbar for those few seconds. */
+  position:relative; isolation:isolate; overflow:hidden;
+  /* Fills the screen below the sticky header, so nothing of the next section
+     shows under it. --ow-header-h is measured and kept current by the script;
+     the fallback is the desktop header, and the svh line keeps mobile from
+     jumping as the browser chrome hides. min-height, not height, so the hero
+     can still grow if the copy ever needs more room. */
+  min-height:calc(100vh  - var(--ow-header-h, 91px));
+  min-height:calc(100svh - var(--ow-header-h, 91px));
+  display:grid; align-content:center;
+  padding:clamp(44px, 5vw, 76px) 0;
+  /* Pale, because the ink photo's own paper is near-white. The old deep
+     maroon was there to sit under a heavy scrim; there is no heavy scrim now. */
+  background:#F0E3E1;
+  color:#fff;
+}
+/* The ink itself now lives in .ow-hero-ink, so ::before is free. */
+.ow-hero-ink{
+  position:absolute; inset:0; z-index:-2;
+  overflow:hidden;
+  /* The pigment is already in the water when you arrive, so there is no
+     drop and no spread — the layer just fades up and the drift carries on. */
+  animation:owInkWake 2.8s ease-out both;
+}
+.ow-hero-ink > span{
+  position:absolute; inset:-15%;
+  /* 40%, not 26%: the source is a tall portrait, and a wide hero only ever
+     shows a horizontal band of it. The band at 26% is the dense upper mass,
+     which is what read as "dark" — 40% catches the bright filaments instead. */
+  background:url("../images/onawave/hero-ink.jpg?v=2") center 40% / cover no-repeat;
+  transform-origin:52% 44%;
+  will-change:transform, opacity;
+  backface-visibility:hidden;
+}
+.ow-ink-a{ animation:owInkA 72s linear infinite; }
+/* Mirrored and on a different clock, so the two never settle into a pattern. */
+.ow-ink-b{
+  /* Multiply, not screen: on a pale base, two passes of ink overlapping
+     should get denser, the way more pigment in water does. Screen made sense
+     when the hero sat on near-black; here it would just bleach out. */
+  mix-blend-mode:multiply; opacity:.22;
+  animation:owInkB 55s linear infinite;
+}
+/* A slow bloom drifting through, so the density keeps shifting. */
+.ow-ink-bloom{
+  background:radial-gradient(44% 48% at 50% 50%, rgba(178,52,46,.30), transparent 70%);
+  mix-blend-mode:multiply;
+  animation:owInkBloom 43s ease-in-out infinite;
+}
+
+@keyframes owInkWake{
+  from{ opacity:0; }
+  to  { opacity:1; }
+}
+/* Periods of 72 / 55 / 43 seconds, pairwise coprime, so the three layers
+   drift apart and recombine for years before the composite repeats.
+   The travel is deliberately wide — that, not the speed, is what makes the
+   motion readable. Rotation stays near a degree: past that the drift starts
+   to look like smoke curling rather than pigment folding in still water. */
+@keyframes owInkA{
+  0%   { transform:scale(1.00) translate3d(0,0,0)          rotate(0deg); }
+  22%  { transform:scale(1.07) translate3d(-4.5%,2.0%,0)   rotate(0.5deg); }
+  44%  { transform:scale(1.15) translate3d(-1.5%,5.4%,0)   rotate(1.1deg); }
+  68%  { transform:scale(1.10) translate3d(4.4%,2.4%,0)    rotate(0.4deg); }
+  86%  { transform:scale(1.04) translate3d(2.0%,-1.8%,0)   rotate(-0.3deg); }
+  100% { transform:scale(1.00) translate3d(0,0,0)          rotate(0deg); }
+}
+/* The mirrored copy swings much further in density than in position: the
+   two passes of pigment drifting in and out of register is most of what
+   reads as movement. */
+@keyframes owInkB{
+  0%   { transform:scaleX(-1) scale(1.18) translate3d(3.6%,-2.4%,0)  rotate(0deg);     opacity:.08; }
+  26%  { transform:scaleX(-1) scale(1.09) translate3d(-1.4%,2.8%,0)  rotate(-0.6deg);  opacity:.28; }
+  52%  { transform:scaleX(-1) scale(1.01) translate3d(-5.0%,5.4%,0)  rotate(-1.2deg);  opacity:.42; }
+  78%  { transform:scaleX(-1) scale(1.09) translate3d(0.8%,1.4%,0)   rotate(-0.5deg);  opacity:.24; }
+  100% { transform:scaleX(-1) scale(1.18) translate3d(3.6%,-2.4%,0)  rotate(0deg);     opacity:.08; }
+}
+@keyframes owInkBloom{
+  0%   { transform:translate3d(-24%,13%,0)  scale(1.00); opacity:.06; }
+  30%  { transform:translate3d(17%,-11%,0)  scale(1.58); opacity:.30; }
+  58%  { transform:translate3d(-11%,-19%,0) scale(1.22); opacity:.15; }
+  80%  { transform:translate3d(7%,7%,0)     scale(1.40); opacity:.25; }
+  100% { transform:translate3d(-24%,13%,0)  scale(1.00); opacity:.06; }
+}
+
+/* Motion is the whole point here, so reduced-motion gets the still frame. */
+@media (prefers-reduced-motion: reduce){
+  .ow-hero-ink, .ow-ink-a, .ow-ink-b, .ow-ink-bloom{ animation:none; }
+  .ow-hero-ink{ opacity:1; }
+  .ow-ink-b, .ow-ink-bloom{ display:none; }
+}
+/* A wash, not a scrim. It is heavy enough under the heading and the meta row
+   for white type to clear contrast at any crop, and gone by the time it
+   reaches the right third, which stays as bright as the Figma mock. */
+.ow-hero::after{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:
+    linear-gradient(to top,
+      rgba(26,8,10,.30) 0%,
+      rgba(26,8,10,.16) 16%,
+      rgba(26,8,10,0)   34%),
+    linear-gradient(100deg,
+      rgba(26,8,10,.50) 0%,
+      rgba(26,8,10,.32) 28%,
+      rgba(26,8,10,.12) 50%,
+      rgba(26,8,10,0)   68%);
+}
+
+/* Hero type inverts; everything below the hero stays on cream. */
+.ow-hero .ow-kicker{ color:rgba(255,255,255,.80); text-shadow:0 1px 12px rgba(26,8,10,.5); }
+.ow-hero .ow-rail-col span.ow-sub{ color:#fff; }
+.ow-hero .ow-title{ color:#fff; }
+.ow-hero .ow-hero-lede{ color:rgba(255,255,255,.86); }
+.ow-hero-body{ display:grid; gap:clamp(36px, 4.5vw, 56px); }
+.ow-kicker{
+  margin:0;
+  font-size:11px; font-weight:700; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--ow-navy);
+}
+.ow-hero .ow-rail-col span.ow-sub{
+  display:block;
+  font-size:18px; font-weight:700; letter-spacing:-0.01em; line-height:1.3;
+  /* A soft shadow rather than a heavier wash: the label sits high in the
+     hero where the ink is brightest, and darkening the whole corner for one
+     line of type would cost more than it buys. */
+  text-shadow:0 1px 14px rgba(26,8,10,.55);
+}
+.ow-title{
+  margin:0;
+  font-size:clamp(40px, 5.6vw, 70px);
+  font-weight:800; line-height:1.04; letter-spacing:-0.035em;
+}
+
+/* Lede and stat card sit on one baseline at the foot of the row. */
+.ow-hero-row{
+  display:grid;
+  grid-template-columns:minmax(0, 480px) minmax(0, 280px);
+  gap:var(--ow-gut);
+  align-items:end;
+  padding-left:calc(var(--ow-rail) + var(--ow-gut));
+}
+.ow-hero-lede{
+  margin:0; font-size:19px; line-height:1.68; color:var(--ow-muted);
+}
+/* Variant A — the card's wash runs through the four phases the dashboard
+   tracks: menstrual (red) → follicular (peach) → ovulation (teal) →
+   luteal (amber), bedded on the deep navy so white type stays readable. */
+.ow-stat{
+  position:relative; isolation:isolate;
+  background:
+    radial-gradient(132% 96% at 1% 0%,   rgba(188,74,68,.94), transparent 62%),
+    radial-gradient(96% 72% at 34% 10%,  rgba(208,128,106,.48), transparent 64%),
+    radial-gradient(112% 86% at 5% 100%, rgba(42,104,110,.50), transparent 60%),
+    radial-gradient(86% 66% at 98% 96%,  rgba(184,127,31,.28), transparent 58%),
+    var(--ow-navy-deep);
+  color:var(--white);
+  border-radius:16px; padding:28px;
+  display:grid; gap:18px;
+  box-shadow:0 18px 44px -18px rgba(10,6,8,.55);
+}
+.ow-stat-fig{ display:grid; gap:10px; }
+.ow-stat b{ font-size:38px; font-weight:800; line-height:1.1; letter-spacing:-0.03em; }
+.ow-stat p{ margin:0; font-size:14.5px; line-height:1.52; opacity:0.82; }
+.ow-stat hr{ border:0; height:1px; background:rgba(255,255,255,.2); margin:0; }
+.ow-stat small{ font-size:11px; line-height:1.64; opacity:0.62; letter-spacing:0.01em; }
+
+/* ---------- 02 the ask ---------- */
+.ow-two{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:var(--ow-gut);
+  align-items:stretch;
+}
+.ow-scenario{
+  margin:0; background:var(--white); border:1px solid var(--line);
+  border-radius:16px; padding:34px 36px 36px;
+}
+.ow-scenario::before{
+  content:"\201C"; display:block;
+  font-size:52px; line-height:.55; color:var(--ow-red); opacity:.4;
+}
+.ow-scenario p{
+  margin:14px 0 0;
+  font-size:clamp(18px, 1.8vw, 21px); font-weight:700;
+  line-height:1.52; letter-spacing:-0.01em;
+}
+.ow-obj{
+  background:var(--ow-teal-wash); border-radius:16px; padding:34px 36px 36px;
+  display:flex; flex-direction:column; gap:18px;
+}
+.ow-obj-title{
+  font-size:10.5px; font-weight:700; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--ow-teal);
+}
+.ow-obj ol{
+  list-style:none; margin:0; padding:0;
+  flex:1; display:flex; flex-direction:column; justify-content:center; gap:16px;
+}
+.ow-obj li{
+  display:grid; grid-template-columns:20px 1fr; gap:14px;
+  font-size:15.5px; line-height:1.55;
+}
+.ow-obj li b{
+  font-size:11px; font-weight:600; line-height:1.56;
+  color:var(--ow-teal); opacity:.75;
+}
+
+/* ---------- 03 grounding ---------- */
+.ow-sources{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+}
+ /* One grain texture, three crops — which is exactly what the Figma file
+   does: the same image fill at three different vertical offsets. The
+   gradient on top is only there so white type clears contrast over the
+   pale patches in the texture. */
+.ow-sources article{
+  border:0; border-radius:14px;
+  padding:30px 28px;
+  min-height:230px;
+  display:grid; align-content:center;
+  color:var(--white);
+  background-color:#7A1D1A;
+  background-image:
+    linear-gradient(170deg, rgba(54,8,8,.14) 0%, rgba(54,8,8,.40) 100%),
+    url("../images/onawave/source-tex.jpg?v=1");
+  background-size:auto, 100% auto;
+  background-repeat:no-repeat, no-repeat;
+  background-position:0 0, 50% 66%;
+}
+.ow-sources article:nth-child(2){ background-position:0 0, 50% 50%; }
+.ow-sources article:nth-child(3){ background-position:0 0, 50% 91%; }
+.ow-sources h3{ margin:0 0 10px; font-size:16.5px; font-weight:700; line-height:1.45; }
+.ow-sources p{ margin:0; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,.90); }
+
+.ow-hyp{ display:grid; gap:12px; list-style:none; margin:0; padding:0; }
+.ow-hyp li{
+  list-style:none;
+  display:grid; grid-template-columns:26px 1fr; gap:16px;
+  background:var(--ow-red-wash); border-left:3px solid var(--ow-red);
+  border-radius:12px; padding:20px 26px;
+  font-size:16px; line-height:1.62;
+}
+.ow-hyp b{
+  font-size:11px; font-weight:600; letter-spacing:0.08em;
+  line-height:1.62; color:var(--ow-red);
+}
+.ow-findings{ display:grid; gap:16px; }
+.ow-caveat{
+  margin:0;
+  background:var(--ow-teal-wash); border-left:3px solid var(--ow-teal);
+  border-radius:12px; padding:20px 26px;
+  font-size:14.5px; line-height:1.64; color:var(--ow-teal);
+}
+
+/* ---------- 04 persona ---------- */
+/* Four cards: who she is, her day in numbers, what she needs, and the one
+   sentence the whole project is answering. */
+/* The photo is a 2:3 portrait. Given a landscape card it lost two fifths of
+   its height to the crop and cut her off mid-torso, so it now runs the full
+   height of the left column and the quote carries the width underneath. At
+   that size the card is within a few percent of the file's own proportions,
+   and almost nothing is cropped at all. */
+.ow-persona{
+  display:grid;
+  grid-template-columns:minmax(0, 0.88fr) minmax(0, 1.12fr);
+  grid-template-rows:auto auto auto;
+  gap:16px;
+  align-items:stretch;
+}
+.ow-p-photo { grid-column:1; grid-row:1 / span 2; }
+.ow-p-meters{ grid-column:2; grid-row:1; }
+.ow-p-goals { grid-column:2; grid-row:2; }
+.ow-p-quote { grid-column:1 / -1; grid-row:3; }
+.ow-persona > *{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.ow-p-photo{
+  margin:0; padding:0; position:relative; overflow:hidden;
+  min-height:420px;
+}
+.ow-p-photo img{
+  position:absolute; inset:0;
+  width:100%; height:100%; display:block;
+  object-fit:cover; object-position:50% 22%;
+}
+.ow-p-badge{
+  position:absolute; top:16px; right:16px;
+  width:38px; height:38px; border-radius:50%;
+  background:var(--ink); color:var(--white);
+  display:grid; place-items:center;
+}
+.ow-p-badge svg{ fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; }
+.ow-p-photo figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:48px 22px 20px;
+  display:grid; gap:3px;
+  background:linear-gradient(to top, rgba(12,16,22,.80), rgba(12,16,22,0));
+  color:var(--white);
+}
+.ow-p-photo figcaption strong{ font-size:21px; font-weight:800; letter-spacing:-0.02em; }
+.ow-p-photo figcaption span{ font-size:13px; color:rgba(255,255,255,.80); }
+
+.ow-p-meters{ padding:26px 28px 28px; display:grid; align-content:start; gap:20px; }
+.ow-p-meters h3,
+.ow-p-goals h3{
+  margin:0; font-size:17px; font-weight:700; letter-spacing:-0.015em;
+}
+.ow-meters{ list-style:none; margin:0; padding:0; display:grid; gap:20px; }
+.ow-meter-top{
+  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  margin:0 0 9px; font-size:13px; line-height:1.4; color:var(--ow-muted);
+}
+.ow-meter-top b{
+  font-size:14px; font-weight:700; color:var(--ow-blue-deep);
+  font-variant-numeric:tabular-nums;
+}
+/* Hatched remainder, so an unfilled bar still reads as a measured scale
+   rather than as something that failed to load. */
+.ow-meter-track{
+  display:block; height:11px; border-radius:6px; overflow:hidden;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(30,79,168,.13) 0 2px, transparent 2px 7px),
+    var(--ow-blue-wash);
+}
+.ow-meter-track i{
+  display:block; height:100%; border-radius:6px;
+  width:var(--fill, 0%);
+  background:linear-gradient(90deg, var(--ow-blue-deep), var(--ow-blue));
+}
+.ow-meter-scale{
+  display:flex; justify-content:space-between;
+  margin:7px 0 0; font-size:11px; letter-spacing:.04em; color:var(--ow-muted);
+}
+
+.ow-p-goals{ padding:26px 28px 28px; display:grid; align-content:start; gap:16px; }
+.ow-p-goals ul{ list-style:none; margin:0; padding:0; display:grid; gap:13px; }
+.ow-p-goals li{
+  display:grid; grid-template-columns:22px 1fr; gap:13px; align-items:start;
+  font-size:14.5px; line-height:1.55;
+}
+.ow-p-goals li::before{
+  content:""; width:22px; height:22px; border-radius:50%; margin-top:1px;
+  background:var(--ow-blue) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12.5 10 17.5 19 7.5'/></svg>") center / 12px 12px no-repeat;
+}
+.ow-p-goals > p{
+  margin:0; padding-top:4px;
+  font-size:13.5px; line-height:1.6; color:var(--ow-muted);
+}
+
+.ow-p-quote{
+  margin:0; padding:34px 38px;
+  background:var(--ow-navy-deep); border-color:var(--ow-navy-deep);
+  color:var(--white);
+  display:grid; align-content:center; gap:12px;
+}
+.ow-p-quote::before{
+  content:"\201C";
+  font-size:58px; line-height:.52; color:rgba(255,255,255,.42);
+}
+.ow-p-quote p{
+  margin:0;
+  font-size:clamp(20px, 2.2vw, 26px); font-weight:700;
+  line-height:1.36; letter-spacing:-0.022em;
+}
+
+/* ---------- 05 current journey ---------- */
+/* One stage at a time. The tablist and the arrows are the only way to move,
+   so both are hidden until JS has actually taken over (.is-stepped); without
+   it the five stages just render in order, which still reads as the journey. */
+.ow-journey{ display:grid; gap:var(--ow-s4); }
+
+.ow-track{
+  list-style:none; margin:0; padding:0;
+  position:relative;
+  display:none; grid-template-columns:repeat(5, 1fr);
+  justify-items:center;
+}
+.ow-journey.is-stepped .ow-track{ display:grid; }
+/* Runs from the centre of the first dot to the centre of the last. */
+.ow-track::before{
+  content:""; position:absolute; top:19px; left:10%; right:10%;
+  height:1px; background:var(--line);
+}
+.ow-track button{
+  position:relative; z-index:1;
+  width:38px; height:38px; border-radius:50%;
+  background:var(--cream); border:1px solid var(--line);
+  display:grid; place-items:center;
+  font:inherit; font-size:12px; font-weight:600; color:var(--ow-navy);
+  cursor:pointer;
+  transition:background .2s var(--ease), color .2s var(--ease),
+             border-color .2s var(--ease), transform .2s var(--ease);
+}
+.ow-track button:hover{ border-color:var(--ow-navy); }
+.ow-track button[aria-selected="true"]{
+  background:var(--ow-navy); border-color:var(--ow-navy); color:var(--white);
+  transform:scale(1.08);
+}
+
+.ow-stages{ display:grid; gap:var(--ow-s4); }
+.ow-stage{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 400px);
+  gap:var(--ow-gut);
+  align-items:center;
+}
+/* Stepped: every stage occupies the same cell, so the block is as tall as the
+   tallest one and nothing jumps as you move through. */
+.ow-journey.is-stepped .ow-stages{ grid-template-areas:"stage"; }
+.ow-journey.is-stepped .ow-stage{
+  grid-area:stage;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .42s var(--ease), visibility .42s;
+}
+.ow-journey.is-stepped .ow-stage.is-on{
+  opacity:1; visibility:visible; pointer-events:auto;
+}
+
+/* Each frame keeps its own proportions, so nothing is cropped. The same
+   number also caps the width, so a 2.6:1 frame and a 1.2:1 frame come out
+   the same height and the block never jumps as you step through. */
+.ow-stage-media{
+  margin:0 auto; position:relative;
+  display:grid;
+  inline-size:min(100%, calc(var(--arn, 1.6) * 460px));
+  aspect-ratio:var(--arn, 1.6);
+  border-radius:16px; overflow:hidden;
+  background:var(--white); border:1px solid var(--line);
+}
+.ow-stage-media img{
+  position:absolute; inset:0;
+  width:100%; height:100%; display:block; object-fit:contain;
+}
+/* Shown only when the stage image isn't on disk yet. */
+.ow-stage-ph{
+  position:absolute; inset:0; display:none;
+  place-content:center; justify-items:center; gap:8px;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#9BA1A9;
+}
+.ow-stage-ph b{ font-size:34px; letter-spacing:-0.02em; color:#C0C5CB; }
+.ow-stage-media.is-missing img{ display:none; }
+.ow-stage-media.is-missing .ow-stage-ph{ display:grid; }
+
+.ow-stage-copy{ display:grid; gap:13px; align-content:center; }
+.ow-stage-count{
+  margin:0; font-size:11px; font-weight:600; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ow-muted);
+}
+.ow-stage-count b{ color:var(--ow-navy); }
+.ow-stage-count i{ font-style:normal; }
+.ow-stage-copy h3{
+  margin:0; font-size:clamp(22px, 2.5vw, 31px);
+  font-weight:800; line-height:1.18; letter-spacing:-0.028em;
+}
+.ow-stage-desc{ margin:0; font-size:16px; line-height:1.65; color:var(--ow-muted); }
+.ow-friction{
+  justify-self:start; margin:0;
+  background:var(--ow-red-wash); border-left:2px solid var(--ow-red);
+  border-radius:8px; padding:10px 14px 10px 14px;
+  font-size:13px; font-weight:500; line-height:1.5; color:var(--ow-red);
+}
+
+.ow-stage-nav{ display:none; gap:10px; justify-content:flex-end; }
+.ow-journey.is-stepped .ow-stage-nav{ display:flex; }
+.ow-arrow{
+  width:46px; height:46px; border-radius:50%;
+  background:var(--white); border:1px solid var(--line); color:var(--ow-navy);
+  display:grid; place-items:center; cursor:pointer;
+  transition:background .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease);
+}
+.ow-arrow svg{ fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.ow-arrow:hover:not(:disabled){ background:var(--ow-navy); border-color:var(--ow-navy); color:var(--white); }
+.ow-arrow:disabled{ opacity:.32; cursor:default; }
+
+/* ---------- 06 the solution ---------- */
+.ow-band{
+  background:var(--white);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  padding:var(--ow-sec-y) 0;
+}
+.ow-band .ow-body{ padding-top:0; }
+.ow-note{
+  background:var(--ow-teal-wash); border-radius:12px; padding:16px;
+  font-size:13.5px; line-height:1.56; color:var(--ow-teal);
+  margin-top:4px;
+}
+
+/* Screen on the left, the decisions that built it on the right. The screen
+   is sticky, so whichever decision you open is explained next to the thing
+   it produced rather than a scroll away from it. */
+.ow-solution{
+  display:grid;
+  grid-template-columns:minmax(0, 1.3fr) minmax(0, 1fr);
+  gap:var(--ow-gut);
+  align-items:start;
+}
+.ow-screen-col{ position:sticky; top:104px; display:grid; gap:18px; }
+
+.ow-figure{ display:grid; gap:16px; margin:0; }
+.ow-figure figcaption{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px;
+  font-size:12.5px; letter-spacing:.02em; color:var(--ow-muted);
+}
+.ow-screen-back{
+  background:none; border:0; padding:0; font:inherit;
+  font-size:12.5px; font-weight:600; color:var(--ow-navy);
+  border-bottom:1px solid var(--line); cursor:pointer;
+}
+.ow-screen-back:hover{ border-bottom-color:var(--ow-navy); }
+
+/* ---- the machine ---- */
+.ow-laptop{ width:100%; margin:0; }
+.ow-laptop-lid{
+  position:relative;
+  padding:11px 11px 13px;
+  border-radius:15px 15px 5px 5px;
+  background:linear-gradient(#22252C, #15171C);
+  box-shadow:0 20px 44px -24px rgba(14,31,61,.55);
+}
+.ow-laptop-lid::before{             /* camera */
+  content:""; position:absolute; top:4px; left:50%; transform:translateX(-50%);
+  width:4px; height:4px; border-radius:50%; background:#3A414C;
+}
+.ow-laptop-screen{
+  position:relative;
+  aspect-ratio:16 / 10;
+  border-radius:4px; overflow:hidden;
+  /* The still sits under the iframe too, so a slow or blocked embed never
+     leaves an empty rectangle. */
+  background:var(--white) url("../images/onawave/dashboard-poster.jpg?v=1") top center / 100% auto no-repeat;
+}
+.ow-laptop-screen iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0; display:block;
+  background:transparent;
+}
+/* The base overhangs the lid on both sides, as a real one does. */
+.ow-laptop-base{
+  position:relative;
+  width:108%; margin-left:-4%;
+  height:14px;
+  background:linear-gradient(#2B2F38, #1C1F26);
+  border-radius:0 0 11px 11px;
+}
+.ow-laptop-base::after{             /* front lip */
+  content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:11%; height:5px; background:#15171C; border-radius:0 0 4px 4px;
+}
+
+/* ---- annotated mode ---- */
+/* A still of the same screen, faded over the live prototype while a decision
+   is open, and scrolled so the region in question is in the middle of the
+   glass. Hidden entirely the rest of the time, so the prototype is the
+   default state of this screen, not a fallback. */
+.ow-annot{
+  position:absolute; inset:0; z-index:2;
+  overflow:hidden; background:var(--white);
+  opacity:0; visibility:hidden;
+  transition:opacity .34s var(--ease), visibility .34s;
+}
+.ow-annot.is-on{ opacity:1; visibility:visible; }
+.ow-annot-scroll{
+  position:absolute; inset:0 0 auto 0;
+  transition:transform .55s var(--ease);
+  will-change:transform;
+}
+.ow-annot-scroll img{ display:block; width:100%; height:auto; }
+
+/* Soft, not a flare. One hairline ring and a short halo — enough to say
+   "this part", not enough to drown the pixels underneath it. */
+.ow-hl{
+  position:absolute; border-radius:6px;
+  border:1.5px solid rgba(var(--hl-rgb, 182,66,60), .85);
+  background:rgba(var(--hl-rgb, 182,66,60), .05);
+  box-shadow:
+    0 0 0 1px     rgba(var(--hl-rgb, 182,66,60), .16),
+    0 0 14px 1px  rgba(var(--hl-rgb, 182,66,60), .18);
+  opacity:0;
+  transition:opacity .3s var(--ease),
+             left .5s var(--ease), top .5s var(--ease),
+             width .5s var(--ease), height .5s var(--ease);
+}
+.ow-hl.is-on{ opacity:1; }
+
+.ow-proto-fallback{
+  margin:0; font-size:12.5px; color:var(--ow-muted);
+}
+.ow-proto-fallback a{
+  color:var(--ow-navy); font-weight:600; text-decoration:none;
+  border-bottom:1px solid var(--line);
+}
+.ow-proto-fallback a:hover{ border-bottom-color:var(--ow-navy); }
+
+/* ---------- the eight decisions (inside 06) ---------- */
+.ow-reason{ display:grid; gap:var(--ow-s3); align-content:start; }
+.ow-reason-lede{
+  margin:0; max-width:46ch;
+  font-size:15px; line-height:1.65; color:var(--ow-muted);
+}
+.ow-rcards{ display:grid; gap:12px; align-content:start; }
+
+.ow-c-red{   --rc:var(--ow-red);   --hl-rgb:182,66,60; }
+.ow-c-navy{  --rc:var(--ow-navy);  --hl-rgb:22,48,92; }
+.ow-c-teal{  --rc:var(--ow-teal);  --hl-rgb:46,110,114; }
+.ow-c-amber{ --rc:var(--ow-amber); --hl-rgb:184,127,31; }
+
+.ow-rcard{
+  background:var(--white);
+  border:1px solid var(--line); border-left:3px solid var(--rc);
+  border-radius:10px; overflow:hidden;
+  transition:box-shadow .2s var(--ease), border-left-width .2s var(--ease);
+}
+.ow-rcard.is-open{
+  border-left-width:6px;
+  box-shadow:0 12px 28px -18px rgba(14,31,61,.42);
+}
+.ow-rcard h3{ margin:0; font-size:inherit; font-weight:400; }
+.ow-rcard-head{
+  width:100%; display:grid;
+  grid-template-columns:26px auto 1fr auto;
+  align-items:center; gap:13px;
+  padding:15px 18px;
+  background:none; border:0; text-align:left; font:inherit; color:inherit;
+  cursor:pointer;
+}
+.ow-rcard-head:hover{ background:#FCFBF9; }
+.ow-rcard-head i{ width:26px; height:3px; border-radius:2px; background:var(--rc); }
+.ow-rcard .ow-r-num{
+  font-size:10.5px; font-weight:600; letter-spacing:.1em; color:var(--ow-muted);
+}
+.ow-rtitle{ font-size:15.5px; font-weight:700; line-height:1.4; }
+.ow-rchev{
+  fill:none; stroke:var(--ow-muted); stroke-width:1.8;
+  stroke-linecap:round; stroke-linejoin:round;
+  transition:transform .22s var(--ease);
+}
+.ow-rcard.is-open .ow-rchev{ transform:rotate(90deg); stroke:var(--rc); }
+
+/* 0fr -> 1fr measures the real content height, so the card opens to exactly
+   what is inside it rather than to a guessed max-height. */
+.ow-rcard-body{
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .3s var(--ease);
+}
+.ow-rcard.is-open .ow-rcard-body{ grid-template-rows:1fr; }
+.ow-rcard-body > div{ overflow:hidden; }
+.ow-rcard-body p{
+  margin:0; padding:0 20px 0 57px;
+  font-size:14px; line-height:1.58; color:var(--ow-muted);
+}
+.ow-rcard-body .ow-q{
+  margin-top:9px; padding-bottom:17px;
+  font-size:13px; font-weight:600; color:var(--rc);
+}
+
+/* ---------- 09 why this order ---------- */
+.ow-flow{
+  background:var(--line); border-radius:14px; overflow:hidden;
+  padding:1px;
+  display:grid; grid-template-columns:repeat(5, 1fr); gap:1px;
+}
+.ow-flow article{ background:var(--white); padding:30px 24px; display:grid; gap:16px; align-content:start; }
+.ow-flow-key{ display:flex; align-items:center; gap:10px; }
+.ow-flow-key b{
+  width:22px; height:22px; border-radius:6px; flex:none;
+  display:grid; place-items:center;
+  background:var(--ow-navy); color:var(--white);
+  font-size:11px; font-weight:600;
+}
+.ow-flow article:nth-child(1) .ow-flow-key b{ background:rgba(22,48,92,.32); }
+.ow-flow article:nth-child(2) .ow-flow-key b{ background:rgba(22,48,92,.49); }
+.ow-flow article:nth-child(3) .ow-flow-key b{ background:rgba(22,48,92,.66); }
+.ow-flow article:nth-child(4) .ow-flow-key b{ background:rgba(22,48,92,.83); }
+.ow-flow-key span{ font-size:14px; font-weight:700; }
+.ow-flow p{ margin:0; font-size:13.5px; line-height:1.56; color:var(--ow-muted); }
+
+/* ---------- 10 what I'd do differently ---------- */
+.ow-limits{ display:grid; gap:14px; list-style:none; margin:0; padding:0; }
+.ow-limits li{
+  list-style:none;
+  display:grid; grid-template-columns:26px 1fr; gap:20px;
+  background:var(--ow-amber-tint); border-left:3px solid var(--ow-amber);
+  border-radius:12px; padding:24px 28px;
+}
+.ow-limits b{
+  font-size:11px; font-weight:600; letter-spacing:0.08em;
+  line-height:2.2; color:var(--ow-amber);
+}
+.ow-limits h3{ margin:0 0 6px; font-size:16px; font-weight:700; line-height:1.5; }
+.ow-limits p{ margin:0; font-size:14.5px; line-height:1.6; color:var(--ow-muted); }
+
+/* ---------- closing ---------- */
+.ow-closing{
+  /* Paper, matching the updated Figma frame — the white band read as a
+     separate page, which it isn't. */
+  background:var(--cream);
+  border-top:1px solid var(--line);
+  padding:var(--ow-sec-y) 0;
+}
+.ow-closing-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 418px);
+  gap:clamp(32px, 5vw, 76px);
+  align-items:center;
+}
+.ow-closing-copy{
+  display:grid; gap:18px; align-content:start; max-width:var(--ow-measure);
+}
+.ow-closing h2{
+  margin:0;
+  font-size:clamp(32px, 4.2vw, 50px);
+  font-weight:800; line-height:1.12; letter-spacing:-0.035em;
+}
+.ow-closing p{ margin:0; font-size:16.5px; line-height:1.76; color:var(--ow-muted); }
+.ow-closing .ow-closing-q{ font-weight:700; color:var(--ink); }
+.ow-closing-links{ display:flex; flex-wrap:wrap; gap:14px 40px; padding-top:8px; }
+.ow-closing-links a{
+  font-size:15px; font-weight:600; color:var(--ink); text-decoration:none;
+  border-bottom:1px solid var(--line); padding-bottom:4px;
+}
+.ow-closing-links a:hover{ border-bottom-color:var(--ink); }
+.ow-closing-media{ margin:0; overflow:hidden; border-radius:4px; }
+.ow-closing-media img{ display:block; width:100%; height:auto; }
+
+/* ---------- outro ---------- */
+.ow-outro{ padding:clamp(48px, 6vw, 88px) 0; }
+.ow-back{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:15px; font-weight:600; text-decoration:none;
+  border-bottom:1px solid var(--line); padding-bottom:4px;
+}
+.ow-back:hover{ border-bottom-color:var(--ink); }
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  /* Below this the screen is too small to read a highlight in, so it stops
+     being sticky and the decisions sit underneath it instead. */
+  .ow-solution{ grid-template-columns:1fr; gap:var(--ow-s4); }
+  .ow-screen-col{ position:static; max-width:760px; }
+  .ow-flow{ grid-template-columns:repeat(3, 1fr); }
+  .ow-stage{ grid-template-columns:minmax(0, 1fr) minmax(0, 320px); }
+}
+@media (max-width:900px){
+  :root{ --ow-rail:150px; }
+  /* Once the rail collapses, the hero copy runs the full width of the screen,
+     so a wash weighted to the left no longer sits under it. An even veil is
+     the only thing that keeps white type readable over the brightest ink. */
+  .ow-hero::after{
+    background:
+      linear-gradient(to top,
+        rgba(26,8,10,.50) 0%,
+        rgba(26,8,10,.34) 30%,
+        rgba(26,8,10,.30) 100%),
+      linear-gradient(100deg,
+        rgba(26,8,10,.46) 0%,
+        rgba(26,8,10,.40) 100%);
+  }
+  .ow-hero-row{ grid-template-columns:1fr; padding-left:0; align-items:start; }
+  .ow-stat{ max-width:320px; }
+  .ow-sources{ grid-template-columns:1fr; }
+  .ow-two{ grid-template-columns:1fr; }
+  /* Stage media stacks above its copy once the two can't sit side by side. */
+  .ow-stage{ grid-template-columns:1fr; gap:24px; }
+  .ow-stage-copy{ align-content:start; }
+  .ow-persona{ grid-template-columns:1fr 1fr; }
+  .ow-p-photo{ min-height:300px; }
+  .ow-closing-grid{ grid-template-columns:1fr; }
+  .ow-closing-media{ max-width:420px; }
+}
+@media (max-width:680px){
+  .ow-grid{ grid-template-columns:1fr; gap:18px; }
+  .ow-rail-col{ grid-auto-flow:column; justify-content:start; align-items:baseline; gap:14px; }
+  .ow-num{ font-size:32px; }
+  .ow-flow{ grid-template-columns:1fr; }
+  .ow-persona{ grid-template-columns:1fr; grid-template-rows:none; }
+  .ow-persona > *{ grid-column:1 !important; grid-row:auto !important; }
+  .ow-p-photo{ min-height:360px; }
+  .ow-p-meters, .ow-p-goals, .ow-p-quote{ padding:24px; }
+  .ow-rcard-body p{ padding-left:20px; }
+  .ow-journey.is-stepped .ow-track{ grid-template-columns:repeat(5, 1fr); }
+  .ow-scenario, .ow-obj{ padding:26px; }
+  .ow-limits li{ padding:20px; gap:14px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .ow-laptop-lid{ box-shadow:none; }
+}
+
+/* ============================================================
+   MOTION
+   The hidden state is keyed off [data-rv] in the markup and gated
+   behind .ow-anim, which a script sets on <html> before first paint.
+   With JS off — or reduced motion on — .ow-anim is never added and
+   everything below simply doesn't apply, so the page renders static
+   and complete. JS only ever adds .is-in.
+   ============================================================ */
+
+.ow-anim .ow-meter-track i{ width:0; }
+.ow-anim .ow-meter-track i.is-fill{
+  width:var(--fill);
+  transition:width 1.15s cubic-bezier(.22,.61,.36,1);
+}
+
+.ow-anim [data-rv]{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .68s var(--ease), transform .68s var(--ease);
+  transition-delay:calc(var(--rv-i, 0) * 65ms);
+  will-change:opacity, transform;
+}
+.ow-anim [data-rv].is-in{
+  opacity:1;
+  transform:none;
+  will-change:auto;
+}
+
+/* The laptop is the payoff shot, so it travels a little further. */
+.ow-anim .ow-figure[data-rv]{
+  transform:translateY(38px) scale(.985);
+  transition-duration:.9s;
+}
+.ow-anim .ow-figure[data-rv].is-in{ transform:none; }
+
+/* The timeline rule draws itself left to right, then the dots land on it. */
+/* The rule between the stage dots draws itself in. It keys off .ow-journey,
+   which is the element carrying data-rv now — the old selector watched
+   .ow-track for an .is-in that nothing was ever going to add, so the line
+   stayed scaled to zero forever. */
+.ow-anim .ow-journey[data-rv] .ow-track::before{
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform .95s var(--ease) .12s;
+}
+.ow-anim .ow-journey[data-rv].is-in .ow-track::before{ transform:scaleX(1); }
+
+/* Reading progress — sits above the sticky header. */
+.ow-progress{
+  position:fixed; inset:0 auto auto 0; z-index:60;
+  width:100%; height:3px;
+  background:var(--ow-navy);
+  transform:scaleX(var(--ow-p, 0)); transform-origin:left center;
+  pointer-events:none;
+}
+@media (prefers-reduced-motion: reduce){ .ow-progress{ display:none; } }
+
+/* ---------- hover ---------- */
+.ow-sources article{
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.ow-sources article:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px -14px rgba(23,21,15,.28);
+}
+/* Cards in the hairline grid can't lift without tearing the 1px rules,
+   so they warm instead. */
+.ow-flow article{ transition:background .3s var(--ease); }
+.ow-flow article:hover{ background:#FCFBF7; }
+/* The decision cards extend their category dash on hover. */
+.ow-rcard-head i{ transition:width .25s var(--ease); }
+.ow-rcard-head:hover i{ width:40px; }
+
+.ow-limits li{ transition:border-left-width .25s var(--ease), padding-left .25s var(--ease); }
+.ow-limits li:hover{ border-left-width:6px; padding-left:25px; }
+
+
+@media (max-width:900px){
+  /* Sticky rails need a tall row to travel in; stacked, there isn't one. */
+  .ow-rail-col{ position:static; }
+  .ow-hero .ow-rail-col{ padding-top:0; }
+}
+
+
+
+
+/* ============================================================
+   07 THE UX WORK
+   ============================================================ */
+
+.ow-process{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(5, 1fr);
+  grid-template-rows:auto auto auto;
+  gap:0 28px;
+  border-top:1px solid var(--line); padding-top:30px;
+}
+.ow-process li{
+  display:grid; grid-row:span 3; grid-template-rows:subgrid; gap:10px;
+  align-content:start;
+}
+.ow-p-step{
+  font-size:10.5px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ow-teal);
+}
+.ow-process h3{ margin:0; font-size:15.5px; font-weight:700; line-height:1.4; }
+.ow-process p{ margin:0; font-size:13.5px; line-height:1.56; color:var(--ow-muted); }
+@supports not (grid-template-rows: subgrid){
+  .ow-process{ grid-template-rows:none; }
+  .ow-process li{ display:block; }
+  .ow-process h3{ margin:8px 0; }
+}
+
+.ow-tradeoffs{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
+}
+.ow-tradeoffs article{
+  position:relative;
+  background:var(--white); border:1px solid var(--line);
+  border-radius:14px; padding:32px 34px;
+}
+.ow-t-num{
+  position:absolute; top:28px; right:30px;
+  font-size:10.5px; font-weight:700; letter-spacing:.1em; color:var(--ow-muted);
+}
+.ow-tradeoffs h3{
+  margin:0 0 18px; padding-right:40px;
+  font-size:18px; font-weight:700; line-height:1.4; letter-spacing:-0.01em;
+}
+.ow-tradeoffs dl{
+  margin:0; display:grid; grid-template-columns:78px 1fr; gap:10px 16px;
+}
+.ow-tradeoffs dt{
+  font-size:10.5px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ow-muted);
+  padding-top:3px;
+}
+.ow-tradeoffs dd{ margin:0; font-size:14.5px; line-height:1.6; }
+/* The chosen line is the answer, so it carries the weight. */
+.ow-tradeoffs dt:nth-of-type(2){ color:var(--ow-teal); }
+.ow-tradeoffs dt:nth-of-type(2) + dd{ font-weight:600; }
+
+@media (max-width:1100px){
+  .ow-process{ grid-template-columns:repeat(3, 1fr); gap:28px 20px; }
+  .ow-process li{ grid-row:auto; grid-template-rows:none; display:block; }
+  .ow-process h3{ margin:8px 0; }
+  .ow-tradeoffs{ grid-template-columns:1fr; }
+}
+@media (max-width:680px){
+  .ow-process{ grid-template-columns:1fr; }
+  .ow-tradeoffs dl{ grid-template-columns:1fr; gap:4px 0; }
+  .ow-tradeoffs dt{ padding-top:10px; }
+  .ow-tradeoffs article{ padding:24px; }
+}
+@media (prefers-reduced-motion: reduce){
+  /* No glide to the highlighted region, and no cross-fade — it just swaps. */
+  .ow-annot, .ow-annot-scroll, .ow-hl{ transition:none; }
+}
+
+.ow-proto-fallback svg{ vertical-align:-1px; }

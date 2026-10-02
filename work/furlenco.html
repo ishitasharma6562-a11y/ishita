@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Furlenco — Designing for Confidence | Ishita Sharma</title>
+<meta name="description" content="A UX case study on furniture rental: why people hesitate before renting, and what makes them confident enough to commit." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=30" />
+<link rel="stylesheet" href="../assets/css/furlenco.css?v=12" />
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="../index.html" aria-label="Home">
+        <img class="rat-logo" src="../assets/images/rat.png" alt="Ishita Sharma — home" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#playground">Playground</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= 01 COVER ================= -->
+  <section class="fx-cover">
+    <div class="wrap">
+      <div class="fx-cover-img">
+        <img src="../assets/images/furlenco/cover.jpg" alt="A living room with a rented sofa, mid-move" />
+      </div>
+      <h1 class="fx-cover-title">FURLENCO</h1>
+      <p class="fx-cover-sub">Designing for Confidence. A Furlenco UX case study</p>
+    </div>
+  </section>
+
+  <!-- ================= 02 THE PROBLEM ================= -->
+  <section class="fx-problem">
+    <div class="wrap">
+      <div class="fx-problem-grid">
+
+        <div class="fx-problem-copy">
+          <h2>Does renting new furniture feel like adding images in a google document?</h2>
+          <p>When I moved into my first apartment, I needed a study table fast. Renting felt like the obvious choice, and Furlenco was the first platform I turned to. Reviews were good, the brand felt safe.</p>
+          <p>But three days before delivery, I still didn't know if I'd made the right call.</p>
+          <p>Furniture isn't like most things you buy online. It's expensive, difficult to return, and expected to last for years, so people aren't just comparing products, they're trying to figure out if something will genuinely fit their space, their lifestyle, their daily routine.</p>
+          <p class="fx-emphasis">A wrong guess here doesn't just cost money. It costs the hassle of living with it, or the hassle of undoing it.</p>
+        </div>
+
+        <!-- Three columns scrolling continuously; each column's tiles are duplicated
+             so the CSS translateY loop wraps without a visible seam. -->
+        <div class="fx-collage" aria-hidden="true">
+          <div class="fx-collage-col"><div class="fx-collage-track fx-up-a"></div></div>
+          <div class="fx-collage-col"><div class="fx-collage-track fx-down"></div></div>
+          <div class="fx-collage-col"><div class="fx-collage-track fx-up-b"></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 WAS IT JUST ME ================= -->
+  <section class="fx-research">
+    <div class="wrap">
+      <h2 class="fx-h2">Was It Just Me?</h2>
+      <p class="fx-lede">My own experience gave me a reason to start, but it wasn't proof of anything beyond myself. So I looked at the problem three ways: through my own hesitation, through a 31-person survey and 5 in-depth interviews with people who'd rented or bought furniture online, and through a direct audit of Furlenco's own product.</p>
+
+      <div class="fx-research-grid">
+        <figure class="fx-research-card">
+          <img src="../assets/images/furlenco/research-1.jpg" alt="Framed question marks on a wall" />
+          <figcaption>
+            <strong>Personal framing</strong>
+            <span>Naming exactly what made me hesitate</span>
+          </figcaption>
+        </figure>
+        <figure class="fx-research-card">
+          <img src="../assets/images/furlenco/research-2.jpg" alt="Two people seated in an interview" />
+          <figcaption>
+            <strong>Primary research</strong>
+            <span>The survey and interviews, run in parallel</span>
+          </figcaption>
+        </figure>
+        <figure class="fx-research-card">
+          <img src="../assets/images/furlenco/research-3.jpg" alt="Someone auditing a website on a laptop" />
+          <figcaption>
+            <strong>UX audit</strong>
+            <span>Walking Furlenco's landing page, listing, and product pages against six confidence-related questions</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="fx-hypothesis">
+        That became my hypothesis:<br />
+        <strong>Maybe the problem isn't finding furniture. It's feeling certain you've found the right furniture.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 04 HOW I APPROACHED THIS ================= -->
+  <section class="fx-approach">
+    <div class="wrap">
+      <h2 class="fx-h2">How I Approached This</h2>
+      <ol class="fx-steps">
+        <li>
+          <span class="fx-step-num">01</span>
+          <h3>Personal framing</h3>
+          <p>Mapped my own rental experience step by step, pinpointing the exact moments doubt crept in, not just "I felt unsure," but where and why.</p>
+        </li>
+        <li>
+          <span class="fx-step-num">02</span>
+          <h3>Survey &amp; Interviews</h3>
+          <p>Ran a 31-person survey and 5 in-depth interviews with people who'd rented or bought furniture online, to see where their confidence dipped and why.</p>
+        </li>
+        <li>
+          <span class="fx-step-num">03</span>
+          <h3>UX audit</h3>
+          <p>Walked Furlenco's landing, listing, and product pages against six confidence-related questions, checking where the product itself answered or ignored those doubts.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 05 WHAT I FOUND ================= -->
+  <section class="fx-found">
+    <div class="wrap">
+
+      <div class="fx-found-top">
+        <h2 class="fx-found-title">06<br />What I<br />Found</h2>
+
+        <div class="fx-stats">
+          <div class="fx-stat">
+            <span class="fx-stat-num" data-count-to="36">36</span>
+            <p class="fx-stat-label">Survey responses + interviews</p>
+          </div>
+          <div class="fx-stat">
+            <span class="fx-stat-num" data-count-to="82" data-suffix="%">82%</span>
+            <p class="fx-stat-label">Hesitated at a neutral 3/5</p>
+          </div>
+          <div class="fx-stat">
+            <span class="fx-stat-num" data-count-to="48" data-suffix="%">48%</span>
+            <p class="fx-stat-label">Paused or delayed a purchase.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fx-insights">
+        <div class="fx-insight">
+          <h3>The Confidence Gap</h3>
+          <p>82% of people who rated their confidence a neutral 3/5 went on to hesitate. Only 11% did at 4/5.</p>
+        </div>
+        <div class="fx-insight">
+          <h3>Trust Isn't Built by Reviews</h3>
+          <p>Every person distrusted reviews for a different reason. Ignored, too thin, curated, fake.</p>
+        </div>
+        <div class="fx-insight">
+          <h3>Photos Are the Real Trust Signal</h3>
+          <p>Real photos build confidence fast; AI-looking or overly polished ones break it just as fast.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 06 THE SOLUTION ================= -->
+  <section class="fx-solution">
+    <div class="wrap">
+      <h2 class="fx-h2">07 — The Solution</h2>
+      <!-- Text rests on the card; the photo (which carries the same wording
+           baked in from Figma) fades in on hover. -->
+      <div class="fx-solution-grid">
+        <figure class="fx-solution-card" tabindex="0">
+          <div class="fx-solution-text">
+            <strong>Real Customer Homes &amp; Reviews</strong>
+            <span>Real photos from actual renters' homes are shown alongside the studio shots, giving people proof that the product looks the same outside a photoshoot.</span>
+            <span class="fx-solution-hint">Hover to view</span>
+          </div>
+          <img src="../assets/images/furlenco/solution-1.jpg?v=2" alt="A renter sitting on a green sofa in her own living room" />
+        </figure>
+        <figure class="fx-solution-card" tabindex="0">
+          <div class="fx-solution-text">
+            <strong>Room Visualisation</strong>
+            <span>A "view in my room" option sits at the very first photo, letting people see the real scale of a piece in their own space before they even get to specs or reviews.</span>
+            <span class="fx-solution-hint">Hover to view</span>
+          </div>
+          <img src="../assets/images/furlenco/solution-2.jpg?v=2" alt="A made bed photographed at an angle showing its real scale in a room" />
+        </figure>
+        <figure class="fx-solution-card" tabindex="0">
+          <div class="fx-solution-text">
+            <strong>Verified Renter Trust Layer</strong>
+            <span>Reviews now carry a "Verified Renter" badge along with how long that person has actually had the piece, instead of relying on a star average alone.</span>
+            <span class="fx-solution-hint">Hover to view</span>
+          </div>
+          <img src="../assets/images/furlenco/solution-3.jpg?v=2" alt="A woman walking through her furnished living room" />
+        </figure>
+        <figure class="fx-solution-card" tabindex="0">
+          <div class="fx-solution-text">
+            <strong>Know Before You Commit</strong>
+            <span>The full cost — deposit, monthly rent, delivery is shown upfront, along with a plain-language section on cancellations and returns, so confidence survives the exit.</span>
+            <span class="fx-solution-hint">Hover to view</span>
+          </div>
+          <img src="../assets/images/furlenco/solution-4.jpg?v=2" alt="A woman arranging a cushion on a rented sofa" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07 BEFORE / AFTER ================= -->
+  <section class="fx-ba">
+    <div class="wrap">
+      <p class="fx-label">08 — Before / After</p>
+      <div class="fx-ba-row">
+        <figure class="fx-ba-item">
+          <video src="../assets/videos/furlenco-before.mp4"
+                 poster="../assets/images/furlenco/before.jpg"
+                 muted loop playsinline preload="metadata"
+                 aria-label="Screen recording of the original Furlenco landing page"></video>
+          <figcaption>Before — the original landing page</figcaption>
+        </figure>
+        <span class="fx-ba-arrow" aria-hidden="true">&rarr;</span>
+        <figure class="fx-ba-item">
+          <video src="../assets/videos/furlenco-after.mp4"
+                 poster="../assets/images/furlenco/after.jpg"
+                 muted loop playsinline preload="metadata"
+                 aria-label="Screen recording of the redesigned Furlenco landing page"></video>
+          <figcaption>After — the redesign</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 08 WALKING THROUGH IT — live prototype ================= -->
+  <section class="fx-proto">
+    <div class="wrap">
+      <p class="fx-label">09 — Walking through it</p>
+      <h2 class="fx-h2">Try it yourself</h2>
+      <p class="fx-lede">The redesigned rent flow, running live. Click through it the way a customer would.</p>
+
+      <div class="fx-laptop">
+        <div class="fx-laptop-screen">
+          <iframe
+            title="Furlenco rent flow — interactive prototype"
+            src="https://embed.figma.com/proto/nT5JWg1Q1Iw6CHvsaLorc5/Furlenco-Case-Study-%E2%80%94-Wireframe-v2?node-id=65-1221&scaling=scale-down-width&content-scaling=fixed&embed-host=share&hide-ui=1"
+            allowfullscreen
+            loading="lazy"></iframe>
+        </div>
+        <div class="fx-laptop-base"><span class="fx-laptop-notch"></span></div>
+      </div>
+
+      <p class="fx-proto-fallback">
+        Prototype not loading?
+        <a href="https://www.figma.com/proto/nT5JWg1Q1Iw6CHvsaLorc5/Furlenco-Case-Study-%E2%80%94-Wireframe-v2?node-id=65-1221" target="_blank" rel="noopener">Open it in Figma
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4"/></svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 09 REFLECTION ================= -->
+  <section class="fx-reflection">
+    <div class="wrap">
+      <div class="fx-reflection-grid">
+        <div>
+          <p class="fx-label">10 — Reflection</p>
+          <p>This project started with one very personal question: "How do I know this furniture is actually right for me?" But the real lesson was that my own experience could only start the investigation — it couldn't be the evidence for the solution.</p>
+          <p>Research helped me question my assumptions; the audit helped me see the product more objectively; and the redesign taught me to trace every feature back to a real, specific moment of doubt.</p>
+        </div>
+        <div>
+          <p class="fx-label">Next steps</p>
+          <p>This redesign is grounded in real research — a 31-person survey and 5 interviews — but it hasn't been tested against actual behavior yet. The next step would be a moderated usability test comparing the current product page against the redesign, tracking:</p>
+          <ul class="fx-next-list">
+            <li><strong>Time to decision</strong> — browsing to confirming</li>
+            <li><strong>Confidence shift</strong> — out of the 3/5 "hesitation zone"</li>
+            <li><strong>Return-terms lookup</strong> — checked without prompting</li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="fx-back" href="../index.html#projects">
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M11 3L3 11M3 11H10M3 11V4" stroke="currentColor" stroke-width="1.4"/></svg>
+        Back to all projects
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
+</footer>
+
+<script src="../assets/js/furlenco.js?v=3"></script>
+</body>
+</html>

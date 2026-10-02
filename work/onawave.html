@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OnaWave Medical — Giving clinicians interpretation, not just data | Ishita Sharma</title>
+<meta name="description" content="OnaWave Medical: a clinical decision support dashboard that turns 28 days of cycle data into a reading a clinician can trust in three minutes. UX case study by Ishita Sharma." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=30" />
+<link rel="stylesheet" href="../assets/css/onawave.css?v=27" />
+<script>
+  /* Set before first paint so reveal targets are never briefly visible.
+     No JS, or reduced motion, means no class and nothing is ever hidden. */
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+    document.documentElement.className += " ow-anim";
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="ow-progress" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="../index.html" aria-label="Home">
+        <img class="rat-logo" src="../assets/images/rat.png" alt="Ishita Sharma — home" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#playground">Playground</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ 01 HERO ============ -->
+  <section class="ow-hero">
+    <!-- Two copies of the same ink, mirrored and drifting on different
+         timings, so they keep sliding out of phase and re-forming. One image,
+         no video, no canvas — it is all GPU-composited transforms. -->
+    <div class="ow-hero-ink" aria-hidden="true">
+      <span class="ow-ink-a"></span>
+      <span class="ow-ink-b"></span>
+      <span class="ow-ink-bloom"></span>
+    </div>
+    <div class="wrap">
+      <div class="ow-hero-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <p class="ow-kicker">Case study</p>
+            <span class="ow-sub">Clinician dashboard</span>
+          </div>
+          <h1 class="ow-title" data-rv>Giving clinicians interpretation, not just data.</h1>
+        </div>
+
+        <div class="ow-hero-row">
+          <p class="ow-hero-lede" data-rv>A clinical decision support dashboard that turns 28 days of cycle data into a reading a clinician can trust in the three minutes they actually have.</p>
+          <div class="ow-stat" data-rv>
+            <div class="ow-stat-fig">
+              <b>3&ndash;5 min</b>
+              <p>is all a clinician gets to read a patient&rsquo;s full cycle and decide what matters</p>
+            </div>
+            <hr />
+            <small>15&ndash;20 patients reviewed daily &middot; the design constraint behind every decision below</small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 THE ASK ============ -->
+  <section class="ow-sec">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">02</span>
+            <span class="ow-label">The ask</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>Design for a clinician mid-consultation</h2>
+            <p class="ow-lede" data-rv>I was asked to design a dashboard for clinicians reviewing a patient&rsquo;s menstrual cycle data &mdash; one that represents data across the cycle, highlights patterns and relationships, and supports fast clinical interpretation.</p>
+          </div>
+        </div>
+
+        <div class="ow-two">
+          <blockquote class="ow-scenario" data-rv>
+            <p>A clinician is reviewing a patient&rsquo;s cycle data mid-consultation. With limited time, they need to spot abnormalities, understand the pattern, and decide whether anything needs further evaluation.</p>
+          </blockquote>
+          <div class="ow-obj" data-rv>
+            <span class="ow-obj-title">What the dashboard had to do</span>
+            <ol>
+              <li><b>01</b><span>Represent data across the full cycle</span></li>
+              <li><b>02</b><span>Highlight patterns and relationships</span></li>
+              <li><b>03</b><span>Enable fast clinical interpretation</span></li>
+              <li><b>04</b><span>Surface important events</span></li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 GROUNDING ============ -->
+  <section class="ow-sec" id="grounding">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">03</span>
+            <span class="ow-label">Grounding the problem</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>No clinicians to interview &mdash; so I built the case from evidence instead</h2>
+            <p class="ow-lede" data-rv>I didn&rsquo;t have access to clinicians to validate this directly. The problem understanding instead came from three sources:</p>
+          </div>
+        </div>
+
+        <div class="ow-sources">
+          <article data-rv>
+            <h3>Clinical resources</h3>
+            <p>Established patterns on menstrual cycle physiology &mdash; what actually matters medically, like LH timing and BBT shifts.</p>
+          </article>
+          <article data-rv>
+            <h3>Comparative app audit</h3>
+            <p>How existing health-tracking apps do &mdash; or mostly don&rsquo;t &mdash; support clinical interpretation rather than patient self-tracking.</p>
+          </article>
+          <article data-rv>
+            <h3>Cognitive load research</h3>
+            <p>UX research on data visualization, to understand what makes multi-variable time-series data slow to parse under time pressure.</p>
+          </article>
+        </div>
+
+        <div class="ow-findings">
+        <ul class="ow-hyp">
+          <li data-rv><b>H1</b><span>Data is difficult to interpret quickly &mdash; raw values don&rsquo;t say what&rsquo;s normal versus worth flagging.</span></li>
+          <li data-rv><b>H2</b><span>Important insights aren&rsquo;t visible upfront; the clinician has to dig for the one thing that matters.</span></li>
+          <li data-rv><b>H3</b><span>Graphs create high cognitive load, with several overlapping variables and no guided reading order.</span></li>
+        </ul>
+
+        <p class="ow-caveat" data-rv>These are informed hypotheses built from research, not clinician-verified findings &mdash; a distinction I address directly further down.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 PERSONA ============ -->
+  <section class="ow-sec">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">04</span>
+            <span class="ow-label">Meet the user</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>The clinician this dashboard is designed for</h2>
+            <p class="ow-lede" data-rv>Everything below is built around one person &mdash; and around one number: the three to five minutes she actually has.</p>
+          </div>
+        </div>
+
+        <div class="ow-persona">
+
+          <figure class="ow-p-photo" data-rv>
+            <img src="../assets/images/onawave/persona-reena.jpg?v=1" alt="Dr. Reena Shah, a gynaecologist in a white coat" width="1024" height="1536" loading="lazy" />
+            <span class="ow-p-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="15" height="15"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg>
+            </span>
+            <figcaption>
+              <strong>Dr. Reena Shah</strong>
+              <span>Gynaecologist &middot; reviews 15&ndash;20 patients a day</span>
+            </figcaption>
+          </figure>
+
+          <!-- Not a personality chart. Every bar here is a figure the brief
+               stated, drawn against the axis printed under it. -->
+          <div class="ow-p-meters" data-rv>
+            <h3>Her day, in the numbers the brief gave me</h3>
+            <ul class="ow-meters">
+              <li class="ow-meter">
+                <p class="ow-meter-top"><span>Minutes per patient review</span><b>3&ndash;5</b></p>
+                <span class="ow-meter-track"><i style="--fill:17%"></i></span>
+                <p class="ow-meter-scale"><span>0</span><span>30 min</span></p>
+              </li>
+              <li class="ow-meter">
+                <p class="ow-meter-top"><span>Patients reviewed daily</span><b>15&ndash;20</b></p>
+                <span class="ow-meter-track"><i style="--fill:80%"></i></span>
+                <p class="ow-meter-scale"><span>0</span><span>25 patients</span></p>
+              </li>
+              <li class="ow-meter">
+                <p class="ow-meter-top"><span>Panels she switches between</span><b>5</b></p>
+                <span class="ow-meter-track"><i style="--fill:100%"></i></span>
+                <p class="ow-meter-scale"><span>0</span><span>5 panels</span></p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="ow-p-goals" data-rv>
+            <h3>What she needs answered</h3>
+            <ul>
+              <li><span>Is there anything urgent I need to act on?</span></li>
+              <li><span>What was this patient&rsquo;s overall cycle pattern?</span></li>
+              <li><span>What should I monitor or investigate next?</span></li>
+            </ul>
+            <p>Her EHR answers none of them directly &mdash; it returns raw tables, with no visible relationship between them.</p>
+          </div>
+
+          <blockquote class="ow-p-quote" data-rv>
+            <p>The tool gives me data. It doesn&rsquo;t give me meaning.</p>
+          </blockquote>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 CURRENT JOURNEY ============ -->
+  <section class="ow-sec">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">05</span>
+            <span class="ow-label">Current journey</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>Five stages, and the system leaves the interpretation to her</h2>
+            <p class="ow-lede" data-rv>Each stage costs her time, and every one of them ends with her doing the interpreting by hand. Step through them one at a time.</p>
+          </div>
+        </div>
+
+        <!-- Stepped by JS. With no JS the five stages simply render in order,
+             which is still the whole journey, just not one screen at a time. -->
+        <div class="ow-journey" id="owJourney" data-rv>
+
+          <ol class="ow-track" role="tablist" aria-label="Journey stages">
+            <li><button type="button" role="tab" id="owTab1" aria-controls="owStage1" aria-selected="true" tabindex="0" data-stage="1">01</button></li>
+            <li><button type="button" role="tab" id="owTab2" aria-controls="owStage2" aria-selected="false" tabindex="-1" data-stage="2">02</button></li>
+            <li><button type="button" role="tab" id="owTab3" aria-controls="owStage3" aria-selected="false" tabindex="-1" data-stage="3">03</button></li>
+            <li><button type="button" role="tab" id="owTab4" aria-controls="owStage4" aria-selected="false" tabindex="-1" data-stage="4">04</button></li>
+            <li><button type="button" role="tab" id="owTab5" aria-controls="owStage5" aria-selected="false" tabindex="-1" data-stage="5">05</button></li>
+          </ol>
+
+          <div class="ow-stages">
+          <article class="ow-stage is-on" id="owStage1" role="tabpanel" aria-labelledby="owTab1">
+            <figure class="ow-stage-media" style="--arn:2.634">
+              <img src="../assets/images/onawave/stage-1.png?v=1" alt="Stage 01 of the current journey &mdash; Multiple panels" loading="lazy" />
+              <span class="ow-stage-ph" aria-hidden="true"><b>01</b>Stage image</span>
+            </figure>
+            <div class="ow-stage-copy">
+              <p class="ow-stage-count">Stage <b>01</b> <i>of 05</i></p>
+              <h3>Multiple panels</h3>
+              <p class="ow-stage-desc">Checks separate sections one by one</p>
+              <p class="ow-friction">Constantly switching panels</p>
+            </div>
+          </article>
+          <article class="ow-stage" id="owStage2" role="tabpanel" aria-labelledby="owTab2" aria-hidden="true">
+            <figure class="ow-stage-media" style="--arn:1.869">
+              <img src="../assets/images/onawave/stage-2.png?v=1" alt="Stage 02 of the current journey &mdash; Graph interpretation" loading="lazy" />
+              <span class="ow-stage-ph" aria-hidden="true"><b>02</b>Stage image</span>
+            </figure>
+            <div class="ow-stage-copy">
+              <p class="ow-stage-count">Stage <b>02</b> <i>of 05</i></p>
+              <h3>Graph interpretation</h3>
+              <p class="ow-stage-desc">Analyses graphs across panels</p>
+              <p class="ow-friction">Data feels overwhelming</p>
+            </div>
+          </article>
+          <article class="ow-stage" id="owStage3" role="tabpanel" aria-labelledby="owTab3" aria-hidden="true">
+            <figure class="ow-stage-media" style="--arn:2.319">
+              <img src="../assets/images/onawave/stage-3.png?v=1" alt="Stage 03 of the current journey &mdash; Event recognition" loading="lazy" />
+              <span class="ow-stage-ph" aria-hidden="true"><b>03</b>Stage image</span>
+            </figure>
+            <div class="ow-stage-copy">
+              <p class="ow-stage-count">Stage <b>03</b> <i>of 05</i></p>
+              <h3>Event recognition</h3>
+              <p class="ow-stage-desc">Hunts for key events</p>
+              <p class="ow-friction">Patterns not easily visible</p>
+            </div>
+          </article>
+          <article class="ow-stage" id="owStage4" role="tabpanel" aria-labelledby="owTab4" aria-hidden="true">
+            <figure class="ow-stage-media" style="--arn:1.524">
+              <img src="../assets/images/onawave/stage-4.png?v=1" alt="Stage 04 of the current journey &mdash; Manual correlation" loading="lazy" />
+              <span class="ow-stage-ph" aria-hidden="true"><b>04</b>Stage image</span>
+            </figure>
+            <div class="ow-stage-copy">
+              <p class="ow-stage-count">Stage <b>04</b> <i>of 05</i></p>
+              <h3>Manual correlation</h3>
+              <p class="ow-stage-desc">Correlates symptoms and trends</p>
+              <p class="ow-friction">Hard to connect the dots</p>
+            </div>
+          </article>
+          <article class="ow-stage" id="owStage5" role="tabpanel" aria-labelledby="owTab5" aria-hidden="true">
+            <figure class="ow-stage-media" style="--arn:1.234">
+              <img src="../assets/images/onawave/stage-5.png?v=1" alt="Stage 05 of the current journey &mdash; Report compilation" loading="lazy" />
+              <span class="ow-stage-ph" aria-hidden="true"><b>05</b>Stage image</span>
+            </figure>
+            <div class="ow-stage-copy">
+              <p class="ow-stage-count">Stage <b>05</b> <i>of 05</i></p>
+              <h3>Report compilation</h3>
+              <p class="ow-stage-desc">Summarises findings</p>
+              <p class="ow-friction">Takes too long to compile</p>
+            </div>
+          </article>
+          </div>
+
+          <div class="ow-stage-nav">
+            <button type="button" class="ow-arrow" data-dir="-1" aria-label="Previous stage">
+              <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+            </button>
+            <button type="button" class="ow-arrow" data-dir="1" aria-label="Next stage">
+              <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 THE SOLUTION ============ -->
+  <section class="ow-band" id="solution">
+    <div class="wrap">
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">06</span>
+            <span class="ow-label">The solution</span>
+            <p class="ow-note">Surfaces the one thing that matters &mdash; before anything else.</p>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>Clarity over complexity &mdash; urgency, understanding, then action, in one view</h2>
+            <p class="ow-lede" data-rv>Rather than adding more visualisations, the dashboard restructures what&rsquo;s shown and in what order &mdash; moving the clinician through a single scroll instead of five disconnected panels.</p>
+          </div>
+        </div>
+
+        <!-- One screen, two modes. The laptop holds the live Figma prototype;
+             opening a decision fades a still of the same screen over it and
+             scrolls to the region that decision produced. Closing it hands the
+             prototype back. The reasoning lives here rather than in a second
+             section, so the screen and the explanation are never apart. -->
+        <div class="ow-solution">
+
+          <div class="ow-screen-col">
+            <figure class="ow-figure" data-rv>
+              <div class="ow-laptop">
+                <div class="ow-laptop-lid">
+                  <div class="ow-laptop-screen">
+                    <iframe
+                      title="OnaWave clinician dashboard, interactive prototype"
+                      src="https://embed.figma.com/proto/16lVbU0lHbC9YmWxlyrFH6/OnaWave-Medical-%E2%80%94-Clinician-Dashboard-Case-Study?node-id=17-870&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;embed-host=share&amp;hide-ui=1"
+                      allowfullscreen
+                      loading="lazy"></iframe>
+
+                    <div class="ow-annot" id="owAnnot" aria-hidden="true">
+                      <div class="ow-annot-scroll" id="owAnnotScroll">
+                        <img src="../assets/images/onawave/dashboard-poster.jpg?v=1" alt="" width="1510" height="1600" loading="lazy" />
+                        <span class="ow-hl" id="owHl"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ow-laptop-base" aria-hidden="true"></div>
+              </div>
+
+              <figcaption>
+                <span id="owMode">Live prototype &mdash; scroll it, and tap the alert counts</span>
+                <button type="button" class="ow-screen-back" id="owBack" hidden>Back to the prototype</button>
+              </figcaption>
+            </figure>
+
+            <p class="ow-proto-fallback">Prototype not loading?
+              <a href="https://www.figma.com/proto/16lVbU0lHbC9YmWxlyrFH6/OnaWave-Medical-%E2%80%94-Clinician-Dashboard-Case-Study?node-id=17-870" target="_blank" rel="noopener">Open it in Figma
+                <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+              </a>
+            </p>
+          </div>
+
+          <div class="ow-reason" id="owReason">
+            <p class="ow-reason-lede" data-rv>Eight decisions built this screen, in a deliberate order: urgency, then understanding, then action. Open one to see where it lives.</p>
+            <div class="ow-rcards">
+              <article class="ow-rcard ow-c-red" data-rv data-box="19.1,8.2,79.2,4.1">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb1">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">01</span>
+                    <span class="ow-rtitle">Critical finding banner</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb1">
+                  <div>
+                    <p>The single most urgent finding, in one plain sentence, placed first so nothing is missed.</p>
+                    <p class="ow-q">Is there anything urgent?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-navy" data-rv data-box="19.1,13.8,20.4,14.9">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb2">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">02</span>
+                    <span class="ow-rtitle">Patient details</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb2">
+                  <div>
+                    <p>Name, age, cycle length, date range &mdash; nothing else. Three seconds to orient.</p>
+                    <p class="ow-q">Who am I looking at?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-teal" data-rv data-box="40.6,13.8,42.7,14.9">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb3">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">03</span>
+                    <span class="ow-rtitle">Clinical summary</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb3">
+                  <div>
+                    <p>Four one-line insights with a consistent colour code carried across the whole dashboard.</p>
+                    <p class="ow-q">What is this cycle&rsquo;s story?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-amber" data-rv data-box="84.4,13.8,12.3,14.9">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb4">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">04</span>
+                    <span class="ow-rtitle">Alerts card</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb4">
+                  <div>
+                    <p>Red for act now, amber for monitor &mdash; separated by severity, not chronology.</p>
+                    <p class="ow-q">How many issues, how serious?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-teal" data-rv data-box="19.1,30.3,77.5,23.9">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb5">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">05</span>
+                    <span class="ow-rtitle">Two split charts</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb5">
+                  <div>
+                    <p>Pain/Energy and BBT/LH kept separate rather than overlaid &mdash; a direct answer to cognitive load.</p>
+                    <p class="ow-q">What are the patterns?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-navy" data-rv data-box="19.1,55.8,77.5,6.4">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb6">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">06</span>
+                    <span class="ow-rtitle">Key metrics strip</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb6">
+                  <div>
+                    <p>Seven values for quick reference, with the abnormal LH&rarr;BBT gap highlighted.</p>
+                    <p class="ow-q">What are the exact values?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-teal" data-rv data-box="19.1,63.8,39.2,14.1">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb7">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">07</span>
+                    <span class="ow-rtitle">Phase cards</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb7">
+                  <div>
+                    <p>Menstrual, Follicular, Ovulation, Luteal &mdash; each framed as a one-line insight, not a raw range.</p>
+                    <p class="ow-q">What&rsquo;s the story, phase by phase?</p>
+                  </div>
+                </div>
+              </article>
+              <article class="ow-rcard ow-c-red" data-rv data-box="19.1,79.6,52.9,18.4">
+                <h3>
+                  <button type="button" class="ow-rcard-head" aria-expanded="false" aria-controls="owRb8">
+                    <i aria-hidden="true"></i>
+                    <span class="ow-r-num">08</span>
+                    <span class="ow-rtitle">Conclusions</span>
+                    <svg class="ow-rchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+                  </button>
+                </h3>
+                <div class="ow-rcard-body" id="owRb8">
+                  <div>
+                    <p>Four explicit next actions, each linked back to a specific finding above.</p>
+                    <p class="ow-q">What do I do next?</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 THE UX WORK ============ -->
+  <section class="ow-sec">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">07</span>
+            <span class="ow-label">The UX work</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>The screen is the output. The decisions are the work.</h2>
+            <p class="ow-lede" data-rv>Most of this project happened before anything was drawn &mdash; in deciding what the clinician needed to be told, in what order, and what to leave out. Here is the method, and the four calls that shaped the layout.</p>
+          </div>
+        </div>
+
+        <ol class="ow-process" data-rv>
+          <li>
+            <span class="ow-p-step">Frame</span>
+            <h3>Turn a brief into constraints</h3>
+            <p>Four objectives, and one number that governed everything after it: three to five minutes per patient.</p>
+          </li>
+          <li>
+            <span class="ow-p-step">Research</span>
+            <h3>Build an evidence base without users</h3>
+            <p>Clinical literature, a competitive audit and cognitive-load research &mdash; stated as three hypotheses, not findings.</p>
+          </li>
+          <li>
+            <span class="ow-p-step">Define</span>
+            <h3>Fix a single user in place</h3>
+            <p>Dr. Reena Shah: fifteen to twenty patients a day, raw tables, three questions she needs answered fast.</p>
+          </li>
+          <li>
+            <span class="ow-p-step">Map</span>
+            <h3>Find where the time actually goes</h3>
+            <p>Five stages, five friction points &mdash; and the discovery that the cost sat between the panels, not inside them.</p>
+          </li>
+          <li>
+            <span class="ow-p-step">Structure</span>
+            <h3>Order before interface</h3>
+            <p>Urgency, context, pattern, meaning, action &mdash; settled as a reading order before any layout existed.</p>
+          </li>
+        </ol>
+
+        <div class="ow-tradeoffs">
+          <article data-rv>
+            <span class="ow-t-num">01</span>
+            <h3>Two charts, not one</h3>
+            <dl>
+              <dt>Considered</dt>
+              <dd>Overlaying BBT, LH, pain and energy on a single chart &mdash; fewer elements on screen.</dd>
+              <dt>Chose</dt>
+              <dd>Two charts, each pairing variables that actually relate to one another.</dd>
+              <dt>Because</dt>
+              <dd>Fewer elements is not the same as less work. The third hypothesis was cognitive load from overlapping variables with no reading order &mdash; one chart would have concentrated that, not solved it.</dd>
+            </dl>
+          </article>
+          <article data-rv>
+            <span class="ow-t-num">02</span>
+            <h3>One scroll, not five panels</h3>
+            <dl>
+              <dt>Considered</dt>
+              <dd>Keeping the familiar five-panel structure and improving each panel on its own terms.</dd>
+              <dt>Chose</dt>
+              <dd>A single scroll with a fixed order.</dd>
+              <dt>Because</dt>
+              <dd>The journey map showed the cost wasn&rsquo;t inside any one panel &mdash; it was in switching between them and holding the thread. Better panels would have left that untouched.</dd>
+            </dl>
+          </article>
+          <article data-rv>
+            <span class="ow-t-num">03</span>
+            <h3>Severity, not chronology</h3>
+            <dl>
+              <dt>Considered</dt>
+              <dd>Listing alerts in the order the events occurred across the cycle.</dd>
+              <dt>Chose</dt>
+              <dd>Splitting them into act now and monitor.</dd>
+              <dt>Because</dt>
+              <dd>In a three-minute review the first question is &ldquo;is anything urgent&rdquo;, not &ldquo;what happened when&rdquo;. Chronology is the data&rsquo;s order; severity is the clinician&rsquo;s.</dd>
+            </dl>
+          </article>
+          <article data-rv>
+            <span class="ow-t-num">04</span>
+            <h3>Insights, not ranges</h3>
+            <dl>
+              <dt>Considered</dt>
+              <dd>Showing each phase&rsquo;s values and letting the clinician read them.</dd>
+              <dt>Chose</dt>
+              <dd>One interpreted sentence per phase, worded as indicative rather than diagnostic.</dd>
+              <dt>Because</dt>
+              <dd>The brief asked for fast clinical interpretation. Handing back raw numbers hands back the work &mdash; but the hedge matters just as much, so it supports her judgment instead of replacing it.</dd>
+            </dl>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 WHY THIS ORDER ============ -->
+  <section class="ow-sec">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">08</span>
+            <span class="ow-label">Why this order</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>Progressive disclosure &mdash; layers, not everything at once</h2>
+            <p class="ow-lede" data-rv>The order is the design. Each layer only makes sense once the one before it has landed.</p>
+          </div>
+        </div>
+
+        <div class="ow-flow">
+          <article data-rv>
+            <div class="ow-flow-key"><b>1</b><span>Urgency</span></div>
+            <p>Critical information sits at the top so action isn&rsquo;t missed.</p>
+          </article>
+          <article data-rv>
+            <div class="ow-flow-key"><b>2</b><span>Context</span></div>
+            <p>Patient details and summary appear early, before the data itself.</p>
+          </article>
+          <article data-rv>
+            <div class="ow-flow-key"><b>3</b><span>Pattern</span></div>
+            <p>Graphs come after summary, once there&rsquo;s a frame to read them against.</p>
+          </article>
+          <article data-rv>
+            <div class="ow-flow-key"><b>4</b><span>Meaning</span></div>
+            <p>Phase cards interpret the data, cutting the need for manual reasoning.</p>
+          </article>
+          <article data-rv>
+            <div class="ow-flow-key"><b>5</b><span>Action</span></div>
+            <p>Clinical direction closes the view, guiding the actual decision.</p>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 WHAT I'D DO DIFFERENTLY ============ -->
+  <section class="ow-sec">
+    <div class="wrap">
+      <hr class="ow-rule" />
+      <div class="ow-body">
+
+        <div class="ow-grid">
+          <div class="ow-rail-col" data-rv>
+            <span class="ow-num">09</span>
+            <span class="ow-label">What I&rsquo;d do differently</span>
+          </div>
+          <div class="ow-main">
+            <h2 data-rv>Naming the gap, rather than hoping no one asks</h2>
+            <p class="ow-lede" data-rv>This was built entirely from desk research, without direct access to clinicians. That&rsquo;s a real constraint worth stating plainly rather than glossing over.</p>
+          </div>
+        </div>
+
+        <ul class="ow-limits">
+          <li data-rv>
+            <b>01</b>
+            <div>
+              <h3>Validate the three hypotheses</h3>
+              <p>Interpretation difficulty, low visibility of key insights, and cognitive load are informed assumptions &mdash; not yet confirmed by practising clinicians.</p>
+            </div>
+          </li>
+          <li data-rv>
+            <b>02</b>
+            <div>
+              <h3>Test under real time pressure</h3>
+              <p>The 3&ndash;5 minute review window shaped the whole hierarchy. I&rsquo;ve designed for it, but haven&rsquo;t observed it hold up in a live consultation.</p>
+            </div>
+          </li>
+          <li data-rv>
+            <b>03</b>
+            <div>
+              <h3>Check the clinical language with a gynaecologist</h3>
+              <p>&ldquo;Indicative, not diagnostic&rdquo; is a deliberate safety choice &mdash; its exact wording needs clinical sign-off, not just my judgment.</p>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 CLOSING ============ -->
+  <section class="ow-closing">
+    <div class="wrap">
+      <div class="ow-closing-grid">
+
+        <div class="ow-closing-copy">
+          <h2 data-rv>Designed to work, not impress.</h2>
+          <p data-rv>Every colour, every section, every word exists because somewhere a clinician has three minutes, fifteen patients, and one question:</p>
+          <p class="ow-closing-q" data-rv>What does this data mean for this patient, right now?</p>
+          <p data-rv>It takes five variables across twenty-eight days and turns them into a story a clinician can read, act on immediately, and return to with confidence &mdash; without changing the mental model they already work in.</p>
+          <p class="ow-closing-links" data-rv>
+            <a href="#solution">View working prototype</a>
+            <a href="#grounding">Full research &amp; process</a>
+          </p>
+        </div>
+
+        <figure class="ow-closing-media" data-rv>
+          <img src="../assets/images/onawave/closing.jpg?v=1" alt="" width="1086" height="1448" loading="lazy" />
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="ow-outro">
+    <div class="wrap">
+      <a class="ow-back" href="../index.html#projects">
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M11 3L3 11M3 11H10M3 11V4" stroke="currentColor" stroke-width="1.4"/></svg>
+        Back to all projects
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
+</footer>
+
+<script src="../assets/js/onawave.js?v=7"></script>
+</body>
+</html>

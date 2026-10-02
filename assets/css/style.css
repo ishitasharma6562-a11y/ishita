@@ -191,6 +191,9 @@ section:last-of-type{ border-bottom:none; }
 .thumb-frame.furlenco{ aspect-ratio:1237/1082; }
 .thumb-frame.nazar{ aspect-ratio:1331/1148; }
 .thumb-frame.studio{ aspect-ratio:1230/1104; }
+/* The exported thumbnail's own pixel ratio, so object-fit:contain has
+   nothing left to letterbox. */
+.thumb-frame.onawave{ aspect-ratio:1351 / 1164; }
 .thumb-frame img{
   position:relative; z-index:1;
   width:100%; height:100%; object-fit:contain;
@@ -420,4 +423,65 @@ footer p{ font-size:14px; color:var(--graphite); margin:0; }
 .sticky-audio-toggle.is-playing .icon-pause{ display:block; }
 @media (max-width:640px){
   .sticky-audio-toggle{ right:16px; bottom:16px; width:46px; height:46px; }
+}
+
+/* ============================================================
+   PRESENCE CURSORS
+   Two pointers — the viewer's, and mine trailing behind it.
+   Everything here is gated behind .pc-on, which cursor.js adds only on a
+   real mouse with motion allowed; otherwise the native cursor is untouched.
+   ============================================================ */
+
+@media (hover: hover) and (pointer: fine){
+  /* `html.pc-on body *` is (0,1,2), which outranks the (0,1,0) cursor:pointer
+     rules in this file and in the case-study stylesheets that load after it,
+     without needing !important. */
+  html.pc-on body *{ cursor:none; }
+  html.pc-on body{ cursor:none; }
+  /* Embedded prototypes keep their own cursor — we can't track inside them. */
+  html.pc-on body iframe{ cursor:auto; }
+}
+
+.pc-cursor{
+  position:fixed; top:0; left:0; z-index:10000;
+  pointer-events:none;
+  display:flex; align-items:flex-start;
+  opacity:0;
+  transform:translate3d(-200px,-200px,0);
+  will-change:transform;
+  transition:opacity .18s ease;
+}
+html.pc-live .pc-cursor{ opacity:1; }
+
+.pc-arrow{
+  width:13px; height:19px;
+  display:block; flex:none;
+  filter:drop-shadow(0 1px 2px rgba(23,21,15,.22));
+}
+.pc-tag{
+  margin:11px 0 0 -2px;
+  padding:3px 8px 4px;
+  border-radius:999px;
+  font-family:'Plus Jakarta Sans', sans-serif;
+  font-size:10.5px; font-weight:600; line-height:1.3; letter-spacing:.01em;
+  white-space:nowrap; color:#fff;
+}
+
+/* Colours carried over from the reference: the viewer in near-black, me in coral. */
+.pc-cursor--you .pc-arrow{ fill:#1C1C1E; }
+.pc-cursor--you .pc-tag{ background:#1C1C1E; }
+.pc-cursor--me  .pc-arrow{ fill:#F97362; }
+.pc-cursor--me  .pc-tag{ background:#F97362; }
+
+/* Mine sits behind the viewer's wherever they overlap. */
+.pc-cursor--me{ z-index:9999; }
+
+/* The viewer's cursor reacts; mine doesn't, because it isn't theirs to press. */
+.pc-cursor--you .pc-arrow,
+.pc-cursor--you .pc-tag{ transition:transform .16s var(--ease); }
+html.pc-hot .pc-cursor--you .pc-arrow{ transform:scale(1.18); }
+html.pc-down .pc-cursor--you .pc-arrow{ transform:scale(.86); }
+
+@media (prefers-reduced-motion: reduce){
+  .pc-cursor{ display:none; }
 }
