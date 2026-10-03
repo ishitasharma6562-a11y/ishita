@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Ishita Sharma</title>
+<meta name="description" content="Five folders: who I am, why the rat, my music library, my favourite stickers and my postcard collection." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css?v=31" />
+<link rel="stylesheet" href="assets/css/about.css?v=3" />
+<script>
+  /* Set before first paint. Without JS the desk never locks and every folder's
+     contents simply render down the page, so the whole thing still reads. */
+  document.documentElement.className += " ab-js";
+</script>
+</head>
+<body>
+<a href="#deskTop" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="index.html" aria-label="Home">
+        <img class="rat-logo" src="assets/images/rat.png" alt="Ishita Sharma — home" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="index.html#playground">Playground</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="deskTop">
+
+  <!-- ============ THE DESK ============ -->
+  <!-- Fills the screen and does not scroll. Pick a folder to open it. -->
+  <section class="ab-desk" id="abDesk" aria-label="Pick a folder">
+    <div class="ab-desk-head">
+      <h1>About me</h1>
+      <p>Five folders. Open one.</p>
+    </div>
+
+    <ul class="ab-folders">
+      <li style="--x:20%; --y:46%; --tilt:-5deg">
+        <button type="button" class="ab-folder" data-opens="whoami">
+          <img class="ab-folder-rat" src="assets/images/about/rat.png" alt="" aria-hidden="true" />
+          <img class="ab-folder-img" src="assets/images/about/folder.png" alt="" aria-hidden="true" />
+          <span class="ab-folder-tab"><b>01</b> Who am I? <i>(pls tell me)</i></span>
+        </button>
+      </li>
+      <li style="--x:67%; --y:33%; --tilt:4deg">
+        <button type="button" class="ab-folder" data-opens="rat">
+          <img class="ab-folder-img" src="assets/images/about/folder.png" alt="" aria-hidden="true" />
+          <span class="ab-folder-tab"><b>02</b> why do i resemble a rat?</span>
+        </button>
+      </li>
+      <li style="--x:11%; --y:80%; --tilt:3deg">
+        <button type="button" class="ab-folder" data-opens="music">
+          <img class="ab-folder-img" src="assets/images/about/folder.png" alt="" aria-hidden="true" />
+          <span class="ab-folder-tab"><b>03</b> my music library</span>
+        </button>
+      </li>
+      <li style="--x:45%; --y:72%; --tilt:-3deg">
+        <button type="button" class="ab-folder" data-opens="stickers">
+          <img class="ab-folder-img" src="assets/images/about/folder.png" alt="" aria-hidden="true" />
+          <span class="ab-folder-tab"><b>04</b> my favourite stickers</span>
+        </button>
+      </li>
+      <li style="--x:76%; --y:78%; --tilt:6deg">
+        <button type="button" class="ab-folder" data-opens="postcards">
+          <img class="ab-folder-img" src="assets/images/about/folder.png" alt="" aria-hidden="true" />
+          <span class="ab-folder-tab"><b>05</b> my postcard collection</span>
+        </button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 01 WHO AM I ============ -->
+  <section class="ab-sec ab-whoami" id="whoami" hidden>
+    <div class="ab-back-bar">
+      <button type="button" class="ab-back" data-back>
+        <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+        All folders
+      </button>
+      <span class="ab-sec-num">01</span>
+    </div>
+
+    <div class="wrap">
+      <div class="ab-head">
+        <h2>Who am I? <em>(pls tell me)</em></h2>
+      </div>
+
+      <div class="ab-whoami-grid">
+        <figure class="ab-polaroid">
+          <img src="assets/images/about/polaroid.jpg" alt="Ishita as a small child in a green top, hands clasped, standing in a kitchen" width="1060" height="774" />
+          <figcaption>exhibit A</figcaption>
+        </figure>
+
+        <div class="ab-whoami-copy">
+          <p>I&rsquo;m Ishita. I like taking photos, collecting postcards, long auto rides and finding new music. I almost always have my AirPods in, eat an unreasonable amount of paneer, and somehow ended up with a rat as my mascot. I&rsquo;m mostly just someone who likes making things and figuring things out as I go.</p>
+          <p class="ab-invite">If my friends have ended up here, please feel free to add to this&nbsp;:)</p>
+        </div>
+      </div>
+
+      <!-- The board is per-visitor: notes live in this browser only. -->
+      <div class="ab-notes" id="abNotes">
+        <div class="ab-notes-head">
+          <h3>The board</h3>
+          <p class="ab-notes-note">Notes you write stay in your browser &mdash; nobody else sees them, not even me.</p>
+          <button type="button" class="ab-note-add" id="abNoteAdd">
+            <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>
+            Add a note
+          </button>
+        </div>
+        <ul class="ab-note-board" id="abNoteBoard"></ul>
+        <p class="ab-note-empty" id="abNoteEmpty">Nothing on the board yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 WHY THE RAT ============ -->
+  <section class="ab-sec ab-rat" id="rat" hidden>
+    <div class="ab-back-bar">
+      <button type="button" class="ab-back" data-back>
+        <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+        All folders
+      </button>
+      <span class="ab-sec-num">02</span>
+    </div>
+
+    <div class="wrap">
+      <div class="ab-rat-grid">
+        <figure class="ab-rat-art">
+          <figcaption class="ab-bubble">It makes the portfolio feel a little more like me.</figcaption>
+          <img src="assets/images/about/rat.png" alt="A scribbled drawing of a rat, lying on its front" width="760" height="507" />
+        </figure>
+
+        <div class="ab-rat-copy">
+          <h2>Why the rat?</h2>
+          <p class="ab-lede">I&rsquo;ve been told I look a little like one. Instead of being offended, I gave it a job. It now lives here and occasionally does some design work.</p>
+          <div class="ab-rat-body">
+            <p>The rat started as a random joke, but eventually became a little stand-in for me across the portfolio. It&rsquo;s curious, slightly nosy, and tends to wander into places it probably shouldn&rsquo;t &mdash; which is pretty close to how I approach design. I like poking around, asking questions, noticing tiny things and figuring out how things work.</p>
+            <p>So you&rsquo;ll see it popping up throughout the site &mdash; sometimes explaining something, sometimes interacting with the page, and sometimes just existing because I thought the page needed a rat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 MUSIC LIBRARY ============ -->
+  <section class="ab-sec ab-music" id="music" hidden>
+    <div class="ab-back-bar">
+      <button type="button" class="ab-back" data-back>
+        <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+        All folders
+      </button>
+      <span class="ab-sec-num">03</span>
+    </div>
+
+    <div class="wrap">
+      <div class="ab-music-grid">
+
+        <!-- The disc is drawn in CSS, so it can spin at any size without a
+             single pixel of artwork, and the label swaps per track. Its
+             rotation is driven by the audio: it runs only while sound plays. -->
+        <div class="ab-deck">
+          <div class="ab-vinyl" id="abVinyl">
+            <div class="ab-vinyl-grooves" aria-hidden="true"></div>
+            <div class="ab-vinyl-label" id="abVinylLabel">
+              <span class="ab-vinyl-title" id="abVinylTitle">Music library</span>
+              <span class="ab-vinyl-dot" aria-hidden="true"></span>
+            </div>
+            <div class="ab-vinyl-sheen" aria-hidden="true"></div>
+          </div>
+          <div class="ab-tonearm" aria-hidden="true"><span></span></div>
+        </div>
+
+        <div class="ab-music-copy">
+          <h2>Music library</h2>
+          <p class="ab-lede">Five songs that have been on far too often. Press play &mdash; the record spins while it plays.</p>
+
+          <ol class="ab-tracks" id="abTracks">
+            <li class="ab-track" data-src="assets/audio/about/track-1.mp3">
+              <button type="button" class="ab-track-btn">
+                <span class="ab-track-num">01</span>
+                <span class="ab-track-play" aria-hidden="true">
+                  <svg class="ab-ic-play" viewBox="0 0 16 16" width="13" height="13"><path d="M4 2.5 13.5 8 4 13.5Z"/></svg>
+                  <svg class="ab-ic-pause" viewBox="0 0 16 16" width="13" height="13"><rect x="3.6" y="2.6" width="3.2" height="10.8"/><rect x="9.2" y="2.6" width="3.2" height="10.8"/></svg>
+                </span>
+                <span class="ab-track-meta">
+                  <span class="ab-track-title">Track one</span>
+                  <span class="ab-track-artist">Artist name</span>
+                </span>
+                <span class="ab-track-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </button>
+            </li>
+            <li class="ab-track" data-src="assets/audio/about/track-2.mp3">
+              <button type="button" class="ab-track-btn">
+                <span class="ab-track-num">02</span>
+                <span class="ab-track-play" aria-hidden="true">
+                  <svg class="ab-ic-play" viewBox="0 0 16 16" width="13" height="13"><path d="M4 2.5 13.5 8 4 13.5Z"/></svg>
+                  <svg class="ab-ic-pause" viewBox="0 0 16 16" width="13" height="13"><rect x="3.6" y="2.6" width="3.2" height="10.8"/><rect x="9.2" y="2.6" width="3.2" height="10.8"/></svg>
+                </span>
+                <span class="ab-track-meta">
+                  <span class="ab-track-title">Track two</span>
+                  <span class="ab-track-artist">Artist name</span>
+                </span>
+                <span class="ab-track-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </button>
+            </li>
+            <li class="ab-track" data-src="assets/audio/about/track-3.mp3">
+              <button type="button" class="ab-track-btn">
+                <span class="ab-track-num">03</span>
+                <span class="ab-track-play" aria-hidden="true">
+                  <svg class="ab-ic-play" viewBox="0 0 16 16" width="13" height="13"><path d="M4 2.5 13.5 8 4 13.5Z"/></svg>
+                  <svg class="ab-ic-pause" viewBox="0 0 16 16" width="13" height="13"><rect x="3.6" y="2.6" width="3.2" height="10.8"/><rect x="9.2" y="2.6" width="3.2" height="10.8"/></svg>
+                </span>
+                <span class="ab-track-meta">
+                  <span class="ab-track-title">Track three</span>
+                  <span class="ab-track-artist">Artist name</span>
+                </span>
+                <span class="ab-track-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </button>
+            </li>
+            <li class="ab-track" data-src="assets/audio/about/track-4.mp3">
+              <button type="button" class="ab-track-btn">
+                <span class="ab-track-num">04</span>
+                <span class="ab-track-play" aria-hidden="true">
+                  <svg class="ab-ic-play" viewBox="0 0 16 16" width="13" height="13"><path d="M4 2.5 13.5 8 4 13.5Z"/></svg>
+                  <svg class="ab-ic-pause" viewBox="0 0 16 16" width="13" height="13"><rect x="3.6" y="2.6" width="3.2" height="10.8"/><rect x="9.2" y="2.6" width="3.2" height="10.8"/></svg>
+                </span>
+                <span class="ab-track-meta">
+                  <span class="ab-track-title">Track four</span>
+                  <span class="ab-track-artist">Artist name</span>
+                </span>
+                <span class="ab-track-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </button>
+            </li>
+            <li class="ab-track" data-src="assets/audio/about/track-5.mp3">
+              <button type="button" class="ab-track-btn">
+                <span class="ab-track-num">05</span>
+                <span class="ab-track-play" aria-hidden="true">
+                  <svg class="ab-ic-play" viewBox="0 0 16 16" width="13" height="13"><path d="M4 2.5 13.5 8 4 13.5Z"/></svg>
+                  <svg class="ab-ic-pause" viewBox="0 0 16 16" width="13" height="13"><rect x="3.6" y="2.6" width="3.2" height="10.8"/><rect x="9.2" y="2.6" width="3.2" height="10.8"/></svg>
+                </span>
+                <span class="ab-track-meta">
+                  <span class="ab-track-title">Track five</span>
+                  <span class="ab-track-artist">Artist name</span>
+                </span>
+                <span class="ab-track-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </button>
+            </li>
+          </ol>
+
+          <p class="ab-music-missing" id="abMusicMissing" hidden>The clips aren&rsquo;t on the server yet &mdash; the record still spins if you press play.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 STICKERS ============ -->
+  <section class="ab-sec ab-stickers" id="stickers" hidden>
+    <div class="ab-back-bar">
+      <button type="button" class="ab-back" data-back>
+        <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+        All folders
+      </button>
+      <span class="ab-sec-num">04</span>
+    </div>
+
+    <div class="wrap">
+      <div class="ab-head">
+        <h2>My favourite stickers</h2>
+        <p class="ab-lede">The ones that get sent the most. Drag them around if you like &mdash; where you leave them is remembered.</p>
+        <button type="button" class="ab-sticker-reset" id="abStickerReset">Put them back</button>
+      </div>
+
+      <div class="ab-board" id="abStickerBoard">
+        <figure class="ab-sticker" data-id="s1" style="--x:4%;  --y:6%;  --tilt:-7deg; --w:200px">
+          <img src="assets/images/about/sticker-1.jpg" alt="Reaction sticker" draggable="false" />
+        </figure>
+        <figure class="ab-sticker" data-id="s2" style="--x:28%; --y:2%;  --tilt:5deg;  --w:166px">
+          <img src="assets/images/about/sticker-2.jpg" alt="Reaction sticker" draggable="false" />
+        </figure>
+        <figure class="ab-sticker" data-id="s3" style="--x:52%; --y:12%; --tilt:-4deg; --w:190px">
+          <img src="assets/images/about/sticker-3.jpg" alt="Reaction sticker" draggable="false" />
+        </figure>
+        <figure class="ab-sticker" data-id="s4" style="--x:76%; --y:4%;  --tilt:8deg;  --w:178px">
+          <img src="assets/images/about/sticker-4.jpg" alt="Reaction sticker" draggable="false" />
+        </figure>
+        <figure class="ab-sticker" data-id="s5" style="--x:22%; --y:56%; --tilt:6deg;  --w:214px">
+          <img src="assets/images/about/sticker-5.jpg" alt="Reaction sticker" draggable="false" />
+        </figure>
+        <figure class="ab-sticker" data-id="s6" style="--x:58%; --y:58%; --tilt:-6deg; --w:186px">
+          <img src="assets/images/about/sticker-6.jpg" alt="Reaction sticker" draggable="false" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 POSTCARDS ============ -->
+  <section class="ab-sec ab-postcards" id="postcards" hidden>
+    <div class="ab-back-bar">
+      <button type="button" class="ab-back" data-back>
+        <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+        All folders
+      </button>
+      <span class="ab-sec-num">05</span>
+    </div>
+
+    <div class="wrap">
+      <div class="ab-head">
+        <h2>My postcard collection</h2>
+        <p class="ab-lede">Still in a shoebox. This folder is waiting for them.</p>
+      </div>
+
+      <div class="ab-postcard-wait" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
+</footer>
+
+<script src="assets/js/about.js?v=1"></script>
+</body>
+</html>

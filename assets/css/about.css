@@ -1,0 +1,534 @@
+/* ============================================================
+   ABOUT — five folders on a desk.
+   The desk fills the screen and does not scroll; opening a folder
+   swaps it for that section. Each section carries its own colour,
+   so the folders read as five different drawers rather than five
+   headings on one page.
+   ============================================================ */
+
+:root{
+  --ab-orange:#E8411A;
+  --ab-orange-deep:#C3330F;
+  --ab-sand:#EFE1BE;
+  --ab-sand-deep:#E4D2A6;
+  --ab-grey:#E9E9EA;
+  --ab-ink:#15171A;
+  --ab-muted:#5C6068;
+
+  --ab-gut: clamp(24px, 4vw, 64px);
+  --ab-sec-y: clamp(56px, 6vw, 96px);
+}
+
+/* The desk is a fixed-height stage, so lock the page behind it. */
+html.ab-js body.ab-locked{ overflow:hidden; }
+
+/* ---------- the desk ---------- */
+/* display:grid outranks the UA rule for [hidden], so the attribute alone
+   would not hide the desk. Same trap as .ab-sec below. */
+.ab-desk[hidden]{ display:none; }
+.ab-desk{
+  position:relative;
+  min-height:calc(100vh  - var(--ab-header-h, 91px));
+  min-height:calc(100svh - var(--ab-header-h, 91px));
+  background:var(--ab-sand);
+  overflow:hidden;
+  padding:clamp(24px, 4vw, 48px) var(--ab-gut) clamp(32px, 5vw, 64px);
+  display:grid;
+  grid-template-rows:auto 1fr;
+  gap:clamp(16px, 3vw, 32px);
+}
+.ab-desk-head h1{
+  margin:0;
+  font-size:clamp(32px, 4.6vw, 54px);
+  font-weight:800; letter-spacing:-0.035em; line-height:1.05;
+  color:var(--ab-ink);
+}
+.ab-desk-head p{
+  margin:10px 0 0;
+  font-size:15px; color:var(--ab-muted);
+}
+
+/* Folders are placed by percentage inside the stage, which keeps the
+   scattered arrangement of the mock at any screen size without a single
+   media query moving them one at a time. */
+.ab-folders{
+  list-style:none; margin:0; padding:0;
+  position:relative;
+}
+.ab-folders li{
+  position:absolute;
+  left:var(--x); top:var(--y);
+  transform:translate(-50%, -50%);
+}
+.ab-folder{
+  position:relative;
+  display:grid; justify-items:center; gap:10px;
+  background:none; border:0; padding:0; font:inherit; color:inherit;
+  cursor:pointer;
+  transform:rotate(var(--tilt));
+  transition:transform .26s cubic-bezier(.2,.7,.3,1);
+}
+.ab-folder:hover,
+.ab-folder:focus-visible{
+  transform:rotate(0deg) translateY(-8px) scale(1.04);
+}
+.ab-folder-img{
+  display:block;
+  width:clamp(118px, 13vw, 176px); height:auto;
+  filter:drop-shadow(0 14px 22px rgba(80,40,10,.22));
+  transition:filter .26s ease;
+}
+.ab-folder:hover .ab-folder-img{
+  filter:drop-shadow(0 22px 30px rgba(80,40,10,.3));
+}
+/* The rat peers over the lip of folder 01, as in the mock. */
+.ab-folder-rat{
+  position:absolute;
+  width:46%; height:auto;
+  left:4%; top:0;
+  transform:translateY(-62%) rotate(-6deg);
+  pointer-events:none; z-index:2;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.ab-folder:hover .ab-folder-rat{
+  transform:translateY(-82%) rotate(-10deg);
+}
+.ab-folder-tab{
+  display:flex; align-items:baseline; gap:8px;
+  font-size:13px; line-height:1.3; color:var(--ab-ink);
+  white-space:nowrap;
+}
+.ab-folder-tab b{
+  font-size:11px; font-weight:700; letter-spacing:.1em;
+  color:var(--ab-orange-deep);
+}
+.ab-folder-tab i{ font-style:italic; color:var(--ab-muted); }
+
+/* ---------- a section ---------- */
+.ab-sec{ padding-bottom:var(--ab-sec-y); min-height:60vh; }
+.ab-sec[hidden]{ display:none; }
+
+.ab-back-bar{
+  position:sticky; top:var(--ab-header-h, 91px); z-index:5;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  padding:14px var(--ab-gut);
+  background:inherit;
+}
+.ab-back{
+  display:inline-flex; align-items:center; gap:8px;
+  background:none; border:0; padding:6px 0; font:inherit;
+  font-size:14px; font-weight:600; color:inherit;
+  cursor:pointer; opacity:.78;
+  transition:opacity .2s ease, gap .2s ease;
+}
+.ab-back:hover{ opacity:1; gap:12px; }
+.ab-back svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.ab-sec-num{
+  font-size:12px; font-weight:700; letter-spacing:.16em; opacity:.5;
+}
+
+.ab-sec .wrap{
+  max-width:1200px; margin:0 auto; padding:0 var(--ab-gut);
+}
+.ab-head{ margin-bottom:clamp(28px, 4vw, 52px); }
+.ab-head h2,
+.ab-rat-copy h2,
+.ab-music-copy h2{
+  margin:0;
+  font-size:clamp(30px, 4.2vw, 52px);
+  font-weight:800; letter-spacing:-0.035em; line-height:1.08;
+}
+.ab-head h2 em{ font-style:italic; font-weight:600; opacity:.62; }
+.ab-lede{
+  margin:14px 0 0; max-width:54ch;
+  font-size:clamp(16px, 1.5vw, 19px); line-height:1.6;
+}
+
+/* ---------- 01 who am i ---------- */
+.ab-whoami{ background:var(--ab-sand); color:var(--ab-ink); }
+.ab-whoami-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 420px) minmax(0, 1fr);
+  gap:clamp(32px, 5vw, 72px);
+  align-items:start;
+}
+.ab-polaroid{
+  margin:0; padding:14px 14px 52px;
+  background:#FBFAF6;
+  box-shadow:0 18px 40px -20px rgba(60,40,10,.42);
+  transform:rotate(-2.5deg);
+  position:relative;
+}
+.ab-polaroid img{ display:block; width:100%; height:auto; }
+.ab-polaroid figcaption{
+  position:absolute; left:0; right:0; bottom:18px;
+  text-align:center;
+  font-size:13px; letter-spacing:.04em; color:#9A9183;
+}
+.ab-whoami-copy p{
+  margin:0 0 18px;
+  font-size:clamp(16px, 1.6vw, 19px); line-height:1.72;
+}
+.ab-invite{
+  font-weight:600;
+  border-left:3px solid var(--ab-orange); padding-left:16px;
+}
+
+/* ---------- the note board ---------- */
+.ab-notes{ margin-top:clamp(44px, 6vw, 80px); }
+.ab-notes-head{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:12px 20px;
+  padding-bottom:18px; border-bottom:1px solid rgba(21,23,26,.14);
+}
+.ab-notes-head h3{
+  margin:0; font-size:19px; font-weight:700; letter-spacing:-0.02em;
+}
+.ab-notes-note{ margin:0; font-size:13px; color:var(--ab-muted); flex:1 1 220px; }
+.ab-note-add{
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--ab-ink); color:#fff; border:0;
+  border-radius:999px; padding:9px 16px;
+  font:inherit; font-size:13.5px; font-weight:600; cursor:pointer;
+  transition:transform .18s ease, background .18s ease;
+}
+.ab-note-add:hover{ transform:translateY(-2px); background:var(--ab-orange-deep); }
+.ab-note-add svg{ fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+
+.ab-note-board{
+  list-style:none; margin:22px 0 0; padding:0;
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(188px, 1fr));
+  gap:18px;
+}
+.ab-note{
+  position:relative;
+  padding:18px 16px 34px;
+  border-radius:3px;
+  background:var(--note, #FFE8A3);
+  box-shadow:0 10px 22px -12px rgba(60,40,10,.5);
+  transform:rotate(var(--note-tilt, 0deg));
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.ab-note:hover{ transform:rotate(0deg) translateY(-3px); box-shadow:0 16px 28px -14px rgba(60,40,10,.55); }
+.ab-note-text{
+  width:100%; min-height:86px;
+  background:none; border:0; resize:none;
+  font:inherit; font-size:15px; line-height:1.5; color:#2A2318;
+}
+.ab-note-text:focus{ outline:2px solid rgba(42,35,24,.3); outline-offset:3px; border-radius:2px; }
+.ab-note-text::placeholder{ color:rgba(42,35,24,.42); }
+.ab-note-who{
+  position:absolute; left:16px; bottom:12px; right:40px;
+  background:none; border:0; padding:0;
+  font:inherit; font-size:12.5px; font-weight:600; color:rgba(42,35,24,.62);
+}
+.ab-note-who:focus{ outline:2px solid rgba(42,35,24,.3); outline-offset:2px; }
+.ab-note-del{
+  position:absolute; right:8px; bottom:8px;
+  width:26px; height:26px; border-radius:50%;
+  background:none; border:0; cursor:pointer;
+  color:rgba(42,35,24,.5); font-size:17px; line-height:1;
+  opacity:0; transition:opacity .18s ease, color .18s ease;
+}
+.ab-note:hover .ab-note-del,
+.ab-note:focus-within .ab-note-del{ opacity:1; }
+.ab-note-del:hover{ color:var(--ab-orange-deep); }
+.ab-note-empty{ margin:22px 0 0; font-size:14px; color:var(--ab-muted); }
+.ab-note-empty[hidden]{ display:none; }
+
+/* ---------- 02 why the rat ---------- */
+.ab-rat{ background:var(--ab-sand-deep); color:var(--ab-ink); }
+.ab-rat-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 460px) minmax(0, 1fr);
+  gap:clamp(32px, 5vw, 76px);
+  align-items:center;
+  padding-top:clamp(16px, 3vw, 40px);
+}
+.ab-rat-art{ margin:0; position:relative; }
+.ab-rat-art img{ display:block; width:100%; height:auto; }
+.ab-bubble{
+  display:block; position:relative;
+  margin:0 0 18px;
+  background:var(--ab-ink); color:#fff;
+  border-radius:16px; padding:16px 20px;
+  font-size:16px; line-height:1.45;
+  max-width:88%;
+}
+.ab-bubble::after{
+  content:""; position:absolute; left:42px; bottom:-11px;
+  border:12px solid transparent;
+  border-top-color:var(--ab-ink); border-bottom:0;
+}
+.ab-rat-copy h2{ margin-bottom:4px; }
+.ab-rat-body{
+  margin-top:26px; padding-left:20px;
+  border-left:1px solid rgba(21,23,26,.3);
+  display:grid; gap:16px;
+}
+.ab-rat-body p{ margin:0; font-size:15px; line-height:1.66; color:#3B3D42; }
+
+/* ---------- 03 music ---------- */
+.ab-music{ background:var(--ab-orange); color:#fff; }
+.ab-music .ab-back,
+.ab-music .ab-sec-num{ color:#fff; }
+.ab-music-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+  gap:clamp(36px, 5vw, 80px);
+  align-items:center;
+  padding-top:clamp(16px, 3vw, 40px);
+}
+
+.ab-deck{ position:relative; justify-self:center; width:min(100%, 440px); }
+.ab-vinyl{
+  position:relative;
+  aspect-ratio:1; border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%, #2A2A2E 0 28%, transparent 28%),
+    repeating-radial-gradient(circle at 50% 50%,
+      #0C0C0E 0 2px, #171719 2px 3px, #0C0C0E 3px 5px),
+    #0C0C0E;
+  box-shadow:0 30px 60px -24px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06);
+  display:grid; place-items:center;
+  /* Paused until the audio actually plays — see about.js. */
+  animation:abSpin 2.4s linear infinite;
+  animation-play-state:paused;
+}
+.ab-vinyl.is-spinning{ animation-play-state:running; }
+@keyframes abSpin{ to{ transform:rotate(360deg); } }
+
+.ab-vinyl-grooves{
+  position:absolute; inset:11%;
+  border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%,
+    rgba(255,255,255,.055) 0 1px, transparent 1px 4px);
+}
+.ab-vinyl-label{
+  position:relative; z-index:2;
+  width:38%; aspect-ratio:1; border-radius:50%;
+  background:var(--label, #F3E7D0);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
+  overflow:hidden;
+}
+.ab-vinyl-title{
+  position:absolute; left:11%; right:11%; top:15%;
+  text-align:center;
+  font-size:clamp(10px, 1.15vw, 13px); font-weight:700;
+  line-height:1.22; letter-spacing:-0.01em; color:#2A2318;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+/* The spindle hole, dead centre and clear of the type above it. */
+.ab-vinyl-dot{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:11%; aspect-ratio:1; border-radius:50%;
+  background:#0C0C0E;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.18);
+}
+/* A fixed highlight that does not rotate with the disc, so the record
+   reads as turning under a light rather than carrying one around. */
+.ab-vinyl-sheen{
+  position:absolute; inset:0; border-radius:50%;
+  background:linear-gradient(118deg,
+    rgba(255,255,255,0) 34%, rgba(255,255,255,.1) 46%,
+    rgba(255,255,255,.02) 54%, rgba(255,255,255,0) 66%);
+  pointer-events:none; z-index:3;
+}
+/* Pivot sits just outside the disc at the top right. The arm hangs from it
+   and swings inward over the record while something is playing. */
+.ab-tonearm{
+  position:absolute; top:3%; right:3%;
+  width:7%; aspect-ratio:1;
+  pointer-events:none; z-index:4;
+}
+.ab-tonearm::before{            /* the pivot housing */
+  content:""; position:absolute; inset:0;
+  border-radius:50%;
+  background:radial-gradient(circle at 36% 32%, #3A3A40, #16161A 70%);
+  box-shadow:0 3px 8px rgba(0,0,0,.45);
+}
+.ab-tonearm span{
+  position:absolute; left:50%; top:50%;
+  width:5px; height:360%;
+  margin-left:-2.5px;
+  border-radius:3px;
+  background:linear-gradient(#4A4A52, #26262B);
+  transform-origin:50% 0;
+  transform:rotate(26deg);
+  transition:transform .7s cubic-bezier(.3,.7,.3,1);
+  box-shadow:0 2px 5px rgba(0,0,0,.3);
+}
+.ab-tonearm span::after{        /* the head, at the far end of the arm */
+  content:""; position:absolute; left:50%; bottom:-2px;
+  width:13px; height:20px; margin-left:-6.5px;
+  border-radius:3px 3px 2px 2px;
+  background:linear-gradient(#2C2C32, #141418);
+  box-shadow:0 2px 5px rgba(0,0,0,.4);
+}
+.ab-deck.is-playing .ab-tonearm span{ transform:rotate(44deg); }
+
+.ab-music-copy h2{ color:#fff; }
+.ab-music .ab-lede{ color:rgba(255,255,255,.88); }
+.ab-tracks{
+  list-style:none; margin:30px 0 0; padding:0;
+  display:grid; gap:4px;
+}
+.ab-track-btn{
+  width:100%;
+  display:grid; grid-template-columns:28px 32px 1fr auto;
+  align-items:center; gap:14px;
+  background:none; border:0; border-radius:12px;
+  padding:13px 14px; text-align:left; font:inherit; color:#fff;
+  cursor:pointer;
+  transition:background .18s ease;
+}
+.ab-track-btn:hover{ background:rgba(255,255,255,.12); }
+.ab-track.is-active .ab-track-btn{ background:rgba(255,255,255,.17); }
+.ab-track-num{
+  font-size:11.5px; font-weight:700; letter-spacing:.1em;
+  color:rgba(255,255,255,.6);
+}
+.ab-track-play{
+  width:32px; height:32px; border-radius:50%;
+  background:rgba(255,255,255,.16);
+  display:grid; place-items:center;
+}
+.ab-track-play svg{ fill:#fff; }
+.ab-ic-pause{ display:none; }
+.ab-track.is-playing .ab-ic-play{ display:none; }
+.ab-track.is-playing .ab-ic-pause{ display:block; }
+.ab-track-meta{ display:grid; gap:2px; min-width:0; }
+.ab-track-title{
+  font-size:15.5px; font-weight:650; line-height:1.3;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.ab-track-artist{
+  font-size:13px; color:rgba(255,255,255,.72);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+/* Four bars that only animate on the track actually playing. */
+.ab-track-bars{ display:flex; align-items:flex-end; gap:2.5px; height:15px; opacity:0; transition:opacity .2s ease; }
+.ab-track.is-playing .ab-track-bars{ opacity:1; }
+.ab-track-bars i{
+  width:2.5px; border-radius:2px; background:#fff; height:30%;
+  animation:abBar .9s ease-in-out infinite;
+}
+.ab-track-bars i:nth-child(2){ animation-duration:.72s; animation-delay:.1s; }
+.ab-track-bars i:nth-child(3){ animation-duration:1.05s; animation-delay:.22s; }
+.ab-track-bars i:nth-child(4){ animation-duration:.82s; animation-delay:.05s; }
+@keyframes abBar{ 0%,100%{ height:26%; } 50%{ height:100%; } }
+
+.ab-music-missing{
+  margin:20px 0 0; font-size:13.5px; color:rgba(255,255,255,.8);
+  border-left:2px solid rgba(255,255,255,.45); padding-left:14px;
+}
+.ab-music-missing[hidden]{ display:none; }
+
+/* ---------- 04 stickers ---------- */
+.ab-stickers{ background:var(--ab-grey); color:var(--ab-ink); }
+.ab-sticker-reset{
+  margin-top:18px;
+  background:none; border:1px solid rgba(21,23,26,.26);
+  border-radius:999px; padding:8px 16px;
+  font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+  transition:background .18s ease, border-color .18s ease;
+}
+.ab-sticker-reset:hover{ background:#fff; border-color:var(--ab-ink); }
+
+.ab-board{
+  position:relative;
+  height:clamp(460px, 56vw, 620px);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(0,0,0,.035) 0 1px, transparent 1px) 0 0 / 26px 26px,
+    #F3F3F4;
+  box-shadow:inset 0 0 0 1px rgba(21,23,26,.07);
+  touch-action:none;
+}
+.ab-sticker{
+  position:absolute; margin:0;
+  left:var(--x); top:var(--y);
+  width:var(--w, 190px);
+  transform:rotate(var(--tilt));
+  cursor:grab;
+  transition:transform .24s cubic-bezier(.2,.7,.3,1), filter .24s ease;
+  filter:drop-shadow(0 10px 16px rgba(20,22,26,.22));
+  user-select:none;
+}
+.ab-sticker img{
+  display:block; width:100%; height:auto;
+  border-radius:8px;
+  /* The white sticker border is drawn, not baked into the artwork. */
+  box-shadow:0 0 0 6px #fff, 0 0 0 7px rgba(20,22,26,.08);
+  pointer-events:none;
+}
+.ab-sticker:hover{
+  transform:rotate(0deg) translateY(-8px) scale(1.04);
+  filter:drop-shadow(0 20px 26px rgba(20,22,26,.3));
+  z-index:4;
+}
+.ab-sticker.is-dragging{
+  cursor:grabbing;
+  transform:rotate(0deg) scale(1.07);
+  filter:drop-shadow(0 26px 34px rgba(20,22,26,.36));
+  transition:none; z-index:6;
+}
+
+/* ---------- 05 postcards ---------- */
+.ab-postcards{ background:#F6F3EC; color:var(--ab-ink); }
+.ab-postcard-wait{
+  display:flex; gap:22px; flex-wrap:wrap;
+}
+.ab-postcard-wait span{
+  width:clamp(150px, 20vw, 230px); aspect-ratio:3 / 2;
+  border-radius:4px;
+  border:1.5px dashed rgba(21,23,26,.2);
+  background:repeating-linear-gradient(45deg,
+    rgba(21,23,26,.025) 0 10px, transparent 10px 20px);
+  transform:rotate(var(--t, -2deg));
+}
+.ab-postcard-wait span:nth-child(2){ --t:3deg; }
+.ab-postcard-wait span:nth-child(3){ --t:-1deg; }
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .ab-whoami-grid,
+  .ab-rat-grid,
+  .ab-music-grid{ grid-template-columns:1fr; }
+  .ab-whoami-grid{ gap:32px; }
+  .ab-polaroid{ max-width:380px; }
+  .ab-deck{ width:min(100%, 340px); }
+}
+@media (max-width:760px){
+  /* Scattered folders need room to scatter. Below this they stack into a
+     list, which is also far easier to tap. */
+  .ab-folders{
+    position:static;
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    gap:clamp(18px, 5vw, 32px);
+    place-content:center;
+  }
+  .ab-folders li{
+    position:static; transform:none;
+    display:grid; place-items:center;
+  }
+  .ab-folders li:first-child{ grid-column:1 / -1; }
+  .ab-desk{ overflow-y:auto; }
+  .ab-folder-tab{ white-space:normal; text-align:center; justify-content:center; }
+  .ab-board{ height:auto; min-height:520px; }
+}
+@media (max-width:520px){
+  /* Dragging inside a short board on a phone is more frustrating than fun,
+     so the stickers fall back to a plain tilted grid. */
+  .ab-board{ height:auto; min-height:0; padding:18px; display:grid;
+             grid-template-columns:repeat(2, 1fr); gap:18px; }
+  .ab-sticker{ position:static; width:auto; }
+  .ab-sticker:hover{ transform:rotate(0deg) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ab-folder, .ab-folder-img, .ab-folder-rat,
+  .ab-sticker, .ab-note, .ab-tonearm{ transition:none; }
+  .ab-vinyl{ animation:none; }
+  .ab-track-bars i{ animation:none; height:60%; }
+}

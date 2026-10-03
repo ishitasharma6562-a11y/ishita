@@ -485,3 +485,13 @@ html.pc-down .pc-cursor--you .pc-arrow{ transform:scale(.86); }
 @media (prefers-reduced-motion: reduce){
   .pc-cursor{ display:none; }
 }
+
+/* The homepage keeps the short version; the five folders live on about.html. */
+.about-more{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:22px;
+  font-size:15px; font-weight:600; text-decoration:none; color:var(--ink);
+  border-bottom:1px solid var(--line); padding-bottom:4px;
+  transition:gap .2s ease, border-color .2s ease;
+}
+.about-more:hover{ gap:12px; border-bottom-color:var(--ink); }
