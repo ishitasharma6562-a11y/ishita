@@ -549,6 +549,23 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
   border-radius:3px;
   box-shadow:0 2px 6px rgba(40,30,16,.14), 0 18px 34px -14px rgba(40,30,16,.4);
 }
+/* Film grain, laid over the card rather than baked into the file: it stays
+   at screen resolution instead of being resampled with the photograph, costs
+   one 23KB tile for all fourteen, and the sources stay clean. The tile is
+   seamless, so it repeats without a seam. Overlay keeps the grain in the
+   midtones and leaves the darkest and lightest parts of each card alone,
+   which is roughly how silver behaves. */
+.ab-pc::after{
+  content:""; position:absolute; inset:0;
+  border-radius:3px;
+  pointer-events:none;
+  background-image:
+    radial-gradient(130% 100% at 50% 50%, transparent 52%, rgba(26,18,8,.22) 100%),
+    url("../images/grain.png?v=1");
+  background-size:auto, 192px 192px;
+  mix-blend-mode:overlay;
+  opacity:.5;
+}
 
 .ab-carousel-bar{
   display:flex; align-items:center; justify-content:center; gap:20px;
