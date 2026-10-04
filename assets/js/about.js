@@ -202,6 +202,28 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   audio.preload = 'none';
   let currentIndex = -1;
 
+  // The clips are cut out of the middle of each song, so both ends would
+  // otherwise start and stop mid-bar. Ramp the volume instead of re-encoding
+  // a fade into the files.
+  const FADE = 0.7;
+  let fadeFrom = 0, fadeStart = 0, fading = 0;
+  function rampIn() {
+    cancelAnimationFrame(fading);
+    fadeFrom = performance.now();
+    const step = () => {
+      const k = Math.min(1, (performance.now() - fadeFrom) / (FADE * 1000));
+      audio.volume = k;
+      if (k < 1 && !audio.paused) fading = requestAnimationFrame(step);
+    };
+    audio.volume = 0;
+    step();
+  }
+  function rampOut() {
+    const left = audio.duration - audio.currentTime;
+    if (!isFinite(left)) return;
+    if (left < FADE) audio.volume = Math.max(0, left / FADE);
+  }
+
   function paint() {
     tracks.forEach((t, i) => {
       const on = i === currentIndex;
@@ -236,8 +258,9 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
     });
   });
 
-  audio.addEventListener('play', paint);
+  audio.addEventListener('play', () => { rampIn(); paint(); });
   audio.addEventListener('pause', paint);
+  audio.addEventListener('timeupdate', rampOut);
   audio.addEventListener('ended', () => {
     // Roll on to the next record rather than stopping dead.
     const next = (currentIndex + 1) % tracks.length;
