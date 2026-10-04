@@ -438,6 +438,16 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 }
 .ab-music-missing[hidden]{ display:none; }
 
+/* Said plainly, under the list, rather than buried in a page footer. */
+.ab-credit{
+  margin:22px 0 0;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.22);
+  max-width:46ch;
+  font-size:12.5px; line-height:1.55;
+  color:rgba(255,255,255,.72);
+}
+
 /* ---------- 04 stickers ---------- */
 .ab-stickers{ background:var(--ab-grey); color:var(--ab-ink); }
 .ab-sticker-reset{
