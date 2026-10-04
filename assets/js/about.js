@@ -328,6 +328,134 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   });
 })();
 
+// ---------- 05 the postcards ----------
+// The rail is an ordinary scroller. This keeps track of which card is nearest
+// the middle, drives the buttons and the arrow keys, and pulls a card the rest
+// of the way in once the rail has been still for a moment.
+(function postcards() {
+  const rail = document.getElementById('abRail');
+  const wrap = document.getElementById('abCarousel');
+  if (!rail || !wrap) return;
+
+  const cards = Array.from(rail.children);
+  if (!cards.length) return;
+  const now = document.getElementById('abPcNow');
+  const prev = wrap.querySelector('[data-pc="-1"]');
+  const next = wrap.querySelector('[data-pc="1"]');
+
+  // `index` is where the rail actually is; `wanted` is where the last button
+  // press asked it to go. They are separate because a press arrives long
+  // before the scroll that answers it finishes, and two quick presses should
+  // move two cards rather than fighting over one.
+  let index = 0, wanted = 0;
+
+  // Measured off bounding rects, not offsetLeft: the rail is not positioned,
+  // so the cards' offsetLeft is relative to an ancestor further up and is out
+  // by however far the rail sits from it. The cards are scaled about their own
+  // centre, so a rect's centre is still the layout centre.
+  function centreOffset(c) {
+    const r = rail.getBoundingClientRect(), b = c.getBoundingClientRect();
+    return (b.left + b.width / 2) - (r.left + r.width / 2);
+  }
+
+  // Every card's centred scroll position, measured once while the rail is
+  // still. Working from a fixed table rather than re-measuring mid-scroll is
+  // what makes a second button press land where it should.
+  let pos = [];
+  function measure() {
+    if (!rail.clientWidth) return;
+    const base = rail.scrollLeft, max = rail.scrollWidth - rail.clientWidth;
+    pos = cards.map(c => Math.max(0, Math.min(max, base + centreOffset(c))));
+  }
+
+  function nearest() {
+    if (!pos.length) return index;
+    let best = 0, dist = Infinity;
+    pos.forEach((p, i) => {
+      const d = Math.abs(p - rail.scrollLeft);
+      if (d < dist) { dist = d; best = i; }
+    });
+    return best;
+  }
+
+  function paint() {
+    index = nearest();
+    cards.forEach((c, i) => c.classList.toggle('is-centre', i === index));
+    if (now) now.textContent = index + 1;
+    if (prev) prev.disabled = index === 0;
+    if (next) next.disabled = index === cards.length - 1;
+  }
+
+  let anim = 0, animating = false;
+  function go(i) {
+    wanted = Math.max(0, Math.min(cards.length - 1, i));
+    const to = pos[wanted];
+    if (to === undefined) return;
+    cancelAnimationFrame(anim);
+    if (abReduceMotion) { rail.scrollLeft = to; paint(); return; }
+    const from = rail.scrollLeft, t0 = performance.now(), ms = 420;
+    animating = true;
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / ms);
+      const e = 1 - Math.pow(1 - k, 3);
+      rail.scrollLeft = from + (to - from) * e;
+      if (k < 1) anim = requestAnimationFrame(step);
+      else { animating = false; paint(); }
+    };
+    anim = requestAnimationFrame(step);
+  }
+
+  // The rAF throttle can swallow the last scroll event of a run, which leaves
+  // the counter a card behind; the idle timer is what makes the final state
+  // correct, and on a drag it is what pulls the nearest card the rest of the
+  // way in.
+  let tick = false, idle = 0;
+  rail.addEventListener('scroll', () => {
+    clearTimeout(idle);
+    idle = setTimeout(() => {
+      if (animating) return;
+      const n = nearest();
+      if (Math.abs(pos[n] - rail.scrollLeft) > 3) go(n); else { wanted = n; paint(); }
+    }, 140);
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(() => { tick = false; paint(); });
+  }, { passive: true });
+
+  wrap.querySelectorAll('[data-pc]').forEach(b => {
+    b.addEventListener('click', () => go(wanted + Number(b.dataset.pc)));
+  });
+
+  cards.forEach((c, i) => {
+    c.addEventListener('click', () => { if (i !== index) go(i); });
+  });
+
+  rail.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(wanted + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); go(wanted - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(cards.length - 1); }
+  });
+
+  // The section starts hidden, so the rail has no width to measure until the
+  // folder is opened. Centre the first card the moment it finally has one.
+  let placed = false;
+  function settle() {
+    if (!rail.clientWidth || animating) return;
+    measure();
+    if (!placed) { placed = true; rail.scrollLeft = pos[0]; }
+    paint();
+  }
+  if (window.ResizeObserver) new ResizeObserver(settle).observe(rail);
+  // A lazy image arriving changes the rail's width, which moves every card.
+  cards.forEach(c => {
+    const img = c.querySelector('img');
+    if (img && !img.complete) img.addEventListener('load', settle, { once: true });
+  });
+  window.addEventListener('resize', settle, { passive: true });
+  settle();
+})();
+
 // ---------- 04 the sticker board ----------
 // Hand-placed angles to begin with, draggable after that, and wherever a
 // visitor leaves them is remembered in their own browser.

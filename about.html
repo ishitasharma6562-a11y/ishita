@@ -7,7 +7,7 @@
 <meta name="description" content="Five folders: who I am, why the rat, my music library, my favourite stickers and my postcard collection." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css?v=31" />
-<link rel="stylesheet" href="assets/css/about.css?v=12" />
+<link rel="stylesheet" href="assets/css/about.css?v=16" />
 <script>
   /* Set before first paint. Without JS the desk never locks and every folder's
      contents simply render down the page, so the whole thing still reads. */
@@ -344,11 +344,68 @@
     <div class="wrap">
       <div class="ab-head">
         <h2>My postcard collection</h2>
-        <p class="ab-lede">Still in a shoebox. This folder is waiting for them.</p>
+        <p class="ab-lede">Picked up in bookshops, airports and other people&rsquo;s cities. Drag, scroll or use the arrows.</p>
       </div>
 
-      <div class="ab-postcard-wait" aria-hidden="true">
-        <span></span><span></span><span></span>
+      <!-- A real horizontal scroller with snap points, so a trackpad, a
+           thumb and the arrow keys all work without any of it being
+           reimplemented. The buttons just scroll it. -->
+      <div class="ab-carousel" id="abCarousel">
+        <ul class="ab-rail" id="abRail" tabindex="0" role="group"
+            aria-label="Postcard collection, 14 cards">
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-01.jpg?v=1" alt="A pink record turning on a turntable" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-02.jpg?v=1" alt="A comic page looking down into a record shop" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-03.jpg?v=1" alt="A painting of the Chicago river" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-04.jpg?v=1" alt="A film still of a family around a kitchen table" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-05.jpg?v=1" alt="A comic panel reading New York" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-06.jpg?v=1" alt="An ink drawing of the Faqir Chand & Sons book store" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-07.jpg?v=1" alt="A black and white photograph of hands holding a camera" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-08.jpg?v=1" alt="A coloured drawing of stacked cups" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-09.jpg?v=1" alt="A line drawing in pencil" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-10.jpg?v=1" alt="A book cover with a CD set into it" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-11.jpg?v=1" alt="A watercolour of Bangalore airport" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-12.jpg?v=1" alt="A New Yorker cover of a busy newsroom" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-13.jpg?v=1" alt="A photograph through an open doorway" loading="lazy" />
+          </li>
+          <li class="ab-pc">
+            <img src="assets/images/postcards/postcard-14.jpg?v=1" alt="A card with a piece of bread on it" loading="lazy" />
+          </li>
+        </ul>
+
+        <div class="ab-carousel-bar">
+          <button type="button" class="ab-cbtn" data-pc="-1" aria-label="Previous postcard">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2.5 4.5 8l5.5 5.5"/></svg>
+          </button>
+          <p class="ab-count"><b id="abPcNow">1</b> <span>/</span> 14</p>
+          <button type="button" class="ab-cbtn" data-pc="1" aria-label="Next postcard">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -359,6 +416,6 @@
   <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
 </footer>
 
-<script src="assets/js/about.js?v=3"></script>
+<script src="assets/js/about.js?v=10"></script>
 </body>
 </html>
