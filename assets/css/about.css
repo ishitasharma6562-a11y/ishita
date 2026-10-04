@@ -99,16 +99,17 @@ html.ab-js body.ab-locked{ overflow:hidden; }
   filter:drop-shadow(0 22px 30px rgba(80,40,10,.3));
 }
 /* One rat per folder, parked out of sight behind the card. The drawing is a
-   rat peering over a ledge, so its own bottom edge wants to sit on the
-   folder's top edge: the folder artwork starts about 19% down its own box,
-   which is where --rat-up puts it. --rat-down tucks it fully inside. */
+   rat peering over a ledge, and its eyes sit between 60% and 75% of its own
+   height. The folder artwork's top edge is 12.25% down its box, so --rat-up
+   has to lift about 88% of the rat above that line for the eyes to clear it
+   with the paws still tucked behind. --rat-down puts the whole thing back. */
 .ab-folder-rat{
   position:absolute; z-index:1;
-  left:9%; top:0;
-  width:50%; height:auto;
+  left:11%; top:0;
+  width:64%; height:auto;
   pointer-events:none;
-  --rat-up:8%;
-  --rat-down:118%;
+  --rat-up:-46%;
+  --rat-down:95%;
   transform:translateY(var(--rat-down));
   transition:transform .34s cubic-bezier(.22,.9,.3,1.25);
 }
