@@ -184,21 +184,20 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 })();
 
 // ---------- 03 the record player ----------
-// One audio element for all five tracks. The disc's rotation is a CSS
+// One audio element for all five records. The disc's rotation is a CSS
 // animation whose play state follows the audio, so the record is turning
 // exactly when there is sound and stops the moment there isn't.
 (function music() {
   const list = document.getElementById('abTracks');
   const vinyl = document.getElementById('abVinyl');
-  const titleEl = document.getElementById('abVinylTitle');
-  const deck = document.querySelector('.ab-deck');
+  const art = document.getElementById('abVinylImg');
+  const deck = document.getElementById('abDeck');
   const missing = document.getElementById('abMusicMissing');
-  if (!list || !vinyl) return;
+  if (!list || !vinyl || !art) return;
 
   const tracks = Array.from(list.querySelectorAll('.ab-track'));
   if (!tracks.length) return;
 
-  const LABELS = ['#F3E7D0', '#E8D3C0', '#DCE7E0', '#EFE0E6', '#E4E0CE'];
   const audio = new Audio();
   audio.preload = 'none';
   let currentIndex = -1;
@@ -219,13 +218,10 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
     const t = tracks[i];
     audio.src = t.dataset.src;
     const title = t.querySelector('.ab-track-title');
-    const artist = t.querySelector('.ab-track-artist');
-    if (titleEl) titleEl.textContent = title ? title.textContent : '';
-    const label = vinyl.querySelector('.ab-vinyl-label');
-    if (label) label.style.setProperty('--label', LABELS[i % LABELS.length]);
-    if (titleEl) {
-      titleEl.title = (title ? title.textContent : '') + (artist ? ' — ' + artist.textContent : '');
+    if (t.dataset.art && art.getAttribute('src') !== t.dataset.art) {
+      art.src = t.dataset.art;
     }
+    art.alt = title ? title.textContent : '';
   }
 
   tracks.forEach((t, i) => {
@@ -251,7 +247,7 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   });
 
   // The clips may not be on the server yet. Say so once, plainly, and keep
-  // the disc turning so the section still demonstrates itself.
+  // the record turning so the section still demonstrates itself.
   audio.addEventListener('error', () => {
     if (missing) missing.hidden = false;
     vinyl.classList.add('is-spinning');
@@ -262,7 +258,51 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
     });
   });
 
+  // Swapping the record should not leave a gap while the next sleeve
+  // downloads, so fetch the other four once the section has been opened.
+  let warmed = false;
+  list.addEventListener('pointerenter', () => {
+    if (warmed) return;
+    warmed = true;
+    tracks.forEach(t => { if (t.dataset.art) new Image().src = t.dataset.art; });
+  }, { once: true });
+
   select(0);
+  paint();
+})();
+
+// ---------- the rat ----------
+// One rat at a time: it drops behind the folder you are leaving and pops up
+// behind the one you are pointing at. With no JS the CSS alone still parks
+// it on folder 01 and pops it on hover.
+(function rat() {
+  const list = document.getElementById('abFolders');
+  if (!list) return;
+  const items = Array.from(list.children);
+  if (!items.length) return;
+
+  const home = items[0];
+  let at = null;
+
+  function moveTo(li) {
+    if (li === at) return;
+    if (at) at.classList.remove('rat-here');
+    at = li;
+    if (at) at.classList.add('rat-here');
+  }
+  moveTo(home);
+
+  items.forEach(li => {
+    const btn = li.querySelector('.ab-folder');
+    if (!btn) return;
+    li.addEventListener('pointerenter', () => moveTo(li));
+    btn.addEventListener('focus', () => moveTo(li));
+  });
+  // Nothing under the pointer: the rat goes back to where the mock has it.
+  list.addEventListener('pointerleave', () => moveTo(home));
+  list.addEventListener('focusout', (e) => {
+    if (!list.contains(e.relatedTarget)) moveTo(home);
+  });
 })();
 
 // ---------- 04 the sticker board ----------

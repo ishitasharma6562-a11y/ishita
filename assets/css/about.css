@@ -48,17 +48,28 @@ html.ab-js body.ab-locked{ overflow:hidden; }
   font-size:15px; color:var(--ab-muted);
 }
 
-/* Folders are placed by percentage inside the stage, which keeps the
-   scattered arrangement of the mock at any screen size without a single
-   media query moving them one at a time. */
+/* The stage is a three-by-two grid, so every folder owns a cell and the
+   scatter is only a nudge inside it. Free percentage placement looked
+   right at one width and collided at every other. */
 .ab-folders{
   list-style:none; margin:0; padding:0;
-  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  grid-template-rows:repeat(2, minmax(0, 1fr));
+  gap:clamp(14px, 2.4vw, 34px);
+  align-items:center; justify-items:center;
+  min-height:0;
 }
+/* Row one skips the middle cell; row two is full. That is the arrangement
+   of the mock, with the gaps doing the work the offsets used to. */
+.ab-folders li:nth-child(1){ grid-area:1 / 1; }
+.ab-folders li:nth-child(2){ grid-area:1 / 3; }
+.ab-folders li:nth-child(3){ grid-area:2 / 1; }
+.ab-folders li:nth-child(4){ grid-area:2 / 2; }
+.ab-folders li:nth-child(5){ grid-area:2 / 3; }
 .ab-folders li{
-  position:absolute;
-  left:var(--x); top:var(--y);
-  transform:translate(-50%, -50%);
+  display:grid; place-items:center;
+  transform:translate(var(--dx, 0), var(--dy, 0));
 }
 .ab-folder{
   position:relative;
@@ -72,26 +83,45 @@ html.ab-js body.ab-locked{ overflow:hidden; }
 .ab-folder:focus-visible{
   transform:rotate(0deg) translateY(-8px) scale(1.04);
 }
+/* The art is its own box so the rat can be positioned against the folder
+   alone, not against the folder plus its label. */
+.ab-folder-art{
+  position:relative; display:block;
+  width:clamp(118px, 12vw, 168px);
+}
 .ab-folder-img{
-  display:block;
-  width:clamp(118px, 13vw, 176px); height:auto;
+  position:relative; z-index:2;
+  display:block; width:100%; height:auto;
   filter:drop-shadow(0 14px 22px rgba(80,40,10,.22));
   transition:filter .26s ease;
 }
 .ab-folder:hover .ab-folder-img{
   filter:drop-shadow(0 22px 30px rgba(80,40,10,.3));
 }
-/* The rat peers over the lip of folder 01, as in the mock. */
+/* One rat per folder, parked out of sight behind the card. The drawing is a
+   rat peering over a ledge, so its own bottom edge wants to sit on the
+   folder's top edge: the folder artwork starts about 19% down its own box,
+   which is where --rat-up puts it. --rat-down tucks it fully inside. */
 .ab-folder-rat{
-  position:absolute;
-  width:46%; height:auto;
-  left:4%; top:0;
-  transform:translateY(-62%) rotate(-6deg);
-  pointer-events:none; z-index:2;
-  transition:transform .3s cubic-bezier(.2,.7,.3,1);
+  position:absolute; z-index:1;
+  left:9%; top:0;
+  width:50%; height:auto;
+  pointer-events:none;
+  --rat-up:8%;
+  --rat-down:118%;
+  transform:translateY(var(--rat-down));
+  transition:transform .34s cubic-bezier(.22,.9,.3,1.25);
 }
-.ab-folder:hover .ab-folder-rat{
-  transform:translateY(-82%) rotate(-10deg);
+/* Without JS the rat still lives on folder 01 and hover still pops one,
+   which can briefly show two. With JS exactly one is ever up. */
+.ab-folders li:first-child .ab-folder-rat{ transform:translateY(var(--rat-up)); }
+.ab-folder:hover .ab-folder-rat,
+.ab-folder:focus-visible .ab-folder-rat{ transform:translateY(var(--rat-up)); }
+html.ab-js .ab-folders li .ab-folder-rat{ transform:translateY(var(--rat-down)); }
+html.ab-js .ab-folders li.rat-here .ab-folder-rat{
+  transform:translateY(var(--rat-up));
+  /* Let the one it is leaving drop first, so it reads as the same rat. */
+  transition-delay:.12s;
 }
 .ab-folder-tab{
   display:flex; align-items:baseline; gap:8px;
@@ -280,90 +310,73 @@ html.ab-js body.ab-locked{ overflow:hidden; }
   padding-top:clamp(16px, 3vw, 40px);
 }
 
-.ab-deck{ position:relative; justify-self:center; width:min(100%, 440px); }
-.ab-vinyl{
+/* ---- the deck ----
+   Measured off the photograph (860x810): the platter's label circle puts
+   the spindle at 45.2% / 50.5%, and the record on it is 78.9% of the image
+   wide. The vinyl is laid a little larger than that so it covers the deck's
+   own record — and with it the deck's own arm, which cannot move. */
+.ab-deck{
   position:relative;
-  aspect-ratio:1; border-radius:50%;
-  background:
-    radial-gradient(circle at 50% 50%, #2A2A2E 0 28%, transparent 28%),
-    repeating-radial-gradient(circle at 50% 50%,
-      #0C0C0E 0 2px, #171719 2px 3px, #0C0C0E 3px 5px),
-    #0C0C0E;
-  box-shadow:0 30px 60px -24px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06);
-  display:grid; place-items:center;
+  justify-self:center;
+  width:min(100%, 460px);
+  --spin-x:45.2%;
+  --spin-y:50.5%;
+}
+.ab-deck-img{
+  display:block; width:100%; height:auto;
+  border-radius:4px;
+  filter:drop-shadow(0 26px 44px rgba(60,10,0,.34));
+}
+.ab-vinyl{
+  position:absolute; z-index:2;
+  left:var(--spin-x); top:var(--spin-y);
+  width:82%; aspect-ratio:1;
+  margin:0;
+  transform:translate(-50%, -50%);
+  /* The rotation lives on the image so the centring transform above is
+     never overwritten by the animation. */
+}
+.ab-vinyl img{
+  display:block; width:100%; height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
   /* Paused until the audio actually plays — see about.js. */
   animation:abSpin 2.4s linear infinite;
   animation-play-state:paused;
 }
-.ab-vinyl.is-spinning{ animation-play-state:running; }
+.ab-vinyl.is-spinning img{ animation-play-state:running; }
 @keyframes abSpin{ to{ transform:rotate(360deg); } }
 
-.ab-vinyl-grooves{
-  position:absolute; inset:11%;
-  border-radius:50%;
-  background:repeating-radial-gradient(circle at 50% 50%,
-    rgba(255,255,255,.055) 0 1px, transparent 1px 4px);
-}
-.ab-vinyl-label{
-  position:relative; z-index:2;
-  width:38%; aspect-ratio:1; border-radius:50%;
-  background:var(--label, #F3E7D0);
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
-  overflow:hidden;
-}
-.ab-vinyl-title{
-  position:absolute; left:11%; right:11%; top:15%;
-  text-align:center;
-  font-size:clamp(10px, 1.15vw, 13px); font-weight:700;
-  line-height:1.22; letter-spacing:-0.01em; color:#2A2318;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-}
-/* The spindle hole, dead centre and clear of the type above it. */
-.ab-vinyl-dot{
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:11%; aspect-ratio:1; border-radius:50%;
-  background:#0C0C0E;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.18);
-}
-/* A fixed highlight that does not rotate with the disc, so the record
-   reads as turning under a light rather than carrying one around. */
-.ab-vinyl-sheen{
-  position:absolute; inset:0; border-radius:50%;
-  background:linear-gradient(118deg,
-    rgba(255,255,255,0) 34%, rgba(255,255,255,.1) 46%,
-    rgba(255,255,255,.02) 54%, rgba(255,255,255,0) 66%);
-  pointer-events:none; z-index:3;
-}
-/* Pivot sits just outside the disc at the top right. The arm hangs from it
-   and swings inward over the record while something is playing. */
+/* The arm hangs from the deck's own pivot assembly, which the record does
+   not cover, and tracks inward while something is playing. */
 .ab-tonearm{
-  position:absolute; top:3%; right:3%;
-  width:7%; aspect-ratio:1;
-  pointer-events:none; z-index:4;
+  position:absolute; z-index:3;
+  left:88.9%; top:37.7%;
+  width:100%; height:0;
+  pointer-events:none;
 }
-.ab-tonearm::before{            /* the pivot housing */
-  content:""; position:absolute; inset:0;
-  border-radius:50%;
-  background:radial-gradient(circle at 36% 32%, #3A3A40, #16161A 70%);
-  box-shadow:0 3px 8px rgba(0,0,0,.45);
-}
+/* Everything here is a percentage of the deck's width, so the arm keeps its
+   proportions against the photograph at any size. 48.9% is the pivot-to-
+   stylus distance measured on the image. */
 .ab-tonearm span{
-  position:absolute; left:50%; top:50%;
-  width:5px; height:360%;
-  margin-left:-2.5px;
-  border-radius:3px;
-  background:linear-gradient(#4A4A52, #26262B);
+  position:absolute; left:0; top:0;
+  width:1.3%; height:0;
+  padding-bottom:48.9%;
+  margin-left:-0.65%;
+  border-radius:999px;
+  background:linear-gradient(#D9D9DD, #8C8C94 42%, #4C4C54);
+  box-shadow:0 2px 6px rgba(0,0,0,.45);
   transform-origin:50% 0;
-  transform:rotate(26deg);
-  transition:transform .7s cubic-bezier(.3,.7,.3,1);
-  box-shadow:0 2px 5px rgba(0,0,0,.3);
+  transform:rotate(36deg);
+  transition:transform .9s cubic-bezier(.3,.7,.3,1);
 }
-.ab-tonearm span::after{        /* the head, at the far end of the arm */
-  content:""; position:absolute; left:50%; bottom:-2px;
-  width:13px; height:20px; margin-left:-6.5px;
+.ab-tonearm span::after{        /* the headshell, at the far end */
+  content:""; position:absolute; left:50%; bottom:0;
+  width:290%; aspect-ratio:17 / 26;
+  transform:translateX(-50%);
   border-radius:3px 3px 2px 2px;
   background:linear-gradient(#2C2C32, #141418);
-  box-shadow:0 2px 5px rgba(0,0,0,.4);
+  box-shadow:0 2px 6px rgba(0,0,0,.45);
 }
 .ab-deck.is-playing .ab-tonearm span{ transform:rotate(44deg); }
 
@@ -397,13 +410,8 @@ html.ab-js body.ab-locked{ overflow:hidden; }
 .ab-ic-pause{ display:none; }
 .ab-track.is-playing .ab-ic-play{ display:none; }
 .ab-track.is-playing .ab-ic-pause{ display:block; }
-.ab-track-meta{ display:grid; gap:2px; min-width:0; }
 .ab-track-title{
-  font-size:15.5px; font-weight:650; line-height:1.3;
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
-.ab-track-artist{
-  font-size:13px; color:rgba(255,255,255,.72);
+  font-size:16px; font-weight:650; line-height:1.3; min-width:0;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 /* Four bars that only animate on the track actually playing. */
@@ -503,16 +511,26 @@ html.ab-js body.ab-locked{ overflow:hidden; }
   /* Scattered folders need room to scatter. Below this they stack into a
      list, which is also far easier to tap. */
   .ab-folders{
-    position:static;
-    display:grid; grid-template-columns:repeat(2, 1fr);
-    gap:clamp(18px, 5vw, 32px);
-    place-content:center;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-template-rows:none;
+    gap:clamp(20px, 5vw, 32px) clamp(12px, 3vw, 24px);
+    align-content:center;
   }
-  .ab-folders li{
-    position:static; transform:none;
-    display:grid; place-items:center;
+  /* The desktop layout pins each folder to a named cell; those rules are
+     more specific than a plain `li`, so they have to be undone one by one. */
+  .ab-folders li:nth-child(1),
+  .ab-folders li:nth-child(2),
+  .ab-folders li:nth-child(3),
+  .ab-folders li:nth-child(4),
+  .ab-folders li:nth-child(5){
+    grid-area:auto;
+    transform:none;
   }
-  .ab-folders li:first-child{ grid-column:1 / -1; }
+  .ab-folders li:nth-child(1){ grid-column:1 / -1; }
+  /* The label is a flex row on the desk, which puts the aside on its own
+     line here. Plain inline text wraps the way it reads. */
+  .ab-folder-tab{ display:block; }
+  .ab-folder-tab b{ margin-right:6px; }
   .ab-desk{ overflow-y:auto; }
   .ab-folder-tab{ white-space:normal; text-align:center; justify-content:center; }
   .ab-board{ height:auto; min-height:520px; }
