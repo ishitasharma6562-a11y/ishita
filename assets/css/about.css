@@ -301,102 +301,103 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 .ab-rat-body p{ margin:0; font-size:15px; line-height:1.66; color:#3B3D42; }
 
 /* ---------- 03 music ---------- */
-/* The deck photograph is flattened onto this exact value rather than carrying
-   an alpha channel, so the two have to stay in step: change one and the
-   record player grows a halo. */
 .ab-music{ background:var(--ab-black); color:#fff; }
 .ab-music .ab-back,
 .ab-music .ab-sec-num{ color:#fff; }
-.ab-music-grid{
+
+/* The record runs off the left edge. The negative margin pulls the grid out
+   to the section's gutter and overflow:clip cuts it there, so nothing spills
+   into the page's own scroll width. clip rather than hidden, because hidden
+   would make this a scroll container and break the sticky back bar above. */
+.ab-player{
+  --disc:clamp(260px, 44vw, 580px);
   display:grid;
-  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
-  gap:clamp(36px, 5vw, 80px);
+  grid-template-columns:minmax(0, 0.92fr) minmax(0, 1fr);
+  gap:clamp(24px, 4vw, 64px);
   align-items:center;
-  padding-top:clamp(16px, 3vw, 40px);
+  margin-left:calc(-1 * var(--ab-gut));
+  padding-left:var(--ab-gut);
+  overflow:clip;
+  padding-top:clamp(12px, 2.5vw, 32px);
+}
+.ab-disc-wrap{
+  position:relative;
+  width:var(--disc); aspect-ratio:1;
+  margin-left:calc(var(--disc) * -0.4);
+  justify-self:start;
 }
 
-/* ---- the deck ----
-   Measured off the photograph (860x810): the platter's label circle puts
-   the spindle at 45.2% / 50.5%, and the record on it is 78.9% of the image
-   wide. The vinyl is laid a little larger than that so it covers the deck's
-   own record — and with it the deck's own arm, which cannot move. */
-.ab-deck{
-  position:relative;
-  justify-self:center;
-  width:min(100%, 460px);
-  --spin-x:45.2%;
-  --spin-y:50.5%;
-}
-.ab-deck-img{
-  display:block; width:100%; height:auto;
-  border-radius:4px;
-  filter:drop-shadow(0 26px 44px rgba(60,10,0,.34));
-}
-.ab-vinyl{
-  position:absolute; z-index:2;
-  left:var(--spin-x); top:var(--spin-y);
-  width:82%; aspect-ratio:1;
-  margin:0;
-  transform:translate(-50%, -50%);
-  /* The rotation lives on the image so the centring transform above is
-     never overwritten by the animation. */
-}
-.ab-vinyl img{
-  display:block; width:100%; height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
+.ab-disc{
+  position:absolute; inset:5%;
+  border-radius:50%;
   /* Paused until the audio actually plays — see about.js. */
-  animation:abSpin 2.4s linear infinite;
+  animation:abSpin 2.6s linear infinite;
   animation-play-state:paused;
 }
-.ab-vinyl.is-spinning img{ animation-play-state:running; }
+.ab-disc.is-spinning{ animation-play-state:running; }
 @keyframes abSpin{ to{ transform:rotate(360deg); } }
+.ab-disc img{
+  display:block; width:100%; height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 14px 36px rgba(0,0,0,.55));
+}
 
-/* The arm hangs from the deck's own pivot assembly, which the record does
-   not cover, and tracks inward while something is playing. */
-.ab-tonearm{
-  position:absolute; z-index:3;
-  left:88.9%; top:37.7%;
-  width:100%; height:0;
+/* The ring sits outside the record and does not turn with it. */
+.ab-ring{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  overflow:visible;
   pointer-events:none;
 }
-/* Everything here is a percentage of the deck's width, so the arm keeps its
-   proportions against the photograph at any size. 48.9% is the pivot-to-
-   stylus distance measured on the image. */
-.ab-tonearm span{
-  position:absolute; left:0; top:0;
-  width:1.3%; height:0;
-  padding-bottom:48.9%;
-  margin-left:-0.65%;
-  border-radius:999px;
-  background:linear-gradient(#D9D9DD, #8C8C94 42%, #4C4C54);
-  box-shadow:0 2px 6px rgba(0,0,0,.45);
-  transform-origin:50% 0;
-  transform:rotate(36deg);
-  transition:transform .9s cubic-bezier(.3,.7,.3,1);
+.ab-ring circle{ fill:none; }
+.ab-ring-track{ stroke:rgba(255,255,255,.2); stroke-width:.65; }
+.ab-ring-fill{
+  stroke:var(--ab-orange); stroke-width:1.1; stroke-linecap:round;
+  transition:stroke-dashoffset .25s linear;
 }
-.ab-tonearm span::after{        /* the headshell, at the far end */
-  content:""; position:absolute; left:50%; bottom:0;
-  width:290%; aspect-ratio:17 / 26;
-  transform:translateX(-50%);
-  border-radius:3px 3px 2px 2px;
-  background:linear-gradient(#2C2C32, #141418);
-  box-shadow:0 2px 6px rgba(0,0,0,.45);
-}
-.ab-deck.is-playing .ab-tonearm span{ transform:rotate(44deg); }
+.ab-ring-dot{ fill:var(--ab-orange); stroke:none; }
+#abRingDot{ transition:transform .25s linear; }
 
-.ab-music-copy h2{ color:#fff; }
-.ab-music .ab-lede{ color:rgba(255,255,255,.88); }
+.ab-music-copy{ min-width:0; }
+/* The shared `.ab-music-copy h2` display size outranks a lone class, so this
+   has to match it on specificity to sit back as a label. */
+.ab-music-copy h2.ab-music-h{
+  margin:0;
+  font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+.ab-now{ margin-top:14px; }
+.ab-now-title{
+  margin:0;
+  font-size:clamp(38px, 6vw, 82px);
+  font-weight:800; letter-spacing:-0.04em; line-height:.98;
+  color:#fff;
+  overflow-wrap:anywhere;
+}
+.ab-now-artist{
+  margin:10px 0 0;
+  font-size:14px; letter-spacing:.04em;
+  color:rgba(255,255,255,.62);
+}
+.ab-time{
+  display:flex; align-items:baseline; gap:8px;
+  margin:18px 0 0;
+  font-size:13px; font-variant-numeric:tabular-nums;
+  color:rgba(255,255,255,.5);
+}
+.ab-time b{ color:var(--ab-orange); font-weight:700; }
+.ab-time i{ font-style:normal; }
+
 .ab-tracks{
-  list-style:none; margin:30px 0 0; padding:0;
-  display:grid; gap:4px;
+  list-style:none; margin:26px 0 0; padding:0;
+  display:grid; gap:2px;
 }
 .ab-track-btn{
   width:100%;
-  display:grid; grid-template-columns:28px 32px 1fr auto;
+  display:grid; grid-template-columns:26px 32px minmax(0,1fr) auto auto;
   align-items:center; gap:14px;
   background:none; border:0; border-radius:12px;
-  padding:13px 14px; text-align:left; font:inherit; color:#fff;
+  padding:11px 14px; text-align:left; font:inherit; color:#fff;
   cursor:pointer;
   transition:background .18s ease;
 }
@@ -404,30 +405,32 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 .ab-track.is-active .ab-track-btn{ background:rgba(255,255,255,.1); }
 .ab-track-num{
   font-size:11.5px; font-weight:700; letter-spacing:.1em;
-  color:rgba(255,255,255,.6);
+  color:rgba(255,255,255,.45);
 }
+.ab-track.is-active .ab-track-num{ color:var(--ab-orange); }
 .ab-track-play{
   width:32px; height:32px; border-radius:50%;
   background:rgba(255,255,255,.14);
   display:grid; place-items:center;
   transition:background .18s ease;
 }
-/* With the panel black, the orange has nowhere else to live — so it marks
-   the record that is on the deck. */
 .ab-track.is-active .ab-track-play{ background:var(--ab-orange); }
-.ab-track.is-active .ab-track-num{ color:var(--ab-orange); }
 .ab-track-play svg{ fill:#fff; }
 .ab-ic-pause{ display:none; }
 .ab-track.is-playing .ab-ic-play{ display:none; }
 .ab-track.is-playing .ab-ic-pause{ display:block; }
 .ab-track-meta{ display:grid; gap:1px; min-width:0; }
 .ab-track-title{
-  font-size:15.5px; font-weight:650; line-height:1.3; min-width:0;
+  font-size:15px; font-weight:650; line-height:1.3; min-width:0;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 .ab-track-artist{
-  font-size:12.5px; line-height:1.3; color:rgba(255,255,255,.72);
+  font-size:12.5px; line-height:1.3; color:rgba(255,255,255,.6);
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.ab-track-dur{
+  font-size:12.5px; color:rgba(255,255,255,.45);
+  font-variant-numeric:tabular-nums;
 }
 /* Four bars that only animate on the track actually playing. */
 .ab-track-bars{ display:flex; align-items:flex-end; gap:2.5px; height:15px; opacity:0; transition:opacity .2s ease; }
@@ -439,7 +442,7 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 .ab-track-bars i:nth-child(2){ animation-duration:.72s; animation-delay:.1s; }
 .ab-track-bars i:nth-child(3){ animation-duration:1.05s; animation-delay:.22s; }
 .ab-track-bars i:nth-child(4){ animation-duration:.82s; animation-delay:.05s; }
-@keyframes abBar{ 0%,100%{ height:26%; } 50%{ height:100%; } }
+@keyframes abBar{ 0%,100%{ height:28%; } 50%{ height:100%; } }
 
 .ab-music-missing{
   margin:20px 0 0; font-size:13.5px; color:rgba(255,255,255,.8);
@@ -576,11 +579,18 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 /* ---------- responsive ---------- */
 @media (max-width:980px){
   .ab-whoami-grid,
-  .ab-rat-grid,
-  .ab-music-grid{ grid-template-columns:1fr; }
+  .ab-rat-grid{ grid-template-columns:1fr; }
   .ab-whoami-grid{ gap:32px; }
   .ab-polaroid{ max-width:380px; }
-  .ab-deck{ width:min(100%, 340px); }
+
+  /* Below this the record has nowhere to run off to, so it comes back into
+     the column and sits above the list at a readable size. */
+  .ab-player{
+    grid-template-columns:1fr;
+    margin-left:0; padding-left:0;
+    --disc:min(78vw, 420px);
+  }
+  .ab-disc-wrap{ margin-left:0; justify-self:center; }
 }
 @media (max-width:760px){
   /* Scattered folders need room to scatter. Below this they stack into a
@@ -621,9 +631,10 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 
 @media (prefers-reduced-motion: reduce){
   .ab-folder, .ab-folder-img, .ab-folder-rat,
-  .ab-sticker, .ab-note, .ab-tonearm{ transition:none; }
+  .ab-sticker, .ab-note{ transition:none; }
+  .ab-ring-fill, #abRingDot{ transition:none; }
   .ab-rail{ scroll-behavior:auto; }
   .ab-pc{ transition:none; }
-  .ab-vinyl{ animation:none; }
+  .ab-disc{ animation:none; }
   .ab-track-bars i{ animation:none; height:60%; }
 }

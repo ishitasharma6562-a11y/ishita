@@ -184,19 +184,26 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 })();
 
 // ---------- 03 the record player ----------
-// One audio element for all five records. The disc's rotation is a CSS
-// animation whose play state follows the audio, so the record is turning
-// exactly when there is sound and stops the moment there isn't.
+// One audio element for all five records. The record's rotation is a CSS
+// animation whose play state follows the audio, so it is turning exactly when
+// there is sound and stops the moment there isn't. The ring around it is the
+// progress bar, and it deliberately does not turn with the record.
 (function music() {
   const list = document.getElementById('abTracks');
-  const vinyl = document.getElementById('abVinyl');
+  const disc = document.getElementById('abVinyl');
   const art = document.getElementById('abVinylImg');
-  const deck = document.getElementById('abDeck');
-  const missing = document.getElementById('abMusicMissing');
-  if (!list || !vinyl || !art) return;
+  if (!list || !disc || !art) return;
 
   const tracks = Array.from(list.querySelectorAll('.ab-track'));
   if (!tracks.length) return;
+
+  const missing = document.getElementById('abMusicMissing');
+  const nowTitle = document.getElementById('abNowTitle');
+  const nowArtist = document.getElementById('abNowArtist');
+  const elapsed = document.getElementById('abElapsed');
+  const ring = document.getElementById('abRingFill');
+  const dot = document.getElementById('abRingDot');
+  const CIRC = 603.19;                    // 2 * pi * r, with r = 96
 
   const audio = new Audio();
   audio.preload = 'none';
@@ -206,22 +213,32 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   // otherwise start and stop mid-bar. Ramp the volume instead of re-encoding
   // a fade into the files.
   const FADE = 0.7;
-  let fadeFrom = 0, fadeStart = 0, fading = 0;
+  let fading = 0;
   function rampIn() {
     cancelAnimationFrame(fading);
-    fadeFrom = performance.now();
+    const t0 = performance.now();
+    audio.volume = 0;
     const step = () => {
-      const k = Math.min(1, (performance.now() - fadeFrom) / (FADE * 1000));
+      const k = Math.min(1, (performance.now() - t0) / (FADE * 1000));
       audio.volume = k;
       if (k < 1 && !audio.paused) fading = requestAnimationFrame(step);
     };
-    audio.volume = 0;
     step();
   }
   function rampOut() {
     const left = audio.duration - audio.currentTime;
-    if (!isFinite(left)) return;
-    if (left < FADE) audio.volume = Math.max(0, left / FADE);
+    if (isFinite(left) && left < FADE) audio.volume = Math.max(0, left / FADE);
+  }
+
+  function mmss(s) {
+    if (!isFinite(s) || s < 0) s = 0;
+    return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  }
+
+  function progress(p) {
+    p = Math.max(0, Math.min(1, p || 0));
+    if (ring) ring.setAttribute('stroke-dashoffset', (CIRC * (1 - p)).toFixed(2));
+    if (dot) dot.setAttribute('transform', 'rotate(' + (p * 360).toFixed(2) + ' 100 100)');
   }
 
   function paint() {
@@ -230,9 +247,7 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
       t.classList.toggle('is-active', on);
       t.classList.toggle('is-playing', on && !audio.paused);
     });
-    const playing = currentIndex >= 0 && !audio.paused;
-    vinyl.classList.toggle('is-spinning', playing);
-    if (deck) deck.classList.toggle('is-playing', playing);
+    disc.classList.toggle('is-spinning', currentIndex >= 0 && !audio.paused);
   }
 
   function select(i) {
@@ -240,10 +255,13 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
     const t = tracks[i];
     audio.src = t.dataset.src;
     const title = t.querySelector('.ab-track-title');
-    if (t.dataset.art && art.getAttribute('src') !== t.dataset.art) {
-      art.src = t.dataset.art;
-    }
+    const artist = t.querySelector('.ab-track-artist');
+    if (t.dataset.art && art.getAttribute('src') !== t.dataset.art) art.src = t.dataset.art;
+    if (nowTitle) nowTitle.textContent = title ? title.textContent : '';
+    if (nowArtist) nowArtist.textContent = artist ? artist.textContent : '';
     art.alt = title ? title.textContent : '';
+    if (elapsed) elapsed.textContent = '0:00';
+    progress(0);
   }
 
   tracks.forEach((t, i) => {
@@ -260,11 +278,14 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
   audio.addEventListener('play', () => { rampIn(); paint(); });
   audio.addEventListener('pause', paint);
-  audio.addEventListener('timeupdate', rampOut);
+  audio.addEventListener('timeupdate', () => {
+    rampOut();
+    if (elapsed) elapsed.textContent = mmss(audio.currentTime);
+    if (audio.duration) progress(audio.currentTime / audio.duration);
+  });
   audio.addEventListener('ended', () => {
     // Roll on to the next record rather than stopping dead.
-    const next = (currentIndex + 1) % tracks.length;
-    select(next);
+    select((currentIndex + 1) % tracks.length);
     audio.play().catch(paint);
     paint();
   });
@@ -273,8 +294,7 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   // the record turning so the section still demonstrates itself.
   audio.addEventListener('error', () => {
     if (missing) missing.hidden = false;
-    vinyl.classList.add('is-spinning');
-    if (deck) deck.classList.add('is-playing');
+    disc.classList.add('is-spinning');
     tracks.forEach((t, i) => {
       t.classList.toggle('is-playing', i === currentIndex);
       t.classList.toggle('is-active', i === currentIndex);
@@ -282,11 +302,8 @@ const abReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   });
 
   // Swapping the record should not leave a gap while the next sleeve
-  // downloads, so fetch the other four once the section has been opened.
-  let warmed = false;
+  // downloads, so fetch the other four once the list has been pointed at.
   list.addEventListener('pointerenter', () => {
-    if (warmed) return;
-    warmed = true;
     tracks.forEach(t => { if (t.dataset.art) new Image().src = t.dataset.art; });
   }, { once: true });
 
