@@ -305,26 +305,38 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 .ab-music .ab-back,
 .ab-music .ab-sec-num{ color:#fff; }
 
-/* The record runs off the left edge. The negative margin pulls the grid out
-   to the section's gutter and overflow:clip cuts it there, so nothing spills
-   into the page's own scroll width. clip rather than hidden, because hidden
-   would make this a scroll container and break the sticky back bar above. */
+/* The record is pinned to the viewport's left edge, not to the content
+   column. `50% - 50vw` measures the gap between this block's edge and the
+   screen's edge (the wrap is centred, so that gap is the same on both sides),
+   and the extra -44% of the record's own width pushes its middle just past
+   the edge, leaving a little over half of it on screen.
+
+   Nothing is clipped on purpose: in a left-to-right page the browser does not
+   let you scroll to content that sits left of the origin, so the overhang is
+   cut by the window and never widens the page. */
 .ab-player{
-  --disc:clamp(260px, 44vw, 580px);
-  display:grid;
-  grid-template-columns:minmax(0, 0.92fr) minmax(0, 1fr);
-  gap:clamp(24px, 4vw, 64px);
-  align-items:center;
-  margin-left:calc(-1 * var(--ab-gut));
-  padding-left:var(--ab-gut);
-  overflow:clip;
+  --disc:clamp(360px, 50vw, 820px);
+  --pc-gap:clamp(28px, 4vw, 72px);
+  position:relative;
+  min-height:var(--disc);
+  display:flex; align-items:center;
   padding-top:clamp(12px, 2.5vw, 32px);
 }
 .ab-disc-wrap{
-  position:relative;
+  position:absolute;
+  left:calc(50% - 50vw - var(--disc) * 0.44);
+  top:50%;
+  transform:translateY(-50%);
   width:var(--disc); aspect-ratio:1;
-  margin-left:calc(var(--disc) * -0.4);
-  justify-self:start;
+}
+/* The copy clears whatever of the record is actually on screen, and runs out
+   to the window's right gutter rather than stopping at the wrap's 1200px.
+   With the record pinned to the left edge, leaving the wrap's right-hand
+   margin empty made the whole section look lopsided. */
+.ab-music-copy{
+  flex:1 1 auto; min-width:0;
+  padding-left:max(0px, calc(var(--disc) * 0.56 + var(--pc-gap) - (50vw - 50%)));
+  margin-right:calc(50% - 50vw + var(--ab-gut));
 }
 
 .ab-disc{
@@ -358,7 +370,6 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
 .ab-ring-dot{ fill:var(--ab-orange); stroke:none; }
 #abRingDot{ transition:transform .25s linear; }
 
-.ab-music-copy{ min-width:0; }
 /* The shared `.ab-music-copy h2` display size outranks a lone class, so this
    has to match it on specificity to sit back as a label. */
 .ab-music-copy h2.ab-music-h{
@@ -586,11 +597,16 @@ html.ab-js .ab-folders li.rat-here .ab-folder-rat{
   /* Below this the record has nowhere to run off to, so it comes back into
      the column and sits above the list at a readable size. */
   .ab-player{
-    grid-template-columns:1fr;
-    margin-left:0; padding-left:0;
+    display:block;
+    min-height:0;
     --disc:min(78vw, 420px);
   }
-  .ab-disc-wrap{ margin-left:0; justify-self:center; }
+  .ab-disc-wrap{
+    position:relative;
+    left:auto; top:auto; transform:none;
+    margin:0 auto clamp(26px, 5vw, 44px);
+  }
+  .ab-music-copy{ padding-left:0; margin-right:0; }
 }
 @media (max-width:760px){
   /* Scattered folders need room to scatter. Below this they stack into a
