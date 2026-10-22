@@ -24,7 +24,7 @@
   font-weight:700; color:var(--graphite); flex:0 0 auto; min-width:64px;
 }
 .sprint-title{ font-size:clamp(19px,2.2vw,24px); font-weight:700; flex:1 1 auto; }
-.sprint-sub{ font-size:14px; color:var(--graphite); flex:0 0 auto; }
+.sprint-when{ font-size:14px; color:var(--graphite); flex:0 0 auto; }
 .sprint-chev{
   flex:0 0 auto; width:13px; height:13px; fill:none;
   stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
@@ -71,5 +71,97 @@
 @media (max-width:640px){
   #sprint{ padding:64px 0; }
   .sprint-item > summary{ flex-wrap:wrap; gap:6px 14px; }
-  .sprint-sub{ flex-basis:100%; }
+  .sprint-when{ flex-basis:100%; }
 }
+
+/* ---------- nested sub-accordions (1.1 … 1.5) ---------- */
+.sprint-subs{ margin-top:30px; border-top:1px solid var(--line); }
+.sprint-sub{ border-bottom:1px solid var(--line); }
+.sprint-sub > summary{
+  list-style:none; cursor:pointer; padding:16px 0;
+  display:flex; align-items:baseline; gap:14px;
+}
+.sprint-sub > summary::-webkit-details-marker{ display:none; }
+.sprint-sub > summary:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.sprint-sub > summary::after{
+  content:"+"; margin-left:auto; color:var(--graphite); font-size:17px; line-height:1;
+}
+.sprint-sub[open] > summary::after{ content:"\2013"; }
+.sp-no{
+  font-size:11px; letter-spacing:.1em; font-weight:700; color:var(--rust);
+  min-width:34px; flex:0 0 auto;
+}
+.sp-name{ font-size:15.5px; font-weight:600; }
+.sp-body{ padding:2px 0 30px; }
+.sp-lede{ font-size:14.5px; line-height:1.6; color:var(--graphite); max-width:84ch; margin:0 0 20px; }
+.sp-big{ font-size:16px; line-height:1.55; color:var(--ink); font-weight:600; max-width:80ch; margin:14px 0; }
+.sp-h{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+       color:var(--graphite); margin:28px 0 12px; }
+.sp-note{ font-size:12.5px; color:var(--graphite); margin-top:10px; }
+.sp-sub{ display:block; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+         color:var(--graphite); font-weight:700; margin-bottom:10px; }
+
+.sp-pairs{ margin:0; }
+.sp-pairs dt{ font-size:12.5px; font-weight:700; color:var(--ink); margin-top:12px; }
+.sp-pairs dd{ margin:3px 0 0; font-size:13.5px; line-height:1.55; color:var(--graphite); }
+.sp-pairs.sp-tight dt{ margin-top:10px; font-size:10.5px; letter-spacing:.07em;
+                       text-transform:uppercase; color:var(--graphite); }
+.sp-pairs ul{ margin:4px 0 0; padding-left:16px; }
+.sp-pairs li{ font-size:12.5px; line-height:1.5; margin-bottom:3px; }
+
+.sp-blocks, .sp-steeps{ display:grid; gap:14px;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); }
+.sp-block, .sp-steep{ border:1px solid var(--line); border-radius:var(--radius-md);
+                      background:var(--white); padding:16px 16px 18px; }
+.sp-block h5, .sp-steep h6{ font-size:14px; font-weight:700; margin:0 0 4px; }
+.sp-stickies{ margin:0; padding-left:16px; }
+.sp-stickies li{ font-size:12.5px; line-height:1.5; color:var(--graphite); margin-bottom:6px; }
+.sp-flowpick{ margin-top:12px; font-size:12px; line-height:1.45; font-weight:600;
+              color:var(--rust); border-top:1px solid var(--line); padding-top:10px; }
+
+.sp-callout{ margin-top:22px; border:2px solid var(--rust); border-radius:var(--radius-md);
+             padding:20px 22px; background:var(--white); }
+.sp-callout h5{ font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+                color:var(--rust); margin:0 0 8px; }
+.sp-callout p{ font-size:13.5px; line-height:1.6; color:var(--graphite); margin:12px 0 0; max-width:84ch; }
+
+.sp-flat{ margin:0; padding-left:18px; }
+.sp-flat li{ font-size:13px; line-height:1.55; color:var(--graphite); margin-bottom:5px; }
+
+.sp-actors{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); }
+.sp-actor{ border:1px solid var(--line); border-radius:var(--radius-md);
+           background:var(--white); padding:18px 18px 20px; }
+.sp-actor h5{ font-size:15px; font-weight:700; margin:4px 0 0; }
+.sp-kind{ font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+          font-weight:700; color:var(--graphite); }
+
+.sp-arts{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); margin-top:14px; }
+.sp-art{ border:1px solid var(--line); border-radius:var(--radius-md); padding:14px 16px; background:var(--white); }
+.sp-art h6{ font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+            color:var(--graphite); margin:0 0 6px; }
+.sp-art p{ font-size:12.5px; line-height:1.55; color:var(--graphite); margin:0; }
+
+.sp-wf{ border-bottom:1px dashed var(--line); }
+.sp-tablewrap{ overflow-x:auto; margin:6px 0 16px; }
+.sp-swim{ border-collapse:collapse; width:100%; min-width:720px; font-size:12.5px; }
+.sp-swim th, .sp-swim td{ border:1px solid var(--line); padding:9px 11px;
+                          vertical-align:top; text-align:left; line-height:1.45; }
+.sp-swim thead th{ background:var(--cream-deep); font-size:10.5px; letter-spacing:.07em;
+                   text-transform:uppercase; }
+.sp-swim tbody th{ background:var(--cream-deep); font-weight:600; width:19%; }
+.sp-swim td{ color:var(--graphite); }
+
+.sp-fric{ margin:0; padding-left:18px; }
+.sp-fric li{ font-size:12.5px; line-height:1.5; color:var(--rust); font-weight:600; margin-bottom:5px; }
+.sp-fric-lg li{ font-size:13.5px; margin-bottom:8px; }
+.sp-cis{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
+.sp-ci{ border:1px solid var(--line); border-radius:var(--radius-md); padding:13px 15px; background:var(--white); }
+.sp-ci h6{ font-size:11.5px; font-weight:700; margin:0 0 6px; color:var(--ink); }
+.sp-ci p{ font-size:12px; line-height:1.5; color:var(--graphite); margin:0; }
+.sp-findings{ margin:12px 0 0; padding-left:20px; }
+.sp-findings li{ font-size:13.5px; line-height:1.6; color:var(--graphite); margin-bottom:9px; }
+.sp-cidl{ margin:0; }
+.sp-cidl dt{ font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+             font-weight:700; color:var(--graphite); margin-top:9px; }
+.sp-cidl dt:first-child{ margin-top:0; }
+.sp-cidl dd{ margin:2px 0 0; font-size:12px; line-height:1.5; color:var(--ink); }
