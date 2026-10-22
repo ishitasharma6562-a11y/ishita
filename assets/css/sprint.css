@@ -1,0 +1,75 @@
+/* ============================================================
+   SECTORAL SPRINT — coursework section (index.html)
+   Self-contained. Nothing here is used anywhere else, so this
+   file and the <section id="sprint"> block can be removed
+   together with no side effects.
+   ============================================================ */
+
+#sprint{ border-bottom:1px solid var(--line); padding:96px 0; }
+#sprint .sprint-note{
+  margin:-32px 0 36px; font-size:14px; color:var(--graphite); max-width:60ch;
+}
+
+/* ---------- accordion ---------- */
+.sprint-acc{ border-top:1px solid var(--line); }
+.sprint-item{ border-bottom:1px solid var(--line); }
+.sprint-item > summary{
+  list-style:none; cursor:pointer; padding:26px 0;
+  display:flex; align-items:baseline; gap:18px;
+}
+.sprint-item > summary::-webkit-details-marker{ display:none; }
+.sprint-item > summary:focus-visible{ outline:2px solid var(--ink); outline-offset:4px; }
+.sprint-num{
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:700; color:var(--graphite); flex:0 0 auto; min-width:64px;
+}
+.sprint-title{ font-size:clamp(19px,2.2vw,24px); font-weight:700; flex:1 1 auto; }
+.sprint-sub{ font-size:14px; color:var(--graphite); flex:0 0 auto; }
+.sprint-chev{
+  flex:0 0 auto; width:13px; height:13px; fill:none;
+  stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+  transform:rotate(90deg); transition:transform .25s var(--ease);
+}
+.sprint-item[open] > summary .sprint-chev{ transform:rotate(-90deg); }
+.sprint-body{ padding:4px 0 44px; }
+
+/* ---------- panel header ---------- */
+.sprint-meta{
+  display:flex; flex-wrap:wrap; gap:10px 28px; margin-bottom:22px;
+  font-size:13px; color:var(--graphite);
+}
+.sprint-meta b{ color:var(--ink); font-weight:600; }
+.sprint-lede{ font-size:16px; line-height:1.6; max-width:76ch; margin-bottom:10px; }
+.sprint-legend{
+  font-size:12.5px; line-height:1.55; color:var(--graphite);
+  border-left:2px solid var(--line); padding-left:14px; margin:26px 0 34px; max-width:78ch;
+}
+
+/* ---------- concept grid ---------- */
+.sprint-grid{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+}
+.sprint-card{
+  border:1px solid var(--line); border-radius:var(--radius-md);
+  background:var(--white); padding:20px 20px 22px;
+}
+.sprint-tag{
+  font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+  color:var(--graphite); display:block; margin-bottom:8px;
+}
+.sprint-card h4{ font-size:16px; line-height:1.3; font-weight:700; margin:0 0 14px; }
+.sprint-block{ margin-top:14px; }
+.sprint-block dt{
+  font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+  color:var(--rust); margin-bottom:5px;
+}
+.sprint-block dd{ margin:0; font-size:13.5px; line-height:1.55; color:var(--graphite); }
+.sprint-block dd + dd{ margin-top:5px; }
+.sprint-block dd b{ color:var(--ink); font-weight:600; }
+
+@media (max-width:640px){
+  #sprint{ padding:64px 0; }
+  .sprint-item > summary{ flex-wrap:wrap; gap:6px 14px; }
+  .sprint-sub{ flex-basis:100%; }
+}

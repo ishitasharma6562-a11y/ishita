@@ -18,6 +18,7 @@
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css?v=32" />
+<link rel="stylesheet" href="assets/css/sprint.css?v=1" />
 </head>
 <body>
 <a href="#home" class="skip-link">Skip to content</a>
@@ -163,6 +164,261 @@
       </div>
     </div>
   </section>
+
+  <!-- ============ SECTORAL SPRINT (coursework) — start ============
+       Self-contained: this block + assets/css/sprint.css.
+       To hide: add the word  hidden  to the <section> tag below.
+       To remove: delete this block and the sprint.css <link>.      -->
+  <section id="sprint">
+    <div class="wrap">
+      <h2 class="section-head">Sectoral Sprint</h2>
+      <p class="sprint-note">Coursework, not client work. Sector-level innovation sprints run as a group studio exercise.</p>
+
+      <div class="sprint-acc">
+        <details class="sprint-item">
+          <summary>
+            <span class="sprint-num">Sprint 01</span>
+            <span class="sprint-title">PhysicsWallah &mdash; when a star teacher leaves</span>
+            <span class="sprint-sub">EdTech &middot; 2026 &rarr; 2031</span>
+            <svg class="sprint-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2.5 11.5 8 6 13.5"/></svg>
+          </summary>
+          <div class="sprint-body">
+            <div class="sprint-meta">
+              <span><b>Sector</b> EdTech</span>
+              <span><b>Focal actor</b> PhysicsWallah</span>
+              <span><b>Group sprint</b> Tanish, Ishita, Thihsya, Ygna, Mehak</span>
+            </div>
+            <p class="sprint-lede"><b>Section 1.5 &middot; 2031 Concept Specifications.</b> Ten innovation ideas, two per STEEP sector, each backtracked from a real 2026 artifact in our Stage&nbsp;4 workflows.</p>
+            <p class="sprint-legend">Each card names the exact 2026 artifact it removes &mdash; 🛠️ material or ⚡ digital &mdash; and the failure it belongs to: 🔴 media break, 🟡 redundant request, ⏳ latency gate.</p>
+
+            <div class="sprint-grid">
+        <article class="sprint-card">
+          <span class="sprint-tag">👥 SOCIAL · IDEA 01</span>
+          <h4>Verified Teacher Handover Live</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>When a teacher leaves, the outgoing and incoming teacher run a live handover class for the batch inside the app. Students hear the reason first-hand and get a clear plan for the rest of the year.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>⚡ Rumour screenshots forwarded in Telegram / WhatsApp batch groups, and PW's late in-app notice (Workflow 1).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>A Hinglish live class in the familiar “bhaiya / didi” style, with both teachers on screen. Students ask questions in chat; the recording is pinned for anyone who missed it.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> PW app (both teachers) → enrolled batch students</dd>
+            <dd><b>Subject · Info type:</b> The batch · faculty-change reason, new timetable, transition plan</dd>
+            <dd><b>Transmission principle:</b> Shared only inside the enrolled batch; the leaving teacher agrees to what is said about their exit.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">👥 SOCIAL · IDEA 02</span>
+          <h4>Family Decision Room</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>A shared space where the student and parent see progress together and decide on renewal as a family. It replaces one-way reminders with a joint decision.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>⚡ CRM renewal reminder that gets ignored; the parent decides without seeing the student's progress (Workflow 1).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>One shared family view on one phone. The parent gets a Hindi voice summary; the student adds a voice note on why they want to stay or switch. Renewal needs both taps.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> PW app → student + linked parent</dd>
+            <dd><b>Subject · Info type:</b> The student · attendance, test trend, teacher-continuity status (no private doubt chats)</dd>
+            <dd><b>Transmission principle:</b> Parent consent for minors under DPDP; the student chooses which progress items the parent sees.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">⚡ TECHNOLOGICAL · IDEA 03</span>
+          <h4>Portable Learning Passport</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>The student's verified learning record (scores, chapters done, doubt summary) lives in an APAAR-linked wallet and moves with them across batches and platforms. PW reads it with consent instead of asking again.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>🟡 Re-confirming batch and enrollment data PW already holds (Workflow 2).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>One “Share my progress” tap, protected by a PIN on the shared family phone. Shown as a simple chapter map, not a data dump.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> Student's learning wallet (DigiLocker / APAAR) → PW batch system or another platform</dd>
+            <dd><b>Subject · Info type:</b> The student · verified progress summary</dd>
+            <dd><b>Transmission principle:</b> Student-controlled, purpose-limited consent token that expires when the batch ends.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">⚡ TECHNOLOGICAL · IDEA 04</span>
+          <h4>Continuity AI Tutor</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>An AI tutor trained on the outgoing teacher's own lectures and notes covers the gap during a faculty swap. It keeps the same explanations and pace until the new teacher settles in.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>⏳ Class gap while the new teacher onboards, and a bare “new faculty assigned” push alert (Workflow 2).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>Same Hinglish style and worked examples, clearly labelled “AI, based on Sir's lectures”. Students ask doubts by voice.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> PW content system → AI tutor → student</dd>
+            <dd><b>Subject · Info type:</b> The teacher's lecture content · the student's doubts</dd>
+            <dd><b>Transmission principle:</b> Teacher's contract licenses lectures for AI use with credit and royalty; doubts are used only to answer them.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">🌿 ENVIRONMENTAL · IDEA 05</span>
+          <h4>Offline Classroom Box</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>A small device at each offline centre caches lectures, marks attendance by QR or student card, and syncs with PW when the internet returns. Paper registers and end-of-week retyping disappear.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>🛠️ Paper attendance register retyped by hand: the 🔴 manual media break (Workflow 3).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>Works with no internet. Students tap their ID card at the door like a metro gate; the centre manager sees a simple daily list in the local language.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> Centre box → PW central system</dd>
+            <dd><b>Subject · Info type:</b> Students at the centre · attendance time-stamps</dd>
+            <dd><b>Transmission principle:</b> Collected only for attendance and safety; synced encrypted; each parent sees only their own child's record.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">🌿 ENVIRONMENTAL · IDEA 06</span>
+          <h4>Voice &amp; IVR Updates</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>Families without smartphones or with weak data get timetable and teacher-change updates as a voice call in their language. They press a key to confirm or ask for a callback.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>🛠️ Printed timetable on the centre notice board that students miss (Workflow 3).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>Hindi, Bhojpuri or Marathi voice on any basic phone. Give a missed call to hear it again; no reading needed.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> PW notification service → parent's / student's phone number</dd>
+            <dd><b>Subject · Info type:</b> The batch · timetable and teacher change</dd>
+            <dd><b>Transmission principle:</b> Only to numbers registered at admission; opt out any time; no marketing in the same call.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">💰 ECONOMIC · IDEA 07</span>
+          <h4>Teacher-Linked Fair Refund</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>Fees are paid month by month and tied to the promised teacher. If that teacher leaves, the unused amount is refunded automatically, with no ticket needed.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>⚡ Refund request ticket + 🛠️ fee receipt screenshot + ⏳ manual review queue (Workflow 4).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>The parent gets a Hindi voice note: “Sir has left. ₹1,200 is coming back to your UPI today.” One tap: stay with the new teacher, or keep the refund.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> PW billing system → parent's UPI app</dd>
+            <dd><b>Subject · Info type:</b> The parent's fee · refund amount and reason</dd>
+            <dd><b>Transmission principle:</b> Fee terms the parent accepted at purchase; no new data or documents asked for.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">💰 ECONOMIC · IDEA 08</span>
+          <h4>Trust Escrow</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>Part of the yearly fee sits in escrow and is released to PW month by month only while the promised teacher and timetable hold. Families feel safe paying upfront, and PW still gets steady income.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>⚡ One-shot annual UPI autopay mandate, and the fight to claw money back (Workflow 4).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>A simple “money safe” meter in the app shows how much is still protected, explained in Hindi like a familiar family savings kitty.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> Parent's bank → regulated escrow account → PW</dd>
+            <dd><b>Subject · Info type:</b> The parent's payment · release triggers (teacher continuity, classes held)</dd>
+            <dd><b>Transmission principle:</b> RBI-regulated escrow rules; release conditions written into the fee agreement.</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">🏛️ POLITICAL / REGULATORY · IDEA 09</span>
+          <h4>One-Tap Consent &amp; Delete</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>Parents manage what PW can do with their child's data through a DPDP consent manager, with time-limited, purpose-tagged consent. Withdrawing consent or deleting data takes one tap, not emails and ID photos.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>🛠️ ID photo sent again + ⚡ complaint email + ⏳ grievance-officer wait (Workflow 5).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>Plain-language consent cards with icons and a Hindi voice explainer. Shows “who used your child's data this month”.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> Parent's consent manager → PW data system</dd>
+            <dd><b>Subject · Info type:</b> The child · consent status and deletion request</dd>
+            <dd><b>Transmission principle:</b> DPDP Act consent and erasure rights, verified through the existing DigiLocker login (no new ID upload).</dd>
+          </dl>
+        </article>
+        <article class="sprint-card">
+          <span class="sprint-tag">🏛️ POLITICAL / REGULATORY · IDEA 10</span>
+          <h4>Faculty Change Ledger</h4>
+          <dl class="sprint-block">
+            <dt>2031 system role</dt>
+            <dd>A regulator-visible ledger records every teacher promise, change and refund for each batch. Consumer authorities audit it automatically instead of waiting for complaints.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>2026 baseline friction resolved</dt>
+            <dd>⚡ National Consumer Helpline complaint form, and “star teacher” ads that overpromise (Workflow 5).</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Cultural ergonomics &amp; interaction model</dt>
+            <dd>Before buying, parents see a public “batch promise card” (teacher, dates, refund rule). A complaint becomes one tap that points to the ledger entry.</dd>
+          </dl>
+          <dl class="sprint-block">
+            <dt>Contextual integrity audit</dt>
+            <dd><b>Sender → Recipient:</b> PW → regulator audit node (e.g. CCPA)</dd>
+            <dd><b>Subject · Info type:</b> Batches and faculty · change dates, refunds issued (no student personal data)</dd>
+            <dd><b>Transmission principle:</b> Statutory audit mandate; aggregated data only, no individual student records.</dd>
+          </dl>
+        </article>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+  <!-- ============ SECTORAL SPRINT (coursework) — end ============ -->
 
   <!-- ================= WHAT I DO ================= -->
   <section id="whatido-section">
