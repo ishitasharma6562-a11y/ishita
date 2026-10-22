@@ -35,10 +35,15 @@
 
 /* ---------- panel header ---------- */
 .sprint-meta{
-  display:flex; flex-wrap:wrap; gap:10px 28px; margin-bottom:22px;
+  display:flex; flex-wrap:wrap; gap:14px 44px; margin-bottom:24px;
   font-size:13px; color:var(--graphite);
 }
-.sprint-meta b{ color:var(--ink); font-weight:600; }
+.sprint-meta span{ display:inline-flex; flex-direction:column; gap:3px; }
+.sprint-meta b{
+  color:var(--graphite); font-weight:700;
+  font-size:10.5px; letter-spacing:.11em; text-transform:uppercase;
+}
+.sprint-meta span{ color:var(--ink); font-size:13.5px; font-weight:500; }
 .sprint-lede{ font-size:16px; line-height:1.6; max-width:76ch; margin-bottom:10px; }
 .sprint-legend{
   font-size:12.5px; line-height:1.55; color:var(--graphite);
