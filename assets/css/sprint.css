@@ -170,3 +170,21 @@
              font-weight:700; color:var(--graphite); margin-top:9px; }
 .sp-cidl dt:first-child{ margin-top:0; }
 .sp-cidl dd{ margin:2px 0 0; font-size:12px; line-height:1.5; color:var(--ink); }
+
+/* ---------- sprint 2: board exports ---------- */
+.sp2-shot{
+  display:block; position:relative; border:1px solid var(--line);
+  border-radius:var(--radius-md); overflow:hidden; background:var(--white);
+  text-decoration:none; line-height:0;
+}
+.sp2-shot img{ display:block; width:100%; height:auto; }
+.sp2-zoom{
+  position:absolute; right:12px; bottom:12px;
+  background:var(--ink); color:var(--cream);
+  font-size:11px; letter-spacing:.07em; text-transform:uppercase; font-weight:700;
+  padding:7px 12px; border-radius:99px; line-height:1;
+  opacity:.82; transition:opacity .2s var(--ease);
+}
+.sp2-shot:hover .sp2-zoom,
+.sp2-shot:focus-visible .sp2-zoom{ opacity:1; }
+.sp2-shot:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
