@@ -188,3 +188,4 @@
 .sp2-shot:hover .sp2-zoom,
 .sp2-shot:focus-visible .sp2-zoom{ opacity:1; }
 .sp2-shot:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.sp3-pages{ display:grid; gap:16px; }
