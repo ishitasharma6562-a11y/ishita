@@ -88,7 +88,7 @@ if (navToggle && navLinks) {
   const track = document.getElementById('projectsTrack');
   if (!section || !track) return;
 
-  const slides = Array.from(track.querySelectorAll('.project-slide'));
+  const slides = Array.from(track.querySelectorAll('.project-slide:not([hidden])'));
   const dots = Array.from(document.querySelectorAll('.projects-progress span'));
   const count = slides.length;
 
