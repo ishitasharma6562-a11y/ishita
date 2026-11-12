@@ -451,6 +451,18 @@ footer p{ font-size:14px; color:var(--graphite); margin:0; }
 }
 html.pen-live .pen-cursor{ opacity:1; }
 
+/* The inked path. Difference blending means one white stroke reads dark on
+   the cream and light on the black sections, with no per-section handling. */
+.pen-ink{
+  position:fixed; top:0; left:0;
+  pointer-events:none;
+  z-index:9999;
+  mix-blend-mode:difference;
+  opacity:0;
+  transition:opacity .18s ease;
+}
+html.pen-live .pen-ink{ opacity:1; }
+
 /* The nib tip is the hotspot, so the glyph hangs down-right of 0,0. */
 .pen-cursor svg{
   display:block;
