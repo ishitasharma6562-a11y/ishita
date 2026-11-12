@@ -96,6 +96,9 @@ if (navToggle && navLinks) {
     return window.matchMedia('(max-width: 900px)').matches;
   }
 
+  // Progress dots are static markup; a hidden slide must not leave a dead dot.
+  dots.forEach((d, i) => { d.hidden = i >= count; });
+
   function setActive(idx) {
     slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
     dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
