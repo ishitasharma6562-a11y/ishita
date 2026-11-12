@@ -426,64 +426,52 @@ footer p{ font-size:14px; color:var(--graphite); margin:0; }
 }
 
 /* ============================================================
-   PRESENCE CURSORS
-   Two pointers — the viewer's, and mine trailing behind it.
-   Everything here is gated behind .pc-on, which cursor.js adds only on a
-   real mouse with motion allowed; otherwise the native cursor is untouched.
+   PEN-TOOL CURSOR
+   One cursor: a pen nib, drawn with its tip on the pointer.
+   Gated behind .pen-on, which pen-cursor.js adds only on a real mouse
+   with motion allowed; otherwise the native cursor is untouched.
    ============================================================ */
 
 @media (hover: hover) and (pointer: fine){
-  /* `html.pc-on body *` is (0,1,2), which outranks the (0,1,0) cursor:pointer
-     rules in this file and in the case-study stylesheets that load after it,
-     without needing !important. */
-  html.pc-on body *{ cursor:none; }
-  html.pc-on body{ cursor:none; }
+  /* (0,1,2) so it outranks the (0,1,0) cursor:pointer rules in this file
+     and in the case-study stylesheets that load after it. */
+  html.pen-on body *{ cursor:none; }
+  html.pen-on body{ cursor:none; }
   /* Embedded prototypes keep their own cursor — we can't track inside them. */
-  html.pc-on body iframe{ cursor:auto; }
+  html.pen-on body iframe{ cursor:auto; }
 }
 
-.pc-cursor{
+.pen-cursor{
   position:fixed; top:0; left:0; z-index:10000;
   pointer-events:none;
-  display:flex; align-items:flex-start;
   opacity:0;
   transform:translate3d(-200px,-200px,0);
   will-change:transform;
   transition:opacity .18s ease;
 }
-html.pc-live .pc-cursor{ opacity:1; }
+html.pen-live .pen-cursor{ opacity:1; }
 
-.pc-arrow{
-  width:13px; height:19px;
-  display:block; flex:none;
-  filter:drop-shadow(0 1px 2px rgba(23,21,15,.22));
+/* The nib tip is the hotspot, so the glyph hangs down-right of 0,0. */
+.pen-cursor svg{
+  display:block;
+  width:26px; height:26px;
+  margin:-1.5px 0 0 -1.5px;
+  transform-origin:3px 21px;
+  transition:transform .16s var(--ease);
 }
-.pc-tag{
-  margin:11px 0 0 -2px;
-  padding:3px 8px 4px;
-  border-radius:999px;
-  font-family:'Plus Jakarta Sans', sans-serif;
-  font-size:10.5px; font-weight:600; line-height:1.3; letter-spacing:.01em;
-  white-space:nowrap; color:#fff;
+.pen-cursor path{
+  fill:var(--ink);
+  stroke:var(--cream);
+  stroke-width:1.1;
+  stroke-linejoin:round;
+  paint-order:stroke fill;
 }
 
-/* Colours carried over from the reference: the viewer in near-black, me in coral. */
-.pc-cursor--you .pc-arrow{ fill:#1C1C1E; }
-.pc-cursor--you .pc-tag{ background:#1C1C1E; }
-.pc-cursor--me  .pc-arrow{ fill:#F97362; }
-.pc-cursor--me  .pc-tag{ background:#F97362; }
-
-/* Mine sits behind the viewer's wherever they overlap. */
-.pc-cursor--me{ z-index:9999; }
-
-/* The viewer's cursor reacts; mine doesn't, because it isn't theirs to press. */
-.pc-cursor--you .pc-arrow,
-.pc-cursor--you .pc-tag{ transition:transform .16s var(--ease); }
-html.pc-hot .pc-cursor--you .pc-arrow{ transform:scale(1.18); }
-html.pc-down .pc-cursor--you .pc-arrow{ transform:scale(.86); }
+html.pen-hot  .pen-cursor svg{ transform:scale(1.16) rotate(-6deg); }
+html.pen-down .pen-cursor svg{ transform:scale(.88); }
 
 @media (prefers-reduced-motion: reduce){
-  .pc-cursor{ display:none; }
+  .pen-cursor{ display:none; }
 }
 
 /* The homepage keeps the short version; the five folders live on about.html. */
