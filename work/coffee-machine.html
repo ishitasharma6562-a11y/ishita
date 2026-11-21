@@ -1,178 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coffee Machine UX Redesign | Ishita Sharma</title>
-<meta name="description" content="A UX research and redesign project tackling the confusion, intimidation and low user control of public coffee machines — by Ishita Sharma.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Half coffee, full confusion | Ishita Sharma</title>
+<meta name="description" content="A coffee machine UX study: why a two-minute coffee turns into public confusion, and a flow that guides instead of gatekeeps." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Ishita Sharma" />
-  <meta property="og:title" content="Coffee Machine UX Redesign | Ishita Sharma" />
-  <meta property="og:description" content="A UX research and redesign project tackling the confusion, intimidation and low user control of public coffee machines — by Ishita Sharma." />
+  <meta property="og:title" content="Half coffee, full confusion | Ishita Sharma" />
+  <meta property="og:description" content="A coffee machine UX study: why a two-minute coffee turns into public confusion, and a flow that guides instead of gatekeeps." />
   <meta property="og:url" content="https://ishitasharma6562-a11y.github.io/ishita/work/coffee-machine.html" />
   <meta property="og:image" content="https://ishitasharma6562-a11y.github.io/ishita/assets/images/og-card.jpg?v=1" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Ishita Sharma, UX / Product and Visual Designer, with a rat peeking over the edge holding a tin-can telephone" />
+  <meta property="og:image:alt" content="Ishita Sharma is a UX and product designer with a brand and visual background, based in Bangalore." />
   <meta name="twitter:card" content="summary_large_image" />
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖤</text></svg>">
-<link rel="stylesheet" href="../assets/css/style.css?v=30">
-<link rel="stylesheet" href="../assets/css/case-study.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css?v=38" />
+<link rel="stylesheet" href="../assets/css/coffee.css?v=2" />
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
-<div class="scroll-progress"></div>
 
-<header class="site-header">
-  <a href="../index.html" class="logo">Ishita<span>.</span></a>
-  <nav class="nav-desktop" aria-label="Primary">
-    <a href="../index.html#work">Work</a>
-    <a href="../about.html">About</a>
-    <a href="../index.html#achievements">Achievements</a>
-    <a href="../index.html#contact">Contact</a>
-  </nav>
-  <div style="display:flex; align-items:center; gap:1rem;">
-    <a href="../assets/docs/Ishita_Sharma_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Resume ↗</a>
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="../index.html" aria-label="Home">
+        <img class="rat-logo" src="../assets/images/rat.png" alt="Ishita Sharma — home" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#playground">Playground</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </nav>
   </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" aria-label="Close menu">Close ✕</button>
-  <ul>
-    <li><a href="../index.html#work">Work</a></li>
-    <li><a href="../about.html">About</a></li>
-    <li><a href="../index.html#achievements">Achievements</a></li>
-    <li><a href="../index.html#contact">Contact</a></li>
-  </ul>
-  <div class="mobile-extra">
-    <a href="../assets/docs/Ishita_Sharma_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Resume ↗</a>
-    <a href="mailto:ishitasharma6562@gmail.com" class="btn btn-ghost btn-sm">Email</a>
-  </div>
-</div>
-
 <main id="main">
 
-  <div class="container cs-hero">
-    <a href="../index.html#work" class="cs-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 7L7 17M7 17H15M7 17V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back to work
-    </a>
+  <!-- ================= COVER ================= -->
+  <section class="cm-cover">
+    <div class="wrap">
+      <p class="cm-cover-meta">Studio module &middot; 2 months &middot; Solo &middot; User research, interaction design</p>
+      <h1 class="cm-cover-title">Half coffee, full confusion.</h1>
+      <p class="cm-cover-sub">Redesigning a coffee machine interface so no one has to stand confused in front of it again.</p>
 
-    <div class="cs-cats reveal" style="margin-top:1.75rem;">
-      <span class="tag">UX Research</span>
-      <span class="tag">Interaction Design</span>
-      <span class="tag">Studio Project</span>
-    </div>
-    <h1 class="reveal">Half coffee, full confusion.</h1>
-    <p class="lede reveal" style="transition-delay:100ms;">Redesigning the public coffee machine experience after watching real people get intimidated by a machine that was supposed to make their morning easier.</p>
+      <nav class="cm-chapters" aria-label="Chapters">
+        <a class="cm-chapter is-current" href="#chapter-1" aria-current="true">
+          <span class="cm-chapter-no">Chapter 1</span>
+          <span class="cm-chapter-name">Before the pour</span>
+        </a>
+        <span class="cm-chapter is-soon" aria-disabled="true">
+          <span class="cm-chapter-no">Chapter 2</span>
+          <span class="cm-chapter-name">After the pour</span>
+          <span class="cm-soon">In progress</span>
+        </span>
+      </nav>
 
-    <dl class="cs-meta reveal" style="transition-delay:150ms;">
-      <div><dt>Role</dt><dd>UX Researcher &amp; Designer</dd></div>
-      <div><dt>Course</dt><dd>Studio I: Experience Design</dd></div>
-      <div><dt>Methods</dt><dd>Interviews, empathy &amp; journey mapping</dd></div>
-      <div><dt>Output</dt><dd>Low-fi wireframes, redesigned flow</dd></div>
-    </dl>
-
-    <div class="cs-cover reveal" style="transition-delay:200ms;">
-      <div class="cs-placeholder">
-        <strong>Image slot</strong>
-        Drop in your coffee-machine sketch / hero illustration here (1600×900 or larger)
-      </div>
-    </div>
-  </div>
-
-  <!-- STORY HOOK -->
-  <section class="cs-section">
-    <div class="container cs-grid">
-      <span class="cs-label reveal">The Spark</span>
-      <div class="cs-content reveal">
-        <h3>A confident guy, a coffee machine, and ten seconds of silence.</h3>
-        <p>My dad once told me about a new coffee machine installed in his office. Everyone gathered around, curious but hesitant — for a moment, no one wanted to try it.</p>
-        <p>Eventually, one guy stepped forward confidently. He pressed a few buttons but nothing happened. What should've been a simple coffee moment quickly turned into public confusion. That confidence lasted about ten seconds.</p>
-        <p>That got me thinking: does this happen to everybody, or is it just first-time users who aren't able to use the machine?</p>
+      <div class="cm-cover-img">
+        <img src="../assets/images/studio.jpg" alt="Coffee machine research illustration from the Studio project" width="1000" height="566" />
       </div>
     </div>
   </section>
 
-  <!-- RESEARCH / DARK SECTION -->
-  <section class="cs-section is-dark">
-    <div class="container cs-grid">
-      <span class="cs-label reveal">01 — User Research</span>
-      <div class="cs-content reveal">
-        <h3>I interviewed users. The machine wasn't very loved.</h3>
-        <p>I conducted in-depth interviews to understand real challenges with public coffee machines, then compared that experience against real-life, self coffee-making to spot the gaps.</p>
-        <ul class="cs-list">
-          <li>Users feel intimidated due to the <strong>lack of feedback and guidance</strong> from the machine.</li>
-          <li>Confusion and cognitive overload were common — too many buttons, too little context.</li>
-          <li>Low <strong>user control</strong>: no way to preview, adjust, or undo a choice mid-way.</li>
-          <li>Empathy mapping and journey mapping surfaced a clear emotional dip right at the moment of first use.</li>
-        </ul>
-      </div>
+  <div id="chapter-1"></div>
+
+  <!-- ================= 01 THE STORY ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">01 &middot; The story</p>
+      <h2 class="cm-h2">Ten seconds of confidence.</h2>
+      <p class="cm-p">My dad once told me about a new coffee machine installed in his office. Everyone gathered around, curious but hesitant. No one wanted to go first.</p>
+      <p class="cm-p">Eventually, one guy stepped forward. Confidently.</p>
+      <p class="cm-p">He pressed a few buttons. Nothing happened. He pressed a few more. His moment of confidence turned into embarrassment.</p>
+      <p class="cm-p">What should have been a simple coffee moment became public confusion.</p>
+      <p class="cm-pull">That confidence lasted about ten seconds.</p>
     </div>
   </section>
 
-  <!-- SOLUTION -->
-  <section class="cs-section">
-    <div class="container cs-grid">
-      <span class="cs-label reveal">02 — The Redesign</span>
-      <div class="cs-content reveal">
-        <h3>A simplified, step-by-step flow that guides instead of gatekeeps.</h3>
-        <p>Starting from low-fidelity wireframes, I designed a flow that gives users confidence at every step rather than dropping them into a wall of options.</p>
-        <div class="cs-two-col">
-          <div class="cs-feature-card">
-            <h4>Real-time guidance</h4>
-            <p>Clear, step-by-step prompts replace silent buttons — the machine tells you what's happening and what's next.</p>
-          </div>
-          <div class="cs-feature-card">
-            <h4>Taste testing</h4>
-            <p>A lightweight way to preview and adjust strength/flavour before committing, restoring the sense of control users lost.</p>
-          </div>
-          <div class="cs-feature-card">
-            <h4>Summary review</h4>
-            <p>A final confirmation step so users know exactly what they're about to get — no more guessing games.</p>
-          </div>
-          <div class="cs-feature-card">
-            <h4>Lower cognitive load</h4>
-            <p>Fewer decisions surfaced at once, sequenced to match how people actually think through making a coffee.</p>
-          </div>
+  <!-- ================= 02 THE QUESTION ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">02 &middot; The question</p>
+      <h2 class="cm-h2" style="max-width:20ch; font-size:clamp(28px, 3.4vw, 46px);">So I wondered: is this just a first-timer problem, or does the machine confuse everyone?</h2>
+    </div>
+  </section>
+
+  <!-- ================= 03 RESEARCH ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">03 &middot; How I researched it</p>
+      <h2 class="cm-h2">Two ways in: what people told me, and what they&rsquo;d already written down.</h2>
+      <p class="cm-lede">I didn&rsquo;t want to rely only on what people said to my face. Interviews tell you what users notice; reviews tell you what they complain about once nobody&rsquo;s watching.</p>
+
+      <div class="cm-two">
+        <div class="cm-card">
+          <span class="cm-kind">Primary</span>
+          <h3>In-depth interviews</h3>
+          <p class="cm-p">I interviewed <strong>12 people</strong> face to face, across a deliberately wide age range of 18 to 50 so the findings weren&rsquo;t just a student sample.</p>
+          <div class="cm-tags"><span>Active users</span><span>First-time users</span><span>Coffee enthusiasts</span></div>
+          <p class="cm-p" style="margin-top:14px;">The spread mattered: some had never seen a machine, some used one daily at the office, one had taught the subject. Generational difference showed up in how willing people were to press a button and find out.</p>
+        </div>
+        <div class="cm-card">
+          <span class="cm-kind">Secondary</span>
+          <h3>Amazon review analysis</h3>
+          <p class="cm-p">I read user reviews of coffee machines across several brands, looking for the gap between the rating and the writing.</p>
+          <p class="cm-quote">Despite predominantly 5-star ratings, nearly every reviewer still described a learning curve and the effort it took to get comfortable with the machine.</p>
+          <p class="cm-p" style="margin-top:14px;">That gap is the whole argument. People rate these machines highly <em>and</em> admit they had to learn them &mdash; which means the problem is real even where satisfaction is high.</p>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="cs-note reveal">
-        <strong>Note:</strong> this was a studio research project — wireframes and detailed flow diagrams can be added here as high-res exports become available.
+  </section>
+
+  <!-- ================= 04 WHAT THEY SAID ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">04 &middot; In depth interviews</p>
+      <h2 class="cm-h2">I spoke to people who use coffee machines at home, offices and public spaces. It wasn&rsquo;t very loved.</h2>
+
+      <div class="cm-findings">
+        <div class="cm-finding">
+          <h3>No feedback means no confidence.</h3>
+          <p class="cm-quote">&ldquo;I want more feedback from the machine to get more confidence.&rdquo;</p>
+        </div>
+        <div class="cm-finding">
+          <h3>Too many options means too much thinking.</h3>
+          <p class="cm-quote">&ldquo;I struggled with multiple options and touchscreens the first time.&rdquo;</p>
+        </div>
+        <div class="cm-finding">
+          <h3>People don&rsquo;t want to learn the machine.</h3>
+          <p class="cm-quote">&ldquo;I want my machine to learn and remember my drink, rather than me learning the machine.&rdquo;</p>
+        </div>
+        <div class="cm-finding">
+          <h3>It&rsquo;s not just first-timers. Regular users still made mistakes.</h3>
+          <p class="cm-quote">&ldquo;It takes time to get used to the machine.&rdquo;</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="cs-nextproject container">
-    <a href="nazar.html" style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:1.5rem;">
-      <div>
-        <div class="label">Next project</div>
-        <h3>Nazar — Be heard, not just seen</h3>
+  <!-- ================= 05 THE PIVOT ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">05 &middot; The pivot</p>
+      <h2 class="cm-h2">From fixing errors &rarr; to preventing them.</h2>
+      <p class="cm-p">At first, the problem seemed obvious: the machine just isn&rsquo;t intuitive.</p>
+      <p class="cm-p">But that felt surface-level. The real issue was that people were <strong>scared of getting it wrong</strong>, and the machine never told them when they did.</p>
+      <p class="cm-p">So I started designing error feedback: warnings, messages, recovery screens.</p>
+      <p class="cm-p">Then a better question came up: <strong>why let the error happen at all?</strong></p>
+      <p class="cm-p">Revisiting the user journey and my professor&rsquo;s feedback confirmed it.</p>
+    </div>
+  </section>
+
+  <!-- ================= 06 THE SHIFT ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">06 &middot; The shift</p>
+      <h2 class="cm-h2">And so I got to work.</h2>
+      <p class="cm-lede">I compared using a coffee machine with making coffee by hand, step by step. Here&rsquo;s what I realised.</p>
+
+      <div class="cm-compare">
+        <div class="cm-card">
+          <h3>By hand</h3>
+          <p class="cm-p">You control the quantities, taste as you go, and fix it after.</p>
+        </div>
+        <div class="cm-card">
+          <h3>By machine</h3>
+          <p class="cm-p">Quantities are fixed, there&rsquo;s no tasting, and once it&rsquo;s poured, it&rsquo;s done.</p>
+        </div>
       </div>
-      <span class="arrow">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-    </a>
-  </div>
+
+      <p class="cm-pull">Less control &rarr; more room for error.</p>
+    </div>
+  </section>
+
+  <!-- ================= 07 PROBLEM STATEMENT ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">07 &middot; Problem statement</p>
+      <h2 class="cm-h2">When control disappears, mistakes go up. That led me here:</h2>
+      <p class="cm-statement">Coffee machines intimidate users by offering little guidance, feedback or control, turning a two-minute coffee into confusion, lost confidence, and sometimes giving up altogether.</p>
+
+      <h3 class="cm-h2" style="margin-top:56px; font-size:clamp(21px,2.1vw,26px);">Same project. A much sharper target.</h3>
+      <p class="cm-lede">I wrote the first version before I&rsquo;d spoken to anyone. Here it is next to the one I ended with, so the distance is visible.</p>
+
+      <div class="cm-versions">
+        <div class="cm-version is-old">
+          <span class="cm-stamp">First version &middot; a hypothesis</span>
+          <p>&ldquo;Coffee machines overwhelm first-time users with complex, non-intuitive interfaces, causing hesitation, confusion, and a loss of confidence in what&rsquo;s meant to be a seamless experience.&rdquo;</p>
+          <small>Written before any interviews. An assumption about who struggles and why.</small>
+        </div>
+        <div class="cm-version is-new">
+          <span class="cm-stamp">Final version &middot; a finding</span>
+          <p>&ldquo;Coffee machines intimidate users by offering little guidance, feedback or control, turning a two-minute coffee into confusion, lost confidence, and sometimes giving up altogether.&rdquo;</p>
+          <small>Written after 12 interviews, the review analysis, and the shift from fixing errors to preventing them.</small>
+        </div>
+      </div>
+
+      <p class="cm-label" style="margin-bottom:18px;">Four things changed, and each came from the research</p>
+      <div class="cm-changes">
+        <div class="cm-change">
+          <div class="from">first-time users</div>
+          <div class="to">users</div>
+          <p>The question I opened with was whether this was a first-timer problem. It wasn&rsquo;t. Regular users still made mistakes, and the reviews said the same.</p>
+        </div>
+        <div class="cm-change">
+          <div class="from">complex, non-intuitive interfaces</div>
+          <div class="to">little guidance, feedback or control</div>
+          <p>&ldquo;Non-intuitive&rdquo; is a verdict, not a diagnosis &mdash; you can&rsquo;t design against it. Three named deficits you can. Each became one of the three solutions.</p>
+        </div>
+        <div class="cm-change">
+          <div class="from">hesitation and lost confidence</div>
+          <div class="to">giving up altogether</div>
+          <p>A feeling became a behaviour. People switched to caf&eacute;s, went back to brewing by hand, and some returned the machine. That is measurable in a way hesitation is not.</p>
+        </div>
+        <div class="cm-change">
+          <div class="from">a seamless experience</div>
+          <div class="to">a two-minute coffee</div>
+          <p>An abstraction became a unit. It also changes what the statement asks for: not &ldquo;make it seamless&rdquo;, but guide, confirm, and let people change their mind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 08 EMPATHY ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">08 &middot; Empathy map</p>
+      <h2 class="cm-h2">I mapped what users say, think, do and feel, to find where the frustration actually sits.</h2>
+
+      <div class="cm-says">
+        <p class="cm-quote">&ldquo;I want my machine to tell me clearly when I go wrong.&rdquo;</p>
+        <p class="cm-quote">&ldquo;I rely on manuals and YouTube videos to understand what to do.&rdquo;</p>
+        <p class="cm-quote">&ldquo;I want a balance between ease of use and the ability to customise.&rdquo;</p>
+      </div>
+
+      <p class="cm-label" style="margin-bottom:18px;">What the map told me</p>
+      <div class="cm-told">
+        <div>
+          <h3>Mistakes happen in public.</h3>
+          <p class="cm-p">Most people I spoke to use machines in shared spaces like offices and caf&eacute;s. Users said they feel self-conscious, even judged, when others are around.</p>
+        </div>
+        <div>
+          <h3>Confusion leads to compromise.</h3>
+          <p class="cm-p">People settle for an easier drink than the one they wanted, or don&rsquo;t try at all.</p>
+        </div>
+        <div>
+          <h3>People walk away.</h3>
+          <p class="cm-p">Many switch to caf&eacute;s or manual brewing; some even returned the machine.</p>
+        </div>
+        <div>
+          <h3>What they want is simple.</h3>
+          <p class="cm-p">Clear, real-time guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 09 SOLUTIONS ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">09 &middot; Potential solutions</p>
+      <h2 class="cm-h2">Three ideas, each answering one thing the research found.</h2>
+
+      <div class="cm-solutions">
+        <div class="cm-card cm-solution">
+          <span class="cm-solves">Solves &middot; option overload</span>
+          <h3>One step at a time</h3>
+          <p class="cm-p">A simple sequence lets users recognise choices instead of remembering how the machine works.</p>
+        </div>
+        <div class="cm-card cm-solution">
+          <span class="cm-solves">Solves &middot; zero feedback</span>
+          <h3>A summary before brewing</h3>
+          <p class="cm-p">Users review type, strength and sweetness, and change anything before it&rsquo;s too late.</p>
+        </div>
+        <div class="cm-card cm-solution">
+          <span class="cm-solves">Solves &middot; lost control</span>
+          <h3>A taste test</h3>
+          <p class="cm-p">A small sample first, so users decide before committing to a full cup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 10 WHAT I LEARNED ================= -->
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">10 &middot; What I learned</p>
+      <div class="cm-learned">
+        <p class="cm-p">This project taught me patience, the value of going deeper, and the importance of looking twice before deciding what the real problem is. It reminded me that UX isn&rsquo;t linear &mdash; it loops, twists, and reveals answers slowly.</p>
+        <p class="cm-said">And as someone great said: mediocre insights give mediocre solutions. Extraordinary insights give extraordinary solutions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CHAPTER 2 TEASER ================= -->
+  <section class="cm-section" id="chapter-2">
+    <div class="wrap">
+      <div class="cm-next">
+        <p class="cm-label">Chapter 2</p>
+        <h2>After the pour</h2>
+        <p class="cm-p">Just when everything felt complete, one question stayed with me: what about after the coffee is poured? Because people don&rsquo;t stop at &ldquo;done.&rdquo; We taste, adjust, personalise. Machines end the moment the cup fills, but the human experience doesn&rsquo;t.</p>
+        <p class="cm-p">Maybe the next chapter begins right there, in the small space after the pour.</p>
+        <span class="cm-next-tag">Wireframes in progress</span>
+      </div>
+
+      <p class="cm-back"><a href="../index.html#projects">&larr; Back to projects</a></p>
+    </div>
+  </section>
 
 </main>
 
-<footer class="site-footer">
-  <p>© <span data-year>2026</span> Ishita Sharma. Built with care.</p>
-  <div class="footer-links">
-    <a href="https://www.linkedin.com/in/ishita-sharma-94436a299" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.behance.net/ishitasharma108" target="_blank" rel="noopener">Behance</a>
-    <a href="mailto:ishitasharma6562@gmail.com">Email</a>
-  </div>
-  <a href="#top" class="back-to-top">Back to top ↑</a>
+<footer>
+  <p>© <span data-year>2026</span> Ishita Sharma. Okay bye!</p>
 </footer>
 
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/main.js?v=9"></script>
 </body>
 </html>
