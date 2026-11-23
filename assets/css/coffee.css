@@ -31,10 +31,13 @@
   margin:0 0 22px;
   font-size:clamp(28px, 3.3vw, 42px);
   font-weight:800; letter-spacing:-.02em; line-height:1.15;
-  max-width:24ch;
+  /* The Figma sets every heading in a 1100-wide box inside a 1220 column,
+     so they run most of the way across rather than stacking in a narrow
+     stack. A ch-based cap was cutting them off about half way. */
+  max-width:min(100%, 1100px);
 }
-.cm-h2--big{ font-size:clamp(32px, 4.2vw, 54px); max-width:20ch; }
-.cm-h2--huge{ font-size:clamp(38px, 5vw, 64px); max-width:14ch; }
+.cm-h2--big{ font-size:clamp(32px, 4.2vw, 54px); }
+.cm-h2--huge{ font-size:clamp(38px, 5vw, 64px); max-width:min(100%, 820px); }
 
 .cm-lede{
   margin:0 0 30px; max-width:66ch;
@@ -138,26 +141,31 @@
 /* ============================================================
    TEXT + ILLUSTRATION ROWS
    ============================================================ */
+/* In the Figma every section illustration runs to the right edge of the
+   1440 frame, and a couple hang past it. So the art column is pinned to
+   the outer edge of the measure rather than floating inside it, and each
+   section states its own width through --art, scaled from the frame. */
 .cm-withart{
   display:grid; gap:clamp(24px, 3.4vw, 56px);
-  grid-template-columns:minmax(0, 1.35fr) minmax(0, 1fr);
+  grid-template-columns:minmax(0, 1fr) minmax(0, var(--art, 380px));
   align-items:center;
 }
 .cm-withart-text{ min-width:0; }
-.cm-art{ margin:0; min-width:0; }
-.cm-art img{
-  display:block; width:100%; height:auto;
-  max-height:420px; object-fit:contain; object-position:center;
+.cm-art{
+  margin:0 calc(var(--pad) * -1) 0 0;
+  min-width:0; justify-self:end;
 }
-.cm-art--square img{ max-height:360px; }
-.cm-art--small img{ max-height:300px; }
+.cm-art img{ display:block; width:100%; height:auto; }
 
 /* the two reaction faces */
 .cm-faces{ padding-top:clamp(36px, 4vw, 56px); }
 .cm-faces-art{ margin:0; }
 .cm-faces-art img{ display:block; width:100%; height:auto; }
+/* In the Figma the image is 1124 wide and the two labels start at 19px and
+   717px into it — so the split is 63.8%, not half, and the labels line up
+   under their own figure instead of drifting. */
 .cm-faces-labels{
-  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  display:grid; grid-template-columns:63.8% 1fr; gap:20px;
   margin-top:8px;
 }
 .cm-faces-labels p{
@@ -170,7 +178,11 @@
 /* ============================================================
    RESEARCH, FINDINGS, COMPARISONS
    ============================================================ */
-.cm-two{ display:grid; gap:18px; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); }
+.cm-two{
+  display:grid; gap:18px;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  margin-top:clamp(12px, 1.4vw, 20px);
+}
 .cm-card{
   border:1px solid var(--line); border-radius:var(--radius-md);
   background:var(--white); padding:26px 26px 28px;
@@ -189,9 +201,13 @@
 }
 
 .cm-findings{
-  display:grid; gap:28px 36px;
+  display:grid; gap:30px 36px;
   grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
+  margin-top:clamp(30px, 3.4vw, 48px);
 }
+/* The interview findings are two columns of two in the Figma, not four
+   across — four makes each quote a thin ribbon. */
+.cm-findings--2{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:38px 48px; }
 .cm-finding h3{ margin:0 0 12px; font-size:21px; font-weight:700; line-height:1.3; }
 .cm-finding .cm-p{ font-size:16px; }
 
@@ -206,6 +222,7 @@
 .cm-compare{
   display:grid; gap:18px;
   grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  margin-top:clamp(14px, 1.6vw, 22px);
 }
 .cm-col{
   border:1px solid var(--line); border-radius:var(--radius-md);
@@ -249,19 +266,27 @@
 .cm-says{
   display:grid; gap:16px;
   grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-  margin-bottom:38px;
+  margin:clamp(30px, 3.4vw, 48px) 0 44px;
 }
 .cm-quote{
   margin:0; padding:20px 22px;
   background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md);
   font-size:17px; line-height:1.55; color:var(--ink); font-weight:500;
 }
-.cm-told{ display:grid; gap:24px 30px; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); }
+.cm-told{
+  display:grid; gap:24px 30px;
+  grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+  margin-top:clamp(20px, 2.2vw, 28px);
+}
 .cm-told h3{ margin:0 0 8px; font-size:18px; font-weight:700; line-height:1.3; }
 .cm-told .cm-p{ font-size:14px; }
 
 /* ---------- solutions ---------- */
-.cm-solutions{ display:grid; gap:18px; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); }
+.cm-solutions{
+  display:grid; gap:18px;
+  grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
+  margin-top:clamp(20px, 2.4vw, 32px);
+}
 .cm-solves{
   display:inline-block; font-size:10px; font-weight:700; letter-spacing:.1em;
   text-transform:uppercase; color:#fff; background:var(--ink);
@@ -273,6 +298,7 @@
 .cm-flow{
   display:grid; gap:22px;
   grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  margin-top:clamp(20px, 2.4vw, 32px);
 }
 .cm-flow figure{
   margin:0; padding:18px;
@@ -346,10 +372,8 @@
    ============================================================ */
 @media (max-width: 900px){
   .cm-withart{ grid-template-columns:1fr; }
-  .cm-art{ order:-1; }
-  .cm-art img,
-  .cm-art--square img,
-  .cm-art--small img{ max-height:260px; }
+  .cm-art{ order:-1; margin:0 auto; justify-self:center; max-width:var(--art, 320px); }
+  .cm-findings--2{ grid-template-columns:1fr; }
 }
 
 /* The Figma plates are 1220px wide and carry real UI copy. Squashed into a
