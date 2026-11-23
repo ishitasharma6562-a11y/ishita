@@ -18,7 +18,7 @@
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
 <link rel="stylesheet" href="../assets/css/style.css?v=39" />
-<link rel="stylesheet" href="../assets/css/coffee.css?v=6" />
+<link rel="stylesheet" href="../assets/css/coffee.css?v=10" />
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
@@ -45,207 +45,243 @@
 
 <main id="main">
 
-  <!-- ================= COVER ================= -->
-  <section class="cm-cover">
+<!-- ==================================================================
+     CHAPTER 1 — built from Figma frame 355:154 "chapter 1".
+     The section backgrounds follow that frame exactly: #532c1e hero,
+     #faf6ec plain, #f2ebdc soft, #412313 / #422314 dark.
+     ================================================================== -->
+<div class="cm-ch" id="chapter-1">
+
+  <!-- hero -->
+  <section class="cm-hero cm-hero--ch1">
     <div class="wrap">
-      <p class="cm-cover-meta">Studio module &middot; 2 months &middot; Solo &middot; User research, interaction design</p>
-      <h1 class="cm-cover-title">Half coffee, full confusion.</h1>
-      <p class="cm-cover-sub">Redesigning a coffee machine interface so no one has to stand confused in front of it again.</p>
+      <h1 class="cm-hero-title">Half coffee,<br />full confusion.</h1>
+      <p class="cm-hero-sub">Redesigning a coffee machine interface so no one has to stand confused in front of it again.</p>
 
       <nav class="cm-chapters" aria-label="Chapters">
-        <button type="button" class="cm-chapter is-current" data-chapter="1" aria-pressed="true">
-          <span class="cm-chapter-no">Chapter 1</span>
-          <span class="cm-chapter-name">Before the pour</span>
-        </button>
-        <button type="button" class="cm-chapter" data-chapter="2" aria-pressed="false">
-          <span class="cm-chapter-no">Chapter 2</span>
-          <span class="cm-chapter-name">After the pour</span>
-        </button>
+        <button type="button" class="cm-chapter" data-chapter="1" aria-pressed="true">Chapter 1 &middot; Before the pour</button>
+        <button type="button" class="cm-chapter" data-chapter="2" aria-pressed="false">Chapter 2 &middot; After the pour</button>
       </nav>
 
-      <div class="cm-cover-img">
-        <img src="../assets/images/studio.jpg" alt="Coffee machine research illustration from the Studio project" width="1000" height="566" />
+      <figure class="cm-hero-art">
+        <img src="../assets/images/coffee1/hero.png" width="1600" height="906" alt="Experience design &mdash; exploring the everyday experience of using a coffee machine, with a tipped-over cup spilling coffee" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="cm-section">
+    <div class="wrap cm-withart">
+      <div class="cm-withart-text">
+        <p class="cm-label">01 &middot; The story</p>
+        <h2 class="cm-h2">Ten seconds of confidence.</h2>
+        <p class="cm-p">My dad told me about a new coffee machine at his office.</p>
+        <p class="cm-p">Everyone was curious. Nobody wanted to go first.<br />
+          Until one guy stepped up.<br />
+          He pressed a button. Nothing.<br />
+          Another button. Still nothing.<br />
+          A few more desperate taps later, his confidence had officially left the building.</p>
+        <p class="cm-p">All he wanted was coffee. Instead, he got an audience.</p>
+      </div>
+      <figure class="cm-art">
+        <img src="../assets/images/coffee1/confused.png" width="1200" height="678" loading="lazy" alt="A figure standing at a coffee machine with question marks over its head" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- the two faces -->
+  <section class="cm-section cm-soft cm-faces">
+    <div class="wrap">
+      <figure class="cm-faces-art">
+        <img src="../assets/images/coffee1/should-vs-actually.png" width="1500" height="567" loading="lazy" alt="Left: a figure in sunglasses throwing peace signs. Right: a figure slumped with a throbbing head" />
+      </figure>
+      <div class="cm-faces-labels">
+        <p>What he should have felt after using it</p>
+        <p>What he actually felt after using it.</p>
       </div>
     </div>
   </section>
 
-  <div class="cm-ch" id="chapter-1">
-
-  <!-- ================= 01 THE STORY ================= -->
-  <section class="cm-section">
+  <!-- 02 -->
+  <section class="cm-section cm-soft">
     <div class="wrap">
-      <p class="cm-label">01 &middot; The story</p>
-      <h2 class="cm-h2">Ten seconds of confidence.</h2>
-      <p class="cm-p">My dad once told me about a new coffee machine installed in his office. Everyone gathered around, curious but hesitant. No one wanted to go first.</p>
-      <p class="cm-p">Eventually, one guy stepped forward. Confidently.</p>
-      <p class="cm-p">He pressed a few buttons. Nothing happened. He pressed a few more. His moment of confidence turned into embarrassment.</p>
-      <p class="cm-p">What should have been a simple coffee moment became public confusion.</p>
-      <p class="cm-pull">That confidence lasted about ten seconds.</p>
+      <p class="cm-label cm-label--mute">02 &middot; The question</p>
+      <h2 class="cm-h2 cm-h2--big">So I wondered: is this just a first-timer problem, or does the machine confuse everyone?</h2>
     </div>
   </section>
 
-  <!-- ================= 02 THE QUESTION ================= -->
-  <section class="cm-section">
-    <div class="wrap">
-      <p class="cm-label">02 &middot; The question</p>
-      <h2 class="cm-h2" style="max-width:20ch; font-size:clamp(28px, 3.4vw, 46px);">So I wondered: is this just a first-timer problem, or does the machine confuse everyone?</h2>
-    </div>
-  </section>
-
-  <!-- ================= 03 RESEARCH ================= -->
+  <!-- 03 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">03 &middot; How I researched it</p>
       <h2 class="cm-h2">Two ways in: what people told me, and what they&rsquo;d already written down.</h2>
-      <p class="cm-lede">I didn&rsquo;t want to rely only on what people said to my face. Interviews tell you what users notice; reviews tell you what they complain about once nobody&rsquo;s watching.</p>
-
+      <p class="cm-lede">I didn&rsquo;t want to rely only on what people said to my face. Interviews tell you what users notice and reviews tell you what they complain about once nobody&rsquo;s watching.</p>
       <div class="cm-two">
         <div class="cm-card">
           <span class="cm-kind">Primary</span>
           <h3>In-depth interviews</h3>
-          <p class="cm-p">I interviewed <strong>12 people</strong> face to face, across a deliberately wide age range of 18 to 50 so the findings weren&rsquo;t just a student sample.</p>
-          <div class="cm-tags"><span>Active users</span><span>First-time users</span><span>Coffee enthusiasts</span></div>
-          <p class="cm-p" style="margin-top:14px;">The spread mattered: some had never seen a machine, some used one daily at the office, one had taught the subject. Generational difference showed up in how willing people were to press a button and find out.</p>
+          <p class="cm-p">I interviewed 12 people face to face, across a deliberately wide age range of 18 to 50 so the findings weren&rsquo;t just a student sample.</p>
+          <div class="cm-tags">
+            <span>Active users</span>
+            <span>First-time users</span>
+            <span>Coffee enthusiasts</span>
+          </div>
+          <p class="cm-p" style="margin-top:14px">The spread mattered: some had never seen a machine, some used one daily at the office.</p>
         </div>
         <div class="cm-card">
           <span class="cm-kind">Secondary</span>
           <h3>Amazon review analysis</h3>
-          <p class="cm-p">I read user reviews of coffee machines across several brands, looking for the gap between the rating and the writing.</p>
-          <p class="cm-quote">Despite predominantly 5-star ratings, nearly every reviewer still described a learning curve and the effort it took to get comfortable with the machine.</p>
-          <p class="cm-p" style="margin-top:14px;">That gap is the whole argument. People rate these machines highly <em>and</em> admit they had to learn them &mdash; which means the problem is real even where satisfaction is high.</p>
+          <p class="cm-p">I went through coffee machine reviews across different brands and noticed something interesting.</p>
+          <p class="cm-p">Most were rated 5 stars. But even happy customers talked about struggling to learn the machine.</p>
+          <p class="cm-p"><strong>Five stars for the coffee. A learning curve for making it.</strong></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 04 WHAT THEY SAID ================= -->
-  <section class="cm-section">
+  <!-- 04 -->
+  <section class="cm-section cm-dark">
     <div class="wrap">
       <p class="cm-label">04 &middot; In depth interviews</p>
       <h2 class="cm-h2">I spoke to people who use coffee machines at home, offices and public spaces. It wasn&rsquo;t very loved.</h2>
-
       <div class="cm-findings">
         <div class="cm-finding">
           <h3>No feedback means no confidence.</h3>
-          <p class="cm-quote">&ldquo;I want more feedback from the machine to get more confidence.&rdquo;</p>
+          <p class="cm-said">&ldquo;I want more feedback from the machine to get more confidence.&rdquo;</p>
         </div>
         <div class="cm-finding">
           <h3>Too many options means too much thinking.</h3>
-          <p class="cm-quote">&ldquo;I struggled with multiple options and touchscreens the first time.&rdquo;</p>
+          <p class="cm-said">&ldquo;I struggled with multiple options and touchscreens the first time.&rdquo;</p>
         </div>
         <div class="cm-finding">
           <h3>People don&rsquo;t want to learn the machine.</h3>
-          <p class="cm-quote">&ldquo;I want my machine to learn and remember my drink, rather than me learning the machine.&rdquo;</p>
+          <p class="cm-said">&ldquo;I want my machine to learn and remember my drink, rather than me learning the machine.&rdquo;</p>
         </div>
         <div class="cm-finding">
           <h3>It&rsquo;s not just first-timers. Regular users still made mistakes.</h3>
-          <p class="cm-quote">&ldquo;It takes time to get used to the machine.&rdquo;</p>
+          <p class="cm-said">&ldquo;It takes time to get used to the machine.&rdquo;</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 05 THE PIVOT ================= -->
+  <!-- 05 -->
   <section class="cm-section">
-    <div class="wrap">
-      <p class="cm-label">05 &middot; The pivot</p>
-      <h2 class="cm-h2">From fixing errors &rarr; to preventing them.</h2>
-      <p class="cm-p">At first, the problem seemed obvious: the machine just isn&rsquo;t intuitive.</p>
-      <p class="cm-p">But that felt surface-level. The real issue was that people were <strong>scared of getting it wrong</strong>, and the machine never told them when they did.</p>
-      <p class="cm-p">So I started designing error feedback: warnings, messages, recovery screens.</p>
-      <p class="cm-p">Then a better question came up: <strong>why let the error happen at all?</strong></p>
-      <p class="cm-p">Revisiting the user journey and my professor&rsquo;s feedback confirmed it.</p>
+    <div class="wrap cm-withart">
+      <div class="cm-withart-text">
+        <p class="cm-label">05 &middot; The pivot</p>
+        <h2 class="cm-h2">From fixing errors to preventing them.</h2>
+        <p class="cm-p">At first, the problem seemed obvious: the machine just isn&rsquo;t intuitive.</p>
+        <p class="cm-p">But after a few discussions, that felt surface-level. The real issue was that people were scared of getting it wrong, and the machine never told them when they did.</p>
+        <p class="cm-p">So I started designing error feedback: warnings, messages, recovery screens.</p>
+        <p class="cm-p"><strong>Then a better question came up: why let the error happen at all?</strong></p>
+        <p class="cm-p">Revisiting the user journey and my professor&rsquo;s feedback confirmed it.</p>
+      </div>
+      <figure class="cm-art cm-art--square">
+        <img src="../assets/images/coffee1/questioning.png" width="1200" height="1200" loading="lazy" alt="A figure with a hand on its hip and two question marks overhead" />
+      </figure>
     </div>
   </section>
 
-  <!-- ================= 06 THE SHIFT ================= -->
-  <section class="cm-section">
+  <!-- 06 -->
+  <section class="cm-section cm-soft">
     <div class="wrap">
-      <p class="cm-label">06 &middot; The shift</p>
+      <p class="cm-label cm-label--mute">06 &middot; The shift</p>
       <h2 class="cm-h2">And so I got to work.</h2>
-      <p class="cm-lede">I compared using a coffee machine with making coffee by hand, step by step. Here&rsquo;s what I realised.</p>
+      <p class="cm-lede">I made the same coffee two ways, by hand and on the machine, and noted what I could see, steer, and fix at each step.</p>
 
       <div class="cm-compare">
-        <div class="cm-card">
+        <div class="cm-col">
           <h3>By hand</h3>
-          <p class="cm-p">You control the quantities, taste as you go, and fix it after.</p>
+          <ol class="cm-steps">
+            <li><span class="cm-step-no">1</span><div><b>Measure</b><p>You decide how much coffee, milk and sugar go in.</p></div></li>
+            <li><span class="cm-step-no">2</span><div><b>Taste as you go</b><p>Sip it while it&rsquo;s still being made.</p></div></li>
+            <li><span class="cm-step-no">3</span><div><b>Fix it</b><p>Too strong? Add milk. Not sweet? Add sugar.</p></div></li>
+          </ol>
+          <p class="cm-verdict cm-verdict--good">You stay in charge the whole way.</p>
         </div>
-        <div class="cm-card">
+        <div class="cm-col is-machine">
           <h3>By machine</h3>
-          <p class="cm-p">Quantities are fixed, there&rsquo;s no tasting, and once it&rsquo;s poured, it&rsquo;s done.</p>
+          <ol class="cm-steps">
+            <li><span class="cm-step-no">1</span><div><b>Pick from a list</b><p>Options appear with no explanation of what they do.</p></div></li>
+            <li><span class="cm-step-no">2</span><div><b>Press brew</b><p>Everything is decided the moment you press it.</p></div></li>
+            <li><span class="cm-step-no">3</span><div><b>Taste at the end</b><p>By the time you sip it, it&rsquo;s too late to change.</p></div></li>
+          </ol>
+          <p class="cm-verdict">You only find out when it&rsquo;s done.</p>
         </div>
       </div>
 
-      <p class="cm-pull">Less control &rarr; more room for error.</p>
+      <p class="cm-label cm-label--mute" style="margin-top:46px">What this told me</p>
+      <div class="cm-findings">
+        <div class="cm-finding">
+          <h3>Guidance</h3>
+          <p class="cm-p">By hand, you know what each step does. The machine shows options and leaves you to guess.</p>
+        </div>
+        <div class="cm-finding">
+          <h3>Feedback</h3>
+          <p class="cm-p">By hand, you taste as you go. The machine tells you nothing until the cup is full.</p>
+        </div>
+        <div class="cm-finding">
+          <h3>Control</h3>
+          <p class="cm-p">By hand, you can fix it at any point. On the machine, once it&rsquo;s poured, it&rsquo;s done.</p>
+        </div>
+      </div>
+      <p class="cm-pull">Less guidance, less feedback, less control. More room for error.</p>
+      <p class="cm-p" style="margin-top:20px">The coffee wasn&rsquo;t the problem. The machine just gave people very little to go on.</p>
     </div>
   </section>
 
-  <!-- ================= 07 PROBLEM STATEMENT ================= -->
+  <!-- 07 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">07 &middot; Problem statement</p>
-      <h2 class="cm-h2">When control disappears, mistakes go up. That led me here:</h2>
+      <p class="cm-p" style="margin-bottom:26px"><strong>When control disappears, mistakes go up. That led me here:</strong></p>
       <p class="cm-statement">Coffee machines intimidate users by offering little guidance, feedback or control, turning a two-minute coffee into confusion, lost confidence, and sometimes giving up altogether.</p>
 
-      <h3 class="cm-h2" style="margin-top:56px; font-size:clamp(21px,2.1vw,26px);">Same project. A much sharper target.</h3>
-      <p class="cm-lede">I wrote the first version before I&rsquo;d spoken to anyone. Here it is next to the one I ended with, so the distance is visible.</p>
-
-      <div class="cm-versions">
-        <div class="cm-version is-old">
-          <span class="cm-stamp">First version &middot; a hypothesis</span>
-          <p>&ldquo;Coffee machines overwhelm first-time users with complex, non-intuitive interfaces, causing hesitation, confusion, and a loss of confidence in what&rsquo;s meant to be a seamless experience.&rdquo;</p>
-          <small>Written before any interviews. An assumption about who struggles and why.</small>
+      <div class="cm-withart" style="margin-top:56px">
+        <div class="cm-withart-text">
+          <h2 class="cm-h2">Same project. A much sharper target.</h2>
+          <p class="cm-label cm-label--mute">Four things changed, and each came from the research</p>
+          <div class="cm-changes">
+            <div class="cm-change">
+              <span class="from">first-time users</span>
+              <span class="to">users</span>
+              <p>The question I opened with was whether this was a first-timer problem. It wasn&rsquo;t. Regular users still made mistakes.</p>
+            </div>
+            <div class="cm-change">
+              <span class="from">complex, non-intuitive interfaces</span>
+              <span class="to">little guidance, feedback or control</span>
+              <p>&ldquo;Non-intuitive&rdquo; is a verdict, not a diagnosis. Three named deficits you can design against.</p>
+            </div>
+            <div class="cm-change">
+              <span class="from">hesitation and lost confidence</span>
+              <span class="to">giving up altogether</span>
+              <p>A feeling became a behaviour &mdash; and a behaviour is measurable.</p>
+            </div>
+          </div>
         </div>
-        <div class="cm-version is-new">
-          <span class="cm-stamp">Final version &middot; a finding</span>
-          <p>&ldquo;Coffee machines intimidate users by offering little guidance, feedback or control, turning a two-minute coffee into confusion, lost confidence, and sometimes giving up altogether.&rdquo;</p>
-          <small>Written after 12 interviews, the review analysis, and the shift from fixing errors to preventing them.</small>
-        </div>
-      </div>
-
-      <p class="cm-label" style="margin-bottom:18px;">Four things changed, and each came from the research</p>
-      <div class="cm-changes">
-        <div class="cm-change">
-          <div class="from">first-time users</div>
-          <div class="to">users</div>
-          <p>The question I opened with was whether this was a first-timer problem. It wasn&rsquo;t. Regular users still made mistakes, and the reviews said the same.</p>
-        </div>
-        <div class="cm-change">
-          <div class="from">complex, non-intuitive interfaces</div>
-          <div class="to">little guidance, feedback or control</div>
-          <p>&ldquo;Non-intuitive&rdquo; is a verdict, not a diagnosis &mdash; you can&rsquo;t design against it. Three named deficits you can. Each became one of the three solutions.</p>
-        </div>
-        <div class="cm-change">
-          <div class="from">hesitation and lost confidence</div>
-          <div class="to">giving up altogether</div>
-          <p>A feeling became a behaviour. People switched to caf&eacute;s, went back to brewing by hand, and some returned the machine. That is measurable in a way hesitation is not.</p>
-        </div>
-        <div class="cm-change">
-          <div class="from">a seamless experience</div>
-          <div class="to">a two-minute coffee</div>
-          <p>An abstraction became a unit. It also changes what the statement asks for: not &ldquo;make it seamless&rdquo;, but guide, confirm, and let people change their mind.</p>
-        </div>
+        <figure class="cm-art cm-art--small">
+          <img src="../assets/images/coffee1/shaky-cup.png" width="1200" height="813" loading="lazy" alt="A figure holding a cup and saucer with both hands shaking" />
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- ================= 08 EMPATHY ================= -->
-  <section class="cm-section">
+  <!-- 08 -->
+  <section class="cm-section cm-soft">
     <div class="wrap">
-      <p class="cm-label">08 &middot; Empathy map</p>
+      <p class="cm-label cm-label--mute">08 &middot; Empathy map</p>
       <h2 class="cm-h2">I mapped what users say, think, do and feel, to find where the frustration actually sits.</h2>
-
       <div class="cm-says">
         <p class="cm-quote">&ldquo;I want my machine to tell me clearly when I go wrong.&rdquo;</p>
         <p class="cm-quote">&ldquo;I rely on manuals and YouTube videos to understand what to do.&rdquo;</p>
         <p class="cm-quote">&ldquo;I want a balance between ease of use and the ability to customise.&rdquo;</p>
       </div>
-
-      <p class="cm-label" style="margin-bottom:18px;">What the map told me</p>
+      <p class="cm-label cm-label--mute">What the map told me</p>
       <div class="cm-told">
         <div>
           <h3>Mistakes happen in public.</h3>
-          <p class="cm-p">Most people I spoke to use machines in shared spaces like offices and caf&eacute;s. Users said they feel self-conscious, even judged, when others are around.</p>
+          <p class="cm-p">Most people use machines in shared spaces. Users said they feel self-conscious, even judged, when others are around.</p>
         </div>
         <div>
           <h3>Confusion leads to compromise.</h3>
@@ -263,12 +299,11 @@
     </div>
   </section>
 
-  <!-- ================= 09 SOLUTIONS ================= -->
+  <!-- 09 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">09 &middot; Potential solutions</p>
       <h2 class="cm-h2">Three ideas, each answering one thing the research found.</h2>
-
       <div class="cm-solutions">
         <div class="cm-card cm-solution">
           <span class="cm-solves">Solves &middot; option overload</span>
@@ -276,7 +311,7 @@
           <p class="cm-p">A simple sequence lets users recognise choices instead of remembering how the machine works.</p>
         </div>
         <div class="cm-card cm-solution">
-          <span class="cm-solves">Solves &middot; zero feedback</span>
+          <span class="cm-solves">Solves &middot; no feedback</span>
           <h3>A summary before brewing</h3>
           <p class="cm-p">Users review type, strength and sweetness, and change anything before it&rsquo;s too late.</p>
         </div>
@@ -289,126 +324,198 @@
     </div>
   </section>
 
-  <!-- ================= 10 WHAT I LEARNED ================= -->
-  <section class="cm-section">
+  <!-- 10 -->
+  <section class="cm-section cm-soft">
     <div class="wrap">
-      <p class="cm-label">10 &middot; What I learned</p>
-      <div class="cm-learned">
-        <p class="cm-p">This project taught me patience, the value of going deeper, and the importance of looking twice before deciding what the real problem is. It reminded me that UX isn&rsquo;t linear &mdash; it loops, twists, and reveals answers slowly.</p>
-        <p class="cm-said">And as someone great said: mediocre insights give mediocre solutions. Extraordinary insights give extraordinary solutions.</p>
+      <p class="cm-label cm-label--mute">10 &middot; The flow, screen by screen</p>
+      <h2 class="cm-h2">Eight screens that guide instead of gatekeep.</h2>
+      <p class="cm-lede">Low-fidelity, because the argument here is the sequence, not the styling. Each screen confirms what just happened and says what comes next &mdash; the three solutions, made concrete.</p>
+      <div class="cm-flow">
+        <figure><img src="../assets/images/coffee1/step-01.png" width="728" height="321" loading="lazy" alt="Flow screen 1" /></figure>
+        <figure><img src="../assets/images/coffee1/step-02.png" width="551" height="260" loading="lazy" alt="Flow screen 2" /></figure>
+        <figure><img src="../assets/images/coffee1/step-03.png" width="732" height="285" loading="lazy" alt="Flow screen 3" /></figure>
+        <figure><img src="../assets/images/coffee1/step-04.png" width="546" height="266" loading="lazy" alt="Flow screen 4" /></figure>
+        <figure><img src="../assets/images/coffee1/step-05.png" width="746" height="296" loading="lazy" alt="Flow screen 5" /></figure>
+        <figure><img src="../assets/images/coffee1/step-06.png" width="565" height="276" loading="lazy" alt="Flow screen 6" /></figure>
+        <figure><img src="../assets/images/coffee1/step-07.png" width="741" height="292" loading="lazy" alt="Flow screen 7" /></figure>
+        <figure><img src="../assets/images/coffee1/step-08.png" width="487" height="227" loading="lazy" alt="Flow screen 8" /></figure>
       </div>
     </div>
   </section>
 
-  <section class="cm-section cm-soft">
-    <div class="wrap">
-      <p class="cm-label">Next</p>
-      <h2 class="cm-h2">Chapter 2 &mdash; After the pour</h2>
-      <p class="cm-p">The machine got easier to use. It still didn&rsquo;t know who was using it. Chapter 2 takes three people through a machine that remembers, and ends in a demo you can play.</p>
-      <p style="margin-top:26px"><button type="button" class="cm-demo" data-goto-chapter="2">Read Chapter 2 <span aria-hidden="true">&rarr;</span></button></p>
+  <!-- 11 -->
+  <section class="cm-section">
+    <div class="wrap cm-withart">
+      <div class="cm-withart-text">
+        <p class="cm-label">11 &middot; What I learned</p>
+        <h2 class="cm-h2">UX isn&rsquo;t linear. It loops.</h2>
+        <p class="cm-p">This project taught me patience, the value of going deeper, and the importance of looking twice before deciding what the real problem is. It reminded me that UX isn&rsquo;t linear &mdash; it loops, twists, and reveals answers slowly.</p>
+        <p class="cm-said cm-said--italic">And as someone great said: mediocre insights give mediocre solutions. Extraordinary insights give extraordinary solutions.</p>
+      </div>
+      <figure class="cm-art cm-art--small">
+        <img src="../assets/images/coffee1/happy.png" width="1200" height="680" loading="lazy" alt="A grinning figure flexing beside a coffee machine with a full cup" />
+      </figure>
     </div>
   </section>
 
-  </div><!-- /chapter 1 -->
+  <!-- next chapter -->
+  <section class="cm-section cm-dark cm-nextup">
+    <div class="wrap">
+      <p class="cm-label">Chapter 2</p>
+      <h2 class="cm-h2 cm-h2--huge">After the pour</h2>
+      <p class="cm-lede">Just when everything felt complete, one question stayed with me: what about after the coffee is poured? Because people don&rsquo;t stop at &ldquo;done.&rdquo; We taste, adjust, personalise. Machines end the moment the cup fills, but the human experience doesn&rsquo;t.</p>
+      <p class="cm-p"><strong>Maybe the next chapter begins right there, in the small space after the pour.</strong></p>
+      <p style="margin-top:30px"><button type="button" class="cm-demo" data-goto-chapter="2">Next chapter <span aria-hidden="true">&rarr;</span></button></p>
+    </div>
+  </section>
 
-  <div class="cm-ch" id="chapter-2" hidden>
+</div><!-- /chapter 1 -->
+
+
+<!-- ==================================================================
+     CHAPTER 2 — built from Figma frame 400:928
+     "chapter 2 · B · only proven technology".
+     ================================================================== -->
+<div class="cm-ch" id="chapter-2" hidden>
+
+  <!-- hero -->
+  <section class="cm-hero cm-hero--ch2">
+    <div class="wrap cm-withart">
+      <div class="cm-withart-text">
+        <p class="cm-label">Half coffee, full confusion &nbsp;&middot;&nbsp; Chapter 2</p>
+        <h1 class="cm-hero-title cm-hero-title--ch2">After the pour.</h1>
+        <p class="cm-hero-sub">Chapter 1 made the machine easier to use.<br />Chapter 2 makes the coffee yours.</p>
+
+        <nav class="cm-chapters" aria-label="Chapters">
+          <button type="button" class="cm-chapter" data-chapter="1" aria-pressed="false">Chapter 1 &middot; Before the pour</button>
+          <button type="button" class="cm-chapter" data-chapter="2" aria-pressed="true">Chapter 2 &middot; After the pour</button>
+        </nav>
+
+        <p class="cm-note cm-note--kicker">A proposed interaction concept.</p>
+      </div>
+      <figure class="cm-art cm-art--square">
+        <img src="../assets/images/coffee2/ch2-hero.png" width="1000" height="969" alt="A figure standing with one hand on its hip, holding a small cup of coffee" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 01 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">01 &mdash; The next question</p>
       <h2 class="cm-h2">Easy to use. Tiring to repeat.</h2>
-      <p class="cm-p">Chapter 1 made the machine easy to use. Now picture someone who loves it. Every morning they want the same coffee, so every morning they tell the machine all over again:</p>
-      <p class="cm-pull" style="max-width:26ch">Cappuccino. Strong. Lightly sweet. Brew.</p>
-      <p class="cm-p">Monday. Tuesday. Wednesday. Thursday. Friday.</p>
-      <p class="cm-label" style="margin-top:28px">From a Chapter 1 interview</p>
-      <p class="cm-quote" style="font-size:19px;max-width:60ch">&ldquo;I want my machine to learn and remember my drink, rather than me learning the machine.&rdquo;</p>
-      <p class="cm-p" style="margin-top:22px"><strong>The machine got easier to use. It still didn&rsquo;t know who was using it.</strong></p>
+      <p class="cm-lede">Chapter 1 made the machine easy to use. Now picture someone who loves it. Every morning they want the same coffee, so every morning they tell the machine all over again:</p>
+      <p class="cm-pull">Cappuccino. Strong. Lightly sweet. Brew.</p>
+      <p class="cm-p cm-p--roast">Monday. Tuesday. Wednesday. Thursday. Friday.</p>
+      <div class="cm-quote-block">
+        <p class="cm-label">From a Chapter 1 interview</p>
+        <p class="cm-quote-big">&ldquo;I want my machine to learn and remember my drink, rather than me learning the machine.&rdquo;</p>
+      </div>
+      <p class="cm-p">The machine got easier to use. It still didn&rsquo;t know who was using it.</p>
     </div>
   </section>
+
+  <!-- 02 -->
   <section class="cm-section cm-soft">
     <div class="wrap">
       <p class="cm-label">02 &mdash; The idea</p>
       <h2 class="cm-h2">What if the machine makes it, and your phone remembers it?</h2>
-      <p class="cm-p">Instead of adding more buttons to the machine, I split the work. The machine does the physical part. Your phone holds what&rsquo;s personal: your usual, your tweaks, your history.</p>
+      <p class="cm-lede">Instead of adding more buttons to the machine, I split the work. The machine does the physical part. Your phone holds what&rsquo;s personal: your usual, your tweaks, your history.</p>
       <figure class="cm-fig">
-        <img src="../assets/images/coffee2/ch2-02-idea.jpg" alt="The machine and the phone side by side: the machine does the physical work, the phone holds what is personal." loading="lazy" decoding="async" />
+        <img src="../assets/images/coffee2/ch2-02-idea.jpg" width="1220" height="627" loading="lazy" decoding="async" alt="The machine and the phone side by side: the machine does the physical work, the phone holds what is personal." />
         <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
       </figure>
     </div>
   </section>
+
+  <!-- 03 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">03 &mdash; Three people, one machine</p>
       <h2 class="cm-h2">Same machine. Three different mornings.</h2>
-      <p class="cm-p">To keep the design honest, I followed three people through it, each arriving with something different.</p>
+      <p class="cm-lede">To keep the design honest, I followed three people through it, each arriving with something different.</p>
       <figure class="cm-fig">
-        <img src="../assets/images/coffee2/ch2-03-people.jpg" alt="Three people: Arjun the regular, Riya the first-timer, and a visitor with no phone or badge." loading="lazy" decoding="async" />
+        <img src="../assets/images/coffee2/ch2-03-people.jpg" width="1220" height="716" loading="lazy" decoding="async" alt="Three people: Arjun the regular, Riya the first-timer, and a visitor with no phone or badge." />
         <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
       </figure>
     </div>
   </section>
+
+  <!-- 04 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">04 &mdash; Arjun, 9:02 AM</p>
       <h2 class="cm-h2">His usual, in one tap.</h2>
-      <p class="cm-p">Arjun opens the app and his recent orders are already there. One tap on Brew again sends his usual to the machine. His phone tells him to place his cup, and the machine takes it from here.</p>
+      <p class="cm-lede">Arjun opens the app and his recent orders are already there. One tap on Brew again sends his usual to the machine. His phone tells him to place his cup, and the machine takes it from here.</p>
       <figure class="cm-fig">
-        <img src="../assets/images/coffee2/ch2-04-arjun.jpg" alt="Arjun&rsquo;s flow: brew again, place cup, brewing, ready; then the edit flow with a taste first." loading="lazy" decoding="async" />
+        <img src="../assets/images/coffee2/ch2-04-arjun.jpg" width="1220" height="2390" loading="lazy" decoding="async" alt="Arjun&rsquo;s flow: brew again, place cup, brewing, ready; then the edit flow with a taste first." />
         <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
       </figure>
     </div>
   </section>
+
+  <!-- 05 -->
   <section class="cm-section cm-dark">
     <div class="wrap">
       <p class="cm-label">05 &mdash; Riya&rsquo;s first coffee</p>
       <h2 class="cm-h2">One choice at a time. Then, a sip.</h2>
-      <p class="cm-p">Riya has no history yet, so the app starts empty and asks one thing per screen. Because it&rsquo;s her first coffee, saving it as her usual is switched on.</p>
+      <p class="cm-lede">Riya has no history yet, so the app starts empty and asks one thing per screen. Because it&rsquo;s her first coffee, saving it as her usual is switched on.</p>
       <figure class="cm-fig">
-        <img src="../assets/images/coffee2/ch2-05-riya.jpg" alt="Riya&rsquo;s flow: choose coffee, strength, sweetness, summary saved as her usual, then a sip before the full cup." loading="lazy" decoding="async" />
+        <img src="../assets/images/coffee2/ch2-05-riya.jpg" width="1220" height="1671" loading="lazy" decoding="async" alt="Riya&rsquo;s flow: choose coffee, strength, sweetness, summary saved as her usual, then a sip before the full cup." />
         <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
       </figure>
     </div>
   </section>
+
+  <!-- 06 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">06 &mdash; The visitor</p>
       <h2 class="cm-h2">No phone. No badge. Still coffee.</h2>
-      <p class="cm-p">A client walks in before a meeting. She has no app and no badge, so the machine guides her on its own, one choice per screen, just like Chapter 1.</p>
+      <p class="cm-lede">A client walks in before a meeting. She has no app and no badge, so the machine guides her on its own, one choice per screen, just like Chapter 1.</p>
       <figure class="cm-fig">
-        <img src="../assets/images/coffee2/ch2-06-visitor.jpg" alt="The visitor&rsquo;s machine-only flow: coffee, strength, sweetness, check, then place cup, brewing and ready." loading="lazy" decoding="async" />
+        <img src="../assets/images/coffee2/ch2-06-visitor.jpg" width="1220" height="867" loading="lazy" decoding="async" alt="The visitor&rsquo;s machine-only flow: coffee, strength, sweetness, check, then place cup, brewing and ready." />
         <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
       </figure>
     </div>
   </section>
+
+  <!-- 07 -->
   <section class="cm-section">
     <div class="wrap">
       <p class="cm-label">07 &mdash; Under the hood</p>
       <h2 class="cm-h2">Everyday technology, most of it already in the office.</h2>
-      <p class="cm-p">Nothing here asks people to carry anything new. It uses what offices already have: phones, ID badges and a network.</p>
-      <p class="cm-note" style="margin-top:18px">These are proven, everyday technologies. How they&rsquo;d be built into a specific machine is a question for the hardware team.</p>
+      <p class="cm-lede">Nothing here asks people to carry anything new. It uses what offices already have: phones, ID badges and a network.</p>
       <figure class="cm-fig">
-        <img src="../assets/images/coffee2/ch2-07-underhood.jpg" alt="Four building blocks: an NFC tag, the office ID badge, office Wi-Fi, and your account." loading="lazy" decoding="async" />
+        <img src="../assets/images/coffee2/ch2-07-underhood.jpg" width="1220" height="229" loading="lazy" decoding="async" alt="Four building blocks: an NFC tag, the office ID badge, office Wi-Fi, and your account." />
         <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
       </figure>
+      <p class="cm-note" style="margin-top:22px">These are proven, everyday technologies. How they&rsquo;d be built into a specific machine is a question for the hardware team.</p>
     </div>
   </section>
+
+  <!-- 08 -->
   <section class="cm-section cm-soft">
     <div class="wrap">
       <p class="cm-label">08 &mdash; Try it</p>
       <h2 class="cm-h2">Make a coffee with Arjun, Riya and a visitor.</h2>
-      <p class="cm-p">A short, playable demo: pick a person, then make their coffee on a working machine and phone. It takes about three minutes.</p>
+      <p class="cm-lede">A short, playable demo: pick a person, then make their coffee on a working machine and phone. It takes about three minutes.</p>
       <p style="margin-top:26px"><a class="cm-demo" href="coffee-demo.html">Play the demo <span aria-hidden="true">&#8599;</span></a></p>
     </div>
   </section>
+
+  <!-- 09 -->
   <section class="cm-section cm-dark">
     <div class="wrap">
       <p class="cm-label">09 &mdash; The reflection</p>
-      <h2 class="cm-h2">Good coffee. A little more human.</h2>
-      <p class="cm-p">I started by asking why people hesitate in front of a coffee machine. The answer wasn&rsquo;t fewer buttons. It was a machine that knows you, and never assumes it does.</p>
+      <h2 class="cm-h2 cm-h2--big">Good coffee. A little more human.</h2>
+      <p class="cm-lede">I started by asking why people hesitate in front of a coffee machine. The answer wasn&rsquo;t fewer buttons. It was a machine that knows you, and never assumes it does.</p>
       <p class="cm-note" style="margin-top:20px">Chapter 2 is a proposed interaction concept. Nothing here has been usability tested, technically validated, or measured.</p>
       <p class="cm-back"><a href="../index.html#projects">&larr; Back to projects</a></p>
     </div>
   </section>
-  </div><!-- /chapter 2 -->
+
+</div><!-- /chapter 2 -->
 
 </main>
 
@@ -418,22 +525,70 @@
 
 <script src="../assets/js/main.js?v=10"></script>
 <script>
-/* Chapter tabs. Both chapters are in the page; only one is shown at a time,
-   so the nav is instant and the URL still deep-links (#chapter-2). */
+/* Chapter tabs. Both chapters live in the page and one is shown at a time,
+   so switching is instant and #chapter-2 still deep-links.
+
+   The swap itself is instant and the scroll resets, then the incoming
+   chapter's hero animates up into place. Fading the outgoing chapter out
+   first was tried and dropped: a pane is ~9000px tall, and compositing all
+   of it blocked the main thread long enough that the swap arrived about a
+   second late. */
 (function chapters(){
-  const tabs = [...document.querySelectorAll('.cm-chapter')];
   const panes = { 1: document.getElementById('chapter-1'), 2: document.getElementById('chapter-2') };
-  if (!tabs.length || !panes[1] || !panes[2]) return;
-  function show(n, scroll){
-    tabs.forEach(t => t.setAttribute('aria-pressed', String(+t.dataset.chapter === n)));
-    panes[1].hidden = n !== 1;
-    panes[2].hidden = n !== 2;
-    if (history.replaceState) history.replaceState(null, '', n === 2 ? '#chapter-2' : location.pathname);
-    if (scroll) panes[n].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!panes[1] || !panes[2]) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = panes[2].hidden ? 1 : 2;
+  let busy = false;
+
+  function setPressed(n){
+    document.querySelectorAll('.cm-chapter').forEach(t => {
+      t.setAttribute('aria-pressed', String(+t.dataset.chapter === n));
+    });
   }
-  tabs.forEach(t => t.addEventListener('click', () => show(+t.dataset.chapter, true)));
-  document.querySelectorAll('[data-goto-chapter]').forEach(b =>
-    b.addEventListener('click', () => show(+b.dataset.gotoChapter, true)));
+
+  function show(n, animate){
+    if (n === current || busy) return;
+    const from = panes[current], to = panes[n];
+
+    setPressed(n);
+    current = n;
+    if (history.replaceState) {
+      history.replaceState(null, '', n === 2 ? '#chapter-2' : location.pathname);
+    }
+
+    if (!animate || reduced) {
+      from.hidden = true;
+      to.hidden = false;
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    // Hide the old chapter and scroll to the top while BOTH are hidden: the
+    // document is only a header and a footer tall at that instant, so the
+    // scroll always lands at 0 rather than being clamped partway down the
+    // incoming chapter.
+    busy = true;
+    from.hidden = true;
+    to.hidden = true;
+    window.scrollTo(0, 0);
+    to.hidden = false;
+
+    // The hero animates itself in; the class is only the trigger, and comes
+    // off once the animation has run so it can fire again next time.
+    to.classList.add('is-entering');
+    setTimeout(() => {
+      to.classList.remove('is-entering');
+      busy = false;
+    }, 360);
+  }
+
+  document.addEventListener('click', (e) => {
+    const tab = e.target.closest('.cm-chapter, [data-goto-chapter]');
+    if (!tab) return;
+    show(+(tab.dataset.chapter || tab.dataset.gotoChapter), true);
+  });
+
   if (location.hash === '#chapter-2') show(2, false);
 })();
 </script>
