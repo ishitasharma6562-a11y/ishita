@@ -18,7 +18,7 @@
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
 <link rel="stylesheet" href="../assets/css/style.css?v=38" />
-<link rel="stylesheet" href="../assets/css/coffee.css?v=2" />
+<link rel="stylesheet" href="../assets/css/coffee.css?v=6" />
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
@@ -53,15 +53,14 @@
       <p class="cm-cover-sub">Redesigning a coffee machine interface so no one has to stand confused in front of it again.</p>
 
       <nav class="cm-chapters" aria-label="Chapters">
-        <a class="cm-chapter is-current" href="#chapter-1" aria-current="true">
+        <button type="button" class="cm-chapter is-current" data-chapter="1" aria-pressed="true">
           <span class="cm-chapter-no">Chapter 1</span>
           <span class="cm-chapter-name">Before the pour</span>
-        </a>
-        <span class="cm-chapter is-soon" aria-disabled="true">
+        </button>
+        <button type="button" class="cm-chapter" data-chapter="2" aria-pressed="false">
           <span class="cm-chapter-no">Chapter 2</span>
           <span class="cm-chapter-name">After the pour</span>
-          <span class="cm-soon">In progress</span>
-        </span>
+        </button>
       </nav>
 
       <div class="cm-cover-img">
@@ -70,7 +69,7 @@
     </div>
   </section>
 
-  <div id="chapter-1"></div>
+  <div class="cm-ch" id="chapter-1">
 
   <!-- ================= 01 THE STORY ================= -->
   <section class="cm-section">
@@ -301,20 +300,115 @@
     </div>
   </section>
 
-  <!-- ================= CHAPTER 2 TEASER ================= -->
-  <section class="cm-section" id="chapter-2">
+  <section class="cm-section cm-soft">
     <div class="wrap">
-      <div class="cm-next">
-        <p class="cm-label">Chapter 2</p>
-        <h2>After the pour</h2>
-        <p class="cm-p">Just when everything felt complete, one question stayed with me: what about after the coffee is poured? Because people don&rsquo;t stop at &ldquo;done.&rdquo; We taste, adjust, personalise. Machines end the moment the cup fills, but the human experience doesn&rsquo;t.</p>
-        <p class="cm-p">Maybe the next chapter begins right there, in the small space after the pour.</p>
-        <span class="cm-next-tag">Wireframes in progress</span>
-      </div>
+      <p class="cm-label">Next</p>
+      <h2 class="cm-h2">Chapter 2 &mdash; After the pour</h2>
+      <p class="cm-p">The machine got easier to use. It still didn&rsquo;t know who was using it. Chapter 2 takes three people through a machine that remembers, and ends in a demo you can play.</p>
+      <p style="margin-top:26px"><button type="button" class="cm-demo" data-goto-chapter="2">Read Chapter 2 <span aria-hidden="true">&rarr;</span></button></p>
+    </div>
+  </section>
 
+  </div><!-- /chapter 1 -->
+
+  <div class="cm-ch" id="chapter-2" hidden>
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">01 &mdash; The next question</p>
+      <h2 class="cm-h2">Easy to use. Tiring to repeat.</h2>
+      <p class="cm-p">Chapter 1 made the machine easy to use. Now picture someone who loves it. Every morning they want the same coffee, so every morning they tell the machine all over again:</p>
+      <p class="cm-pull" style="max-width:26ch">Cappuccino. Strong. Lightly sweet. Brew.</p>
+      <p class="cm-p">Monday. Tuesday. Wednesday. Thursday. Friday.</p>
+      <p class="cm-label" style="margin-top:28px">From a Chapter 1 interview</p>
+      <p class="cm-quote" style="font-size:19px;max-width:60ch">&ldquo;I want my machine to learn and remember my drink, rather than me learning the machine.&rdquo;</p>
+      <p class="cm-p" style="margin-top:22px"><strong>The machine got easier to use. It still didn&rsquo;t know who was using it.</strong></p>
+    </div>
+  </section>
+  <section class="cm-section cm-soft">
+    <div class="wrap">
+      <p class="cm-label">02 &mdash; The idea</p>
+      <h2 class="cm-h2">What if the machine makes it, and your phone remembers it?</h2>
+      <p class="cm-p">Instead of adding more buttons to the machine, I split the work. The machine does the physical part. Your phone holds what&rsquo;s personal: your usual, your tweaks, your history.</p>
+      <figure class="cm-fig">
+        <img src="../assets/images/coffee2/ch2-02-idea.jpg" alt="The machine and the phone side by side: the machine does the physical work, the phone holds what is personal." loading="lazy" decoding="async" />
+        <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">03 &mdash; Three people, one machine</p>
+      <h2 class="cm-h2">Same machine. Three different mornings.</h2>
+      <p class="cm-p">To keep the design honest, I followed three people through it, each arriving with something different.</p>
+      <figure class="cm-fig">
+        <img src="../assets/images/coffee2/ch2-03-people.jpg" alt="Three people: Arjun the regular, Riya the first-timer, and a visitor with no phone or badge." loading="lazy" decoding="async" />
+        <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">04 &mdash; Arjun, 9:02 AM</p>
+      <h2 class="cm-h2">His usual, in one tap.</h2>
+      <p class="cm-p">Arjun opens the app and his recent orders are already there. One tap on Brew again sends his usual to the machine. His phone tells him to place his cup, and the machine takes it from here.</p>
+      <figure class="cm-fig">
+        <img src="../assets/images/coffee2/ch2-04-arjun.jpg" alt="Arjun&rsquo;s flow: brew again, place cup, brewing, ready; then the edit flow with a taste first." loading="lazy" decoding="async" />
+        <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="cm-section cm-dark">
+    <div class="wrap">
+      <p class="cm-label">05 &mdash; Riya&rsquo;s first coffee</p>
+      <h2 class="cm-h2">One choice at a time. Then, a sip.</h2>
+      <p class="cm-p">Riya has no history yet, so the app starts empty and asks one thing per screen. Because it&rsquo;s her first coffee, saving it as her usual is switched on.</p>
+      <figure class="cm-fig">
+        <img src="../assets/images/coffee2/ch2-05-riya.jpg" alt="Riya&rsquo;s flow: choose coffee, strength, sweetness, summary saved as her usual, then a sip before the full cup." loading="lazy" decoding="async" />
+        <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">06 &mdash; The visitor</p>
+      <h2 class="cm-h2">No phone. No badge. Still coffee.</h2>
+      <p class="cm-p">A client walks in before a meeting. She has no app and no badge, so the machine guides her on its own, one choice per screen, just like Chapter 1.</p>
+      <figure class="cm-fig">
+        <img src="../assets/images/coffee2/ch2-06-visitor.jpg" alt="The visitor&rsquo;s machine-only flow: coffee, strength, sweetness, check, then place cup, brewing and ready." loading="lazy" decoding="async" />
+        <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="cm-section">
+    <div class="wrap">
+      <p class="cm-label">07 &mdash; Under the hood</p>
+      <h2 class="cm-h2">Everyday technology, most of it already in the office.</h2>
+      <p class="cm-p">Nothing here asks people to carry anything new. It uses what offices already have: phones, ID badges and a network.</p>
+      <p class="cm-note" style="margin-top:18px">These are proven, everyday technologies. How they&rsquo;d be built into a specific machine is a question for the hardware team.</p>
+      <figure class="cm-fig">
+        <img src="../assets/images/coffee2/ch2-07-underhood.jpg" alt="Four building blocks: an NFC tag, the office ID badge, office Wi-Fi, and your account." loading="lazy" decoding="async" />
+        <figcaption class="cm-swipe">Swipe to see the whole flow &rarr;</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="cm-section cm-soft">
+    <div class="wrap">
+      <p class="cm-label">08 &mdash; Try it</p>
+      <h2 class="cm-h2">Make a coffee with Arjun, Riya and a visitor.</h2>
+      <p class="cm-p">A short, playable demo: pick a person, then make their coffee on a working machine and phone. It takes about three minutes.</p>
+      <p style="margin-top:26px"><a class="cm-demo" href="coffee-demo.html">Play the demo <span aria-hidden="true">&#8599;</span></a></p>
+    </div>
+  </section>
+  <section class="cm-section cm-dark">
+    <div class="wrap">
+      <p class="cm-label">09 &mdash; The reflection</p>
+      <h2 class="cm-h2">Good coffee. A little more human.</h2>
+      <p class="cm-p">I started by asking why people hesitate in front of a coffee machine. The answer wasn&rsquo;t fewer buttons. It was a machine that knows you, and never assumes it does.</p>
+      <p class="cm-note" style="margin-top:20px">Chapter 2 is a proposed interaction concept. Nothing here has been usability tested, technically validated, or measured.</p>
       <p class="cm-back"><a href="../index.html#projects">&larr; Back to projects</a></p>
     </div>
   </section>
+  </div><!-- /chapter 2 -->
 
 </main>
 
@@ -323,5 +417,26 @@
 </footer>
 
 <script src="../assets/js/main.js?v=9"></script>
+<script>
+/* Chapter tabs. Both chapters are in the page; only one is shown at a time,
+   so the nav is instant and the URL still deep-links (#chapter-2). */
+(function chapters(){
+  const tabs = [...document.querySelectorAll('.cm-chapter')];
+  const panes = { 1: document.getElementById('chapter-1'), 2: document.getElementById('chapter-2') };
+  if (!tabs.length || !panes[1] || !panes[2]) return;
+  function show(n, scroll){
+    tabs.forEach(t => t.setAttribute('aria-pressed', String(+t.dataset.chapter === n)));
+    panes[1].hidden = n !== 1;
+    panes[2].hidden = n !== 2;
+    if (history.replaceState) history.replaceState(null, '', n === 2 ? '#chapter-2' : location.pathname);
+    if (scroll) panes[n].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(+t.dataset.chapter, true)));
+  document.querySelectorAll('[data-goto-chapter]').forEach(b =>
+    b.addEventListener('click', () => show(+b.dataset.gotoChapter, true)));
+  if (location.hash === '#chapter-2') show(2, false);
+})();
+</script>
+
 </body>
 </html>

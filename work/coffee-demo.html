@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Make a coffee &mdash; demo | Ishita Sharma</title>
+<meta name="description" content="A short playable demo from the Half coffee, full confusion case study: pick a person and make their coffee on a working machine and phone." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ishita Sharma" />
+  <meta property="og:title" content="Make a coffee &mdash; demo | Ishita Sharma" />
+  <meta property="og:description" content="A short playable demo from the Half coffee, full confusion case study: pick a person and make their coffee on a working machine and phone." />
+  <meta property="og:url" content="https://ishitasharma6562-a11y.github.io/ishita/work/coffee-demo.html" />
+  <meta property="og:image" content="https://ishitasharma6562-a11y.github.io/ishita/assets/images/og-card.jpg?v=1" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x2615;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: a cream counter with the machine and the phone on it. Full mode adds a facilitator panel; demo mode adds a cast picker and a coach line. Single light theme on purpose, matching the case study. */
+:root{
+  --counter:#F6F0E2; --panel:#FBF8F1; --line:#E2D7C1; --ink:#17150F; --body:#6B675C; --eb:#6F4B2D;
+  --machine:#2B2620; --metal:#3A342C;
+  --scr-ink:#1F1F1F; --scr-mute:#6B6B6B; --scr-soft:#CFCFCF; --scr-track:#E6E6E6;
+  --ok:#2F6B3A; --warn:#8A4B12; --warn-bg:#F7E9D6; --nudge:#C98A3E;
+  --a1:#E7C9A5; --a2:#C9D8C2; --a3:#D6CBE4;
+  --display:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;
+  --ui:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--counter);color:var(--ink);font-family:var(--display);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:2px solid var(--eb);outline-offset:2px}
+.top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;max-width:1360px;margin:0 auto 18px}
+.top h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0}
+.eb{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--eb);text-transform:uppercase}
+.top p{margin:0;color:var(--body);font-size:14px;max-width:60ch}
+.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:20px;max-width:1360px;margin:0 auto;align-items:start}
+.demo .layout{grid-template-columns:minmax(0,1fr);max-width:1100px}
+@media (max-width:1000px){.layout{grid-template-columns:minmax(0,1fr)}}
+.demo .panel,.full .cast,.full .coach,.full .story{display:none}
+
+/* Panel (full) */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.panel h2{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--eb);text-transform:uppercase;margin:0 0 8px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tab{border:1px solid var(--line);background:transparent;border-radius:10px;padding:8px 6px;font-weight:700;font-size:13px}
+.tab small{display:block;font-weight:500;color:var(--body);font-size:11px}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tab[aria-pressed="true"] small{color:#D9D3C6}
+.blurb{font-size:13.5px;color:var(--body);margin:8px 0 0;line-height:1.45}
+.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.tasks label{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.tasks input{margin-top:3px;accent-color:var(--ink)}
+.tasks .n{font-weight:700;color:var(--eb);min-width:1.2em}
+.tip{font-size:12.5px;color:var(--body);margin:8px 0 0;line-height:1.45}
+.clock{display:flex;align-items:baseline;gap:10px}
+.clock b{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.clock span{font-size:13px;color:var(--body)}
+.sim{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
+.pbtn:disabled{opacity:.45}
+.toggle{display:flex;align-items:flex-start;gap:8px;font-size:13px;font-weight:600;line-height:1.35}
+.toggle input{accent-color:var(--ink);width:16px;height:16px;margin-top:1px}
+.toggle small{display:block;font-weight:500;color:var(--body)}
+.logwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:700;color:var(--eb);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+.empty{padding:12px;color:var(--body);font-size:13px}
+.copied{font-size:12px;color:var(--ok)}
+
+/* Demo chrome */
+.demo-col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.cast{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.cast{grid-template-columns:minmax(0,1fr)}}
+.who{display:flex;gap:12px;align-items:center;text-align:left;background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px}
+.who .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:var(--ink);flex:none}
+.who b{display:block;font-size:15px}
+.who small{display:block;color:var(--body);font-size:12.5px;line-height:1.35}
+.who[aria-pressed="true"]{border-color:var(--ink);background:#fff}
+.story{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.story .t{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.story p{margin:2px 0 0;color:var(--body);font-size:14px;max-width:62ch}
+.chips2{display:flex;gap:6px;flex-wrap:wrap}
+.sbtn{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:700}
+.sbtn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.coach{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:14px;padding:12px 16px;font-size:15px;font-weight:600;min-height:52px}
+.coach .step{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#D9C3A4;font-weight:700;flex:none}
+.coach.win{background:var(--ok)}
+.coach .acts{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.coach .acts button{background:#fff;color:var(--ink);border:0;border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:700}
+
+/* Stage */
+.stage{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-end;padding:20px 12px 0;min-width:0}
+.dev-label{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--eb);text-transform:uppercase;text-align:center;margin-top:12px}
+.machine-wrap{width:min(600px,100%);min-width:0}
+.machine{background:var(--machine);border-radius:28px 28px 14px 14px;padding:22px 22px 0}
+.mscreen{background:#fff;border-radius:12px;aspect-ratio:16/9;overflow:hidden;container-type:inline-size;border:4px solid #0D0B09}
+.mpanel{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 4px;flex-wrap:wrap}
+.hw{display:flex;align-items:center;gap:10px;background:var(--metal);border:1px solid #4A4339;color:#EDE6D8;border-radius:12px;padding:8px 12px;font-size:12.5px;font-weight:600}
+.hw .tagmark{width:30px;height:30px;border-radius:50%;border:2px dashed #CDBFA6;display:grid;place-items:center;font-size:8px;letter-spacing:.02em;flex:none}
+.hw:disabled{opacity:.4}
+.hw:not(:disabled):hover{border-color:#CDBFA6}
+.spoutzone{position:relative;height:150px;background:linear-gradient(#211D18,#1A1713);margin:0 -22px;border-radius:0 0 14px 14px;display:flex;justify-content:center}
+.spout{position:absolute;top:0;width:70px;height:22px;background:var(--metal);border-radius:0 0 10px 10px}
+.stream{position:absolute;top:22px;width:6px;height:70px;background:#7A4A25;border-radius:3px;opacity:0;transition:opacity .3s}
+.pouring .stream{opacity:1}
+.tray{position:absolute;bottom:14px;width:170px;height:96px;border-radius:12px;border:2px dashed #5C5347;background:transparent;color:#B8AD99;font-size:12px;font-weight:600;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.tray.want{border-color:#E8C9A0;color:#F2DEC2}
+.cup{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:62px;height:58px;background:#F4EFE6;border-radius:4px 4px 18px 18px}
+.cup::after{content:"";position:absolute;right:-14px;top:12px;width:16px;height:24px;border:5px solid #F4EFE6;border-left:0;border-radius:0 12px 12px 0}
+.phone-wrap{width:300px;flex:none}
+.phone{width:300px;height:620px;background:#0F0E0C;border-radius:46px;padding:10px;position:relative}
+.phone::before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:88px;height:24px;background:#0F0E0C;border-radius:14px;z-index:3}
+.pscreen{width:100%;height:100%;background:#fff;border-radius:36px;overflow:hidden;position:relative}
+.nudge{box-shadow:0 0 0 3px var(--nudge),0 0 0 7px rgba(201,138,62,.28)!important}
+@media (prefers-reduced-motion:no-preference){.nudge{animation:nud 1.4s ease-in-out infinite}@keyframes nud{50%{box-shadow:0 0 0 3px var(--nudge),0 0 0 11px rgba(201,138,62,.12)}}}
+
+/* Screen UI */
+.scr{height:100%;display:flex;flex-direction:column;gap:.7em;font-family:var(--ui);color:var(--scr-ink);position:relative}
+.p .scr{font-size:13px;padding:52px 16px 18px}
+.m .scr{font-size:calc(100cqw / 42);padding:1.4em 1.6em}
+.scr h2{font-size:1.6em;font-weight:600;margin:0;letter-spacing:-.01em;line-height:1.2;text-wrap:balance}
+.scr p{margin:0}
+.mut{color:var(--scr-mute);font-size:.92em;line-height:1.4}
+.lnk{background:none;border:0;padding:.2em 0;color:var(--scr-mute);text-decoration:underline;font-size:.95em;align-self:center}
+.back{background:none;border:0;padding:0;color:var(--scr-mute);font-size:.95em;align-self:flex-start}
+.body{flex:1;display:flex;flex-direction:column;gap:.6em;min-height:0}
+.center .body{align-items:center;justify-content:center;text-align:center}
+.actions{display:flex;flex-direction:column;gap:.55em}
+.row{display:flex;gap:.55em}
+.row>*{flex:1}
+.btn{border-radius:.9em;padding:.95em;font-weight:600;font-size:1em;border:1.5px solid transparent}
+.btn.p{background:var(--scr-ink);color:#fff}
+.btn.s{background:#fff;border-color:#555}
+.btn:disabled{background:#DDDDDD;color:#999;border-color:transparent}
+.btn.sm{padding:.45em .8em;font-size:.85em;border-radius:.7em;flex:none}
+.ic{width:4.2em;height:4.2em;border-radius:50%;background:#D6D6D6;display:grid;place-items:center;flex:none}
+.ic svg{width:55%;height:55%}
+.ords{display:flex;flex-direction:column;gap:.55em;overflow:auto;min-height:0}
+.ocard{border:1px solid var(--scr-ink);border-radius:.9em;padding:.8em .9em;display:flex;flex-direction:column;gap:.7em}
+.ocard b{display:block;font-weight:600;font-size:1.05em}
+.ocard small{display:block;color:var(--scr-mute);font-size:.86em;margin-top:.15em}
+.ocard .btn{padding:.7em;font-size:.95em}
+.ocard.draft{border-style:dashed}
+.tagline{font-size:.72em;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--scr-mute)}
+.opt{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:#fff;border:1px solid var(--scr-soft);border-radius:.9em;padding:.8em .9em;width:100%}
+.opt b{font-weight:600}
+.opt small{color:var(--scr-mute);font-size:.85em;margin-top:.15em}
+.opt.on{border:2px solid var(--scr-ink)}
+.info{border:1px solid var(--scr-ink);border-radius:.9em;padding:.9em 1em}
+.info b{display:block;font-weight:600;font-size:1.08em}
+.info small{color:var(--scr-mute);font-size:.9em}
+.tog{display:flex;align-items:center;justify-content:space-between;gap:.8em;background:none;border:0;padding:.3em 0;text-align:left;font-size:1em;width:100%}
+.tog .sw{width:2.8em;height:1.7em;border-radius:1em;background:#E0E0E0;position:relative;flex:none;transition:background .15s}
+.tog .sw::after{content:"";position:absolute;top:.2em;left:.2em;width:1.3em;height:1.3em;border-radius:50%;background:#fff;transition:left .15s}
+.tog[aria-checked="true"] .sw{background:var(--scr-ink)}
+.tog[aria-checked="true"] .sw::after{left:1.3em}
+.warn{background:var(--warn-bg);color:var(--warn);border-radius:.8em;padding:.8em .9em;font-size:.92em;line-height:1.4}
+.bar{width:70%;height:.55em;background:var(--scr-track);border-radius:1em;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--scr-ink);border-radius:1em;transition:width .1s linear}
+.notif{position:absolute;top:44px;left:10px;right:10px;background:#F2F2F2;border-radius:16px;padding:10px 12px;font-family:var(--ui);font-size:12px;line-height:1.4;box-shadow:0 4px 14px #0002;z-index:2;text-align:left}
+.notif b{display:block;font-size:12.5px}
+.banner{display:flex;align-items:center;justify-content:space-between;gap:.6em;border:1px solid var(--scr-soft);border-radius:.7em;padding:.45em .5em .45em .8em;font-size:.9em}
+
+/* Sliders: plain pills, no icon, no marker */
+.sls{display:flex;justify-content:center;gap:2.2em;padding-top:.4em}
+.sl{display:flex;flex-direction:column;align-items:center;gap:.2em;text-align:center}
+.sl b{font-weight:600;font-size:.98em;margin-top:.35em}
+.sl .val{font-size:.92em}
+.sl small{color:var(--scr-mute);font-size:.8em;min-height:1.2em}
+.pill{position:relative;width:84px;height:230px;border-radius:26px;background:var(--scr-track);overflow:hidden;touch-action:none;cursor:ns-resize;flex:none}
+.pill::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to top,transparent 0 calc(20% - 1px),rgba(128,128,128,.35) calc(20% - 1px) 20%);pointer-events:none}
+.pill .fill{position:absolute;left:0;right:0;bottom:0;background:var(--scr-ink);transition:height .12s ease}
+.pill.big{width:96px;height:300px;border-radius:30px}
+.bigwrap{display:flex;gap:1.1em;align-items:stretch;justify-content:center}
+.levels{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.levels li{flex:1;display:flex;align-items:center}
+.levels button{background:none;border:0;padding:.1em 0;text-align:left;color:var(--scr-mute);font-size:.95em}
+.levels li.on button{color:var(--scr-ink);font-weight:600}
+.levels li.on button::before{content:"● "}
+.m .pill{width:4.2em;height:11.5em;border-radius:1.3em}
+.m .pill.big{width:5em;height:15.5em;border-radius:1.5em}
+.m .sls{gap:1.8em;padding-top:0}
+.m .scr.split{flex-direction:row;gap:1.6em}
+.m .split .col{flex:1;display:flex;flex-direction:column;gap:.6em;min-width:0}
+.m .split .side{display:flex;flex-direction:column;gap:.6em;align-items:center;justify-content:center}
+.m .ords,.m .opts{flex-direction:row}
+.m .ocard,.m .opt{flex:1;min-width:0}
+.m .actions{flex-direction:row;align-items:center}
+.m .actions>.btn{flex:1}
+.opts{display:flex;flex-direction:column;gap:.55em}
+.ro{pointer-events:none}
+.ro .banner,.ro .banner *{pointer-events:auto}
+.ro .actions{display:none}
+.nophone{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px;text-align:center;font-family:var(--ui);color:var(--scr-mute);font-size:13px;background:#F3F3F3}
+
+/* ---------- Demo: quiet version. One neutral palette, one accent (the ring), lots of air. ---------- */
+body.demo{background:#FAF8F4;padding-block:56px 80px}
+.demo .top{flex-direction:column;align-items:center;text-align:center;gap:12px;max-width:720px;margin:0 auto 48px}
+.demo .top h1{font-size:40px;letter-spacing:-.03em;margin-top:10px}
+.demo .top p{font-size:16px;line-height:1.55;max-width:56ch}
+.demo .demo-col{gap:0;align-items:center}
+.demo .cast{display:flex;justify-content:center;gap:40px;border-bottom:1px solid #E8E2D6;width:min(560px,100%);margin-bottom:36px}
+.demo .who{background:none;border:0;border-radius:0;padding:0 2px 14px;display:block;text-align:center;border-bottom:2px solid transparent;margin-bottom:-1px;color:#9A958A}
+.demo .who b{font-size:16px;font-weight:700}
+.demo .who small{font-size:12.5px;color:inherit;margin-top:2px}
+.demo .who[aria-pressed="true"]{background:none;color:var(--ink);border-bottom-color:var(--ink)}
+.demo .who:hover{color:var(--ink)}
+.demo .story{flex-direction:column;align-items:center;text-align:center;background:none;border:0;padding:0;gap:14px;margin-bottom:28px}
+.demo .story .t{font-size:24px;letter-spacing:-.02em}
+.demo .story p{font-size:15.5px;line-height:1.55;margin-top:6px;max-width:52ch}
+.demo .chips2{gap:22px}
+.demo .sbtn{background:none;border:0;border-radius:0;padding:2px 0;font-size:13.5px;font-weight:600;color:#9A958A;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:5px}
+.demo .sbtn[aria-pressed="true"]{background:none;color:var(--ink);text-decoration-color:var(--ink)}
+.demo .coach{background:none;color:var(--ink);border:1px solid #E8E2D6;border-radius:999px;padding:10px 10px 10px 22px;min-height:0;width:min(640px,100%);font-size:15px;font-weight:500;gap:14px}
+.demo .coach .step{color:var(--eb)}
+.demo .coach.win{background:none;border-color:var(--ink)}
+.demo .coach .acts button{background:none;border:1px solid #DDD6C8;color:var(--ink);font-weight:600}
+.demo .coach .acts button:last-child:not(:first-child){background:var(--ink);border-color:var(--ink);color:#fff}
+.demo .stage{gap:64px;padding:64px 0 0;align-items:flex-end;width:100%}
+.demo .dev-label{color:#9A958A;margin-top:18px;letter-spacing:.16em}
+/* light devices */
+.demo .machine{background:#fff;border:1px solid #E3DDD1;box-shadow:0 1px 0 #EFEAE0,0 24px 48px -32px rgba(40,30,20,.25)}
+.demo .mscreen{border:1px solid #E3DDD1}
+.demo .hw{background:#fff;border:1px solid #E3DDD1;color:#5E5A51}
+.demo .hw .tagmark{border-color:#C9C2B4;color:#8F897D}
+.demo .hw:not(:disabled):hover{border-color:#9A958A}
+.demo .spoutzone{background:#F4F1EB;border-top:1px solid #ECE6DB}
+.demo .spout{background:#DCD5C8}
+.demo .tray{border-color:#D2CABB;color:#9A958A}
+.demo .tray.want{border-color:var(--ink);color:var(--ink)}
+.demo .cup{background:#fff;box-shadow:inset 0 0 0 1.5px #CFC8BA}
+.demo .cup::after{border-color:#CFC8BA}
+.demo .phone{background:#fff;border:1px solid #E3DDD1;box-shadow:0 24px 48px -32px rgba(40,30,20,.25)}
+.demo .phone::before{background:#ECE7DE}
+.demo .phone{padding:7px}.demo .pscreen{border-radius:39px}
+.demo .nudge{box-shadow:0 0 0 2px var(--ink),0 0 0 7px rgba(23,21,15,.08)!important}
+@media (prefers-reduced-motion:no-preference){.demo .nudge{animation:nud2 1.6s ease-in-out infinite}@keyframes nud2{50%{box-shadow:0 0 0 2px var(--ink),0 0 0 11px rgba(23,21,15,.03)}}}
+@media (max-width:640px){.demo .cast{gap:22px}.demo .top h1{font-size:32px}.demo .coach{border-radius:18px;flex-wrap:wrap}.demo .stage{gap:40px}}
+</style>
+<style>
+/* back link into the case study — the demo is otherwise self-contained */
+.demo-back{position:fixed;top:14px;left:14px;z-index:20;display:inline-flex;align-items:center;gap:7px;
+  background:#fff;border:1px solid #E3DDD1;border-radius:999px;padding:9px 16px;
+  font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;font-weight:700;color:#17150F;text-decoration:none}
+.demo-back:hover{border-color:#17150F}
+@media (max-width:640px){.demo-back{position:static;margin:0 auto 18px;display:flex;width:max-content}}
+</style>
+</head>
+<body>
+<a class="demo-back" href="coffee-machine.html">&larr; Back to the case study</a>
+
+<header class="top">
+  <div>
+    <div class="eb">Half coffee, full confusion · Chapter 2</div>
+    <h1 id="h1">Make a coffee, three ways</h1>
+  </div>
+  <p id="lede">Pick a person and follow the hint. A ring shows where to tap next.</p>
+</header>
+
+<main class="layout">
+  <aside class="panel" aria-label="Test controls">
+    <section><h2>Who is testing</h2><div class="tabs" id="tabs"></div><p class="blurb" id="blurb"></p></section>
+    <section><h2>Tasks</h2><ol class="tasks" id="tasks"></ol><p class="tip">Read one task aloud. Don’t point or explain. Note where they pause.</p></section>
+    <section><h2>Time to coffee</h2><div class="clock"><b id="clock">0.0 s</b><span id="clockNote">Starts at the first tap</span></div></section>
+    <section><h2>Simulate</h2>
+      <div class="sim" style="flex-direction:column;align-items:flex-start">
+        <label class="toggle"><input type="checkbox" id="milk" checked> Milk available</label>
+        <label class="toggle"><input type="checkbox" id="live"><span>Live phone–machine link<small>Still exploring. Turns on screen mirroring and walking away.</small></span></label>
+        <div class="sim"><button class="pbtn" id="walk" data-act="walk">Walk away</button><button class="pbtn" data-act="resetAll">Reset person</button></div>
+      </div>
+    </section>
+    <section><h2>Session log</h2><div class="logwrap" id="log"></div>
+      <div class="sim" style="margin-top:8px"><button class="pbtn" data-act="copyLog">Copy log</button><button class="pbtn" data-act="clearLog">Clear</button><span class="copied" id="copied" aria-live="polite"></span></div>
+    </section>
+  </aside>
+
+  <div class="demo-col">
+    <div class="cast" id="cast" aria-label="Choose a person"></div>
+    <div class="story" id="story"></div>
+    <div class="coach" id="coach" aria-live="polite"></div>
+    <section class="stage" aria-label="Prototype">
+      <div class="machine-wrap">
+        <div class="machine">
+          <div class="mscreen m" id="mscreen" aria-label="Machine screen"></div>
+          <div class="mpanel">
+            <button class="hw" id="hwPhone" data-act="tapPhone"><span class="tagmark">NFC</span>Tap phone here</button>
+            <button class="hw" id="hwBadge" data-act="tapBadge"><span class="tagmark">ID</span>Tap badge</button>
+          </div>
+          <div class="spoutzone" id="spoutzone"><div class="spout"></div><div class="stream"></div><button class="tray" id="tray" data-act="placeCup">Cup tray</button></div>
+        </div>
+        <div class="dev-label">The machine</div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone"><div class="pscreen p" id="pscreen" aria-label="Phone screen"></div></div>
+        <div class="dev-label" id="phoneLabel">Their phone</div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+const MODE="demo";
+document.body.classList.add(MODE);
+const STR=["Mild","Light","Medium","Medium-strong","Strong"];
+const SWT=["No sugar","Lightly sweet","Medium","Sweet","Very sweet"];
+const NAMES={str:STR,swt:SWT};
+const TYPES=[{n:"Cappuccino",d:"Espresso, steamed milk and foam",milk:true},{n:"Americano",d:"Espresso and hot water",milk:false},{n:"Latte",d:"Espresso with lots of milk",milk:true}];
+const PEOPLE={
+  arjun:{label:"Arjun",role:"The regular",init:"A",av:"var(--a1)",blurb:"Has had the same cappuccino for two years. Has his phone and his office badge.",phone:true,badge:true,recents:[{type:"Cappuccino",str:4,swt:2},{type:"Americano",str:5,swt:1},{type:"Latte",str:2,swt:4}],usual:0},
+  riya:{label:"Riya",role:"The first-timer",init:"R",av:"var(--a2)",blurb:"First day at the office. Has the app, but has never used this machine.",phone:true,badge:false,recents:[],usual:null},
+  visitor:{label:"Visitor",role:"The visitor",init:"V",av:"var(--a3)",blurb:"Here for a meeting. No app and no badge, so only the machine.",phone:false,badge:false,recents:[],usual:null}
+};
+const TASKS={
+  arjun:["Get your usual coffee.","Today you want it less sweet, but only for today. Taste it first.","Your phone has died. Get your usual using your badge."],
+  riya:["It’s your first day. Get a coffee you’ll like.","You’re not sure how it will taste. Try it before the full cup."],
+  visitor:["You’re here for a meeting. Get a strong coffee."]
+};
+const STORIES={
+  arjun:[{id:"usual",title:"His usual, in one tap",intro:"Arjun has had the same cappuccino for two years. Get it for him in one tap.",win:"One tap, one cup. His phone handed over at the cup."},
+         {id:"edit",title:"Less sugar today",intro:"Today Arjun wants it less sweet, just for today. He’d like to taste it first.",win:"Less sugar, tasted first, and his usual stayed safe."}],
+  riya:[{id:"first",title:"Her first coffee",intro:"Riya has never used this machine. Help her make a latte she’ll like.",win:"One choice at a time, a sip to check, and now it’s her usual."}],
+  visitor:[{id:"guest",title:"No phone, no badge",intro:"A client is here for a meeting. No app, no badge. Get her a strong coffee.",win:"The machine did it all on its own. No app, no sign-up."}]
+};
+const clone=o=>JSON.parse(JSON.stringify(o));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const short=o=>`${STR[o.str-1]} · ${SWT[o.swt-1].toLowerCase()}`;
+const full=o=>`${STR[o.str-1]}, ${SWT[o.swt-1].toLowerCase()} ${o.type.toLowerCase()}`;
+const same=(a,b)=>a&&b&&a.type===b.type&&a.str===b.str&&a.swt===b.swt;
+function diff(a,b){const d=[];if(a.type!==b.type)d.push(`${b.type.toLowerCase()} instead of ${a.type.toLowerCase()}`);if(a.str!==b.str)d.push(`strength ${a.str} → ${b.str}`);if(a.swt!==b.swt)d.push(`sweetness ${a.swt} → ${b.swt}`);return d;}
+const PRE=["home","edit","n-type","n-str","n-swt","confirm"];
+
+let S,brewInt=null;
+let LOG=[];try{LOG=JSON.parse(localStorage.getItem("hc-proto-log")||"[]")}catch(e){LOG=[]}
+function saveLog(){try{localStorage.setItem("hc-proto-log",JSON.stringify(LOG))}catch(e){}}
+function session(){clearInterval(brewInt);return {ctrl:null,who:null,via:null,step:"idle",order:null,base:null,baseUsual:false,mode:null,tastes:0,sip:null,tasteFirst:false,saveUsual:false,handed:false,phoneDone:false,brewP:0,t0:null,secs:null}}
+function fresh(scn){return {scn,users:clone(PEOPLE),tasks:{arjun:[],riya:[],visitor:[]},milk:true,live:false,draft:null,notif:null,story:0,won:false,...session()}}
+S=fresh("arjun");
+const U=()=>S.who?S.users[S.who]:null;
+const nm=()=>S.who?S.users[S.who].label:"Your";
+
+function startClock(){if(S.t0==null){S.t0=performance.now();S.secs=null;}}
+function stopClock(){if(S.t0!=null){S.secs=(performance.now()-S.t0)/1000;S.t0=null;}}
+function endSession(){Object.assign(S,session(),{secs:S.secs});}
+function handoff(){S.step="place";if(S.ctrl==="phone"){S.handed=true;S.ctrl="machine";}}
+const ACT={
+  tapPhone(){const p=S.users[S.scn];if(!p.phone)return;
+    if(S.ctrl==="machine"&&S.who===S.scn&&PRE.includes(S.step)){S.ctrl="phone";S.via="badge → phone";return;}
+    if(S.ctrl)return;S.ctrl="phone";S.via="phone";S.who=S.scn;S.step="home";S.notif=null;S.won=false;startClock();},
+  tapBadge(){const p=S.users[S.scn];if(!p.badge||S.ctrl)return;S.ctrl="machine";S.via="badge";S.who=S.scn;S.step="home";S.notif=null;S.won=false;startClock();},
+  startHere(){if(S.ctrl)return;S.ctrl="machine";S.via="machine";S.who=null;S.mode="guest";S.order={type:null,str:3,swt:3};S.step="n-type";S.won=false;startClock();},
+  brewAgain(el){const u=U(),i=+el.dataset.i,o=u.recents[i];S.order=clone(o);S.base=clone(o);S.baseUsual=i===u.usual;S.mode="usual";S.saveUsual=false;S.tasteFirst=false;handoff();},
+  edit(el){const u=U(),i=+el.dataset.i,o=u.recents[i];S.order=clone(o);S.base=clone(o);S.baseUsual=i===u.usual;S.mode="edit";S.saveUsual=false;S.step="edit";},
+  newOrder(){S.order={type:null,str:3,swt:3};S.base=null;S.mode="new";S.saveUsual=true;S.step="n-type";},
+  resume(){const d=S.draft;S.order=clone(d.order);S.base=d.base?clone(d.base):null;S.baseUsual=d.baseUsual;S.mode=d.mode;S.saveUsual=d.mode==="new";S.draft=null;S.step="confirm";},
+  home(){S.step="home";S.tastes=0;},
+  cancel(){endSession();},
+  type(el){S.order.type=el.dataset.v;},
+  goto(el){S.step=el.dataset.v;},
+  review(){S.step="confirm";},
+  resetEdit(){S.order=clone(S.base);},
+  lvl(el){S.order[el.dataset.k]=+el.dataset.l;},
+  toggleSave(){S.saveUsual=!S.saveUsual;},
+  brew(){S.tasteFirst=false;handoff();},
+  taste(){S.tasteFirst=true;handoff();},
+  change(){S.step=S.mode==="new"||S.mode==="guest"?"n-type":"edit";},
+  switchAmericano(){S.order.type="Americano";},
+  placeCup(){if(S.step!=="place")return;if(S.tasteFirst&&S.tastes<1){S.tastes=1;S.sip=clone(S.order);S.step="sip";}else startBrew();},
+  cancelPlace(){if(S.handed){S.notif={t:"Order cancelled",d:"Nothing was poured."};endSession();}else S.step="confirm";},
+  tasted(){S.step="howis";},
+  tasteAgain(){S.tastes=Math.min(2,S.tastes+1);S.sip=clone(S.order);S.step="sip";},
+  brewNow(){startBrew();},
+  done(){finish();},
+  phoneDone(){S.phoneDone=true;},
+  useMachine(){S.ctrl="machine";S.via="phone → machine";},
+  walk(){if(!S.ctrl||!S.live)return;
+    if(!PRE.includes(S.step)){S.notif={t:"Your coffee is on its way",d:"It will finish at the 3rd-floor machine."};return;}
+    if(S.who&&S.order&&S.order.type)S.draft={who:S.who,order:clone(S.order),base:S.base?clone(S.base):null,baseUsual:S.baseUsual,mode:S.mode};
+    S.notif=S.who&&S.users[S.who].phone?{t:"You walked away",d:S.draft?"The machine is free for the next person. Your order is saved. Tap again to finish it.":"The machine is free for the next person."}:null;
+    S.t0=null;endSession();},
+  resetAll(){const k=S.scn,t=S.tasks,mode=S.live;S=fresh(k);S.tasks=t;S.tasks[k]=[];S.live=mode;syncInputs();},
+  scn(el){const v=el.dataset.v;const keep={tasks:S.tasks,users:S.users,milk:S.milk,live:S.live,draft:null,notif:null};S=Object.assign(fresh(v),keep);},
+  story(el){S.story=+el.dataset.i;const k=S.scn,keep={tasks:S.tasks,users:S.users,milk:S.milk,live:S.live};S=Object.assign(fresh(k),keep,{story:+el.dataset.i});},
+  restart(){const k=S.scn;S=Object.assign(fresh(k),{story:S.story});},
+  nextStory(){const list=STORIES[S.scn];if(S.story+1<list.length){ACT.story({dataset:{i:S.story+1}});}else{const order=["arjun","riya","visitor"];const n=order[(order.indexOf(S.scn)+1)%3];S=Object.assign(fresh(n),{users:S.users});}},
+  copyLog(){const rows=[["Person","Path","Tastes","Saved","Seconds"],...LOG.map(r=>[r.who,r.path,r.tastes,r.end,r.secs])].map(r=>r.join("\t")).join("\n");const msg=document.getElementById("copied");
+    try{navigator.clipboard.writeText(rows).then(()=>{msg.textContent="Copied";},()=>{msg.textContent="Select the table and copy it";});}catch(e){msg.textContent="Select the table and copy it";}},
+  clearLog(){LOG=[];saveLog();}
+};
+function startBrew(){S.step="brewing";S.brewP=0;clearInterval(brewInt);brewInt=setInterval(()=>{S.brewP=Math.min(100,S.brewP+2.5);if(S.brewP>=100){clearInterval(brewInt);S.step="ready";stopClock();}render();},100);}
+function finish(){
+  const u=U();let end="–";
+  if(u){if(S.saveUsual){u.recents=u.recents.filter(r=>!same(r,S.order));u.recents.unshift(clone(S.order));u.usual=0;end="Saved as usual";}
+    else{end="Just this once";if(S.mode==="new"&&!u.recents.some(r=>same(r,S.order)))u.recents.push(clone(S.order));}}
+  const path=S.mode==="guest"?"Guest":({usual:"Brew again",edit:"Edit",new:"New"}[S.mode]||S.mode);
+  LOG.unshift({who:S.who?S.users[S.who].label:"Visitor",path:`${path} · ${S.via||"machine"}`,tastes:S.tastes,end,secs:S.secs!=null?S.secs.toFixed(1):"–"});saveLog();
+  endSession();S.won=true;
+}
+
+/* view helpers */
+const btn=(l,a,k="p",dis=false,x="")=>`<button class="btn ${k}" data-act="${a}" ${dis?"disabled":""} ${x}>${l}</button>`;
+const link=(l,a,x="")=>`<button class="lnk" data-act="${a}" ${x}>${l}</button>`;
+const back=(l,a,x="")=>`<button class="back" data-act="${a}" ${x}>← ${l}</button>`;
+const icon=k=>{const p={cup:'<path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',tap:'<path d="M12 4a8 8 0 0 1 0 16M12 8a4 4 0 0 1 0 8"/><circle cx="12" cy="12" r="1.5"/>',sip:'<path d="M6 8h10v6a5 5 0 0 1-10 0z"/><path d="M9 3c0 1.5 1.5 1.5 1.5 3"/>',send:'<path d="M4 12l16-7-6 16-3-7z"/>'}[k]||"";return `<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg></div>`;};
+function pill(key,val,title,sub){const n=NAMES[key];
+  return `<div class="sl"><div class="pill" data-key="${key}" role="slider" tabindex="0" aria-label="${title}" aria-valuemin="1" aria-valuemax="5" aria-valuenow="${val}" aria-valuetext="${n[val-1]}"><div class="fill" style="height:${val*20}%"></div></div><b>${title}</b><span class="val">${n[val-1]}</span><small>${sub||""}</small></div>`;}
+function bigPill(key,val,title){const n=NAMES[key];
+  return `<div class="bigwrap"><div class="pill big" data-key="${key}" role="slider" tabindex="0" aria-label="${title}" aria-valuemin="1" aria-valuemax="5" aria-valuenow="${val}" aria-valuetext="${n[val-1]}"><div class="fill" style="height:${val*20}%"></div></div><ol class="levels">${[5,4,3,2,1].map(l=>`<li class="${l===val?"on":""}"><button data-act="lvl" data-k="${key}" data-l="${l}">${n[l-1]}</button></li>`).join("")}</ol></div>`;}
+const subOf=(key,base,val,word)=>base==null?"":(base===val?(word==="sip"?"Same as your sip":word==="usual"?"Your usual":"No change"):`${word==="sip"?"Your sip":word==="usual"?"Usual":"Was"}: ${NAMES[key][base-1].toLowerCase()}`);
+
+function parts(dev){
+  const m=dev==="m",u=U(),o=S.order;
+  switch(S.step){
+  case "idle":
+    if(m)return {center:true,body:`${icon("tap")}<h2>Tap your phone or badge below</h2><p class="mut">to get your usual</p>`,actions:btn("or start here","startHere","s")};
+    return null;
+  case "home":{
+    if(!u.recents.length)return {center:true,top:m?"":'<span class="mut">Connected to machine · 3rd floor</span>',body:`${icon("cup")}<h2>Let’s make your first coffee</h2><p class="mut">We’ll remember it for next time.</p>`,actions:btn("Start","newOrder")};
+    const draft=S.draft&&S.draft.who===S.who?`<div class="ocard draft"><div><span class="tagline">Unfinished order</span><b>${S.draft.order.type}</b><small>${short(S.draft.order)}</small></div><div class="row">${btn("Resume","resume","s")}</div></div>`:"";
+    const list=u.recents.map((r,i)=>`<div class="ocard"><div><b>${r.type}</b><small>${short(r)}${i===u.usual?" · usual":""}</small></div><div class="row">${btn("Brew again","brewAgain","p",false,`data-i="${i}"`)}${btn("Edit","edit","s",false,`data-i="${i}"`)}</div></div>`).join("");
+    return {top:m?"":'<span class="mut">Connected to machine · 3rd floor</span>',title:`Good morning, ${u.label}`,sub:"Your recent orders",body:`<div class="ords">${draft}${list}</div>`,actions:btn("New","newOrder")};}
+  case "edit":{const b=S.base,w=S.baseUsual?"usual":"was";
+    return {top:back("Back","home"),title:`Edit your ${o.type.toLowerCase()}`,sub:"Drag up or down to change it.",
+      body:`<div class="sls">${pill("str",o.str,"Strength",subOf("str",b.str,o.str,w))}${pill("swt",o.swt,"Sweetness",subOf("swt",b.swt,o.swt,w))}</div>`,slider:true,
+      actions:`${btn("Review","review")}${same(b,o)?"":link(S.baseUsual?"Reset to usual":"Reset","resetEdit")}`};}
+  case "n-type":
+    return {top:`${S.who?back("Back","home"):back("Cancel","cancel")}<span class="mut">Step 1 of 3</span>`,title:"Choose your coffee",
+      body:`<div class="opts">${TYPES.map(t=>`<button class="opt ${o.type===t.n?"on":""}" data-act="type" data-v="${t.n}" aria-pressed="${o.type===t.n}"><b>${t.n}</b><small>${t.d}</small></button>`).join("")}</div>`,
+      actions:btn("Next","goto","p",!o.type,'data-v="n-str"')};
+  case "n-str":
+    return {top:`${back("Back","goto",'data-v="n-type"')}<span class="mut">Step 2 of 3</span>`,title:"How strong?",sub:"Drag up for stronger, or tap a level.",body:bigPill("str",o.str,"Strength"),slider:true,actions:btn("Next","goto","p",false,'data-v="n-swt"')};
+  case "n-swt":
+    return {top:`${back("Back","goto",'data-v="n-str"')}<span class="mut">Step 3 of 3</span>`,title:"How sweet?",sub:"Drag up for sweeter, or tap a level.",body:bigPill("swt",o.swt,"Sweetness"),slider:true,actions:btn("Review","review")};
+  case "confirm":{
+    const t=TYPES.find(x=>x.n===o.type),out=!S.milk&&t.milk;
+    let note="";if(S.mode==="new")note="New order";else if(S.base){const d=diff(S.base,o);note=d.length?"Edited: "+d.join(", "):(S.baseUsual?"Your usual":"Same as last time");}
+    const bk=S.mode==="new"||S.mode==="guest"?back("Back","goto",'data-v="n-swt"'):back("Back","goto",'data-v="edit"');
+    const tog=S.who?`<button class="tog" data-act="toggleSave" role="switch" aria-checked="${S.saveUsual}"><span>${S.mode==="new"?"Save as my usual":"Make this my new usual"}</span><span class="sw"></span></button>`:"";
+    const mirror=S.live&&!m?'<p class="mut">Shown on the machine screen too</p>':"";
+    return {top:bk,title:"Look right?",body:`<div class="info"><b>${o.type}</b><small>${short(o)}</small></div>${note?`<p>${esc(note)}</p>`:""}${tog}${out?`<div class="warn"><b>Out of milk.</b> A ${o.type.toLowerCase()} needs milk. Try an Americano with the same strength and sweetness?</div>`:mirror}`,
+      actions:out?`${btn("Switch to Americano","switchAmericano")}${btn("Change something","change","s")}`:m?`${btn("Change something","change","s")}${btn("Taste first","taste","s")}${btn("Brew","brew")}`:`${btn("Brew","brew")}${btn("Taste first","taste","s")}${link("Change something","change")}`};}
+  case "place":
+    return {center:true,body:`<p class="mut">${S.who?nm()+"’s ":"Your "}${o.type.toLowerCase()}</p>${icon("cup")}<h2>Place your cup under the spout</h2><p class="mut">Waiting for cup…</p>`,actions:btn("Cancel","cancelPlace","s")};
+  case "sip":
+    return {center:true,body:`<p class="mut">Taste ${S.tastes} of 2</p>${icon("sip")}<h2>Take a sip</h2><p class="mut">Put your cup back when you’re ready.</p>`,actions:btn("I’ve tasted it","tasted")};
+  case "howis":{const s=S.sip,last=S.tastes>=2;
+    return {top:`<span class="mut">Taste ${S.tastes} of 2</span>`,title:last?"How about now?":"How is it?",sub:last?"No sips left, but you can still adjust before brewing.":"Drag a slider to change it. Then taste again, or brew.",
+      body:`<div class="sls">${pill("str",o.str,"Strength",subOf("str",s.str,o.str,"sip"))}${pill("swt",o.swt,"Sweetness",subOf("swt",s.swt,o.swt,"sip"))}</div>`,slider:true,
+      actions:last?btn("Brew it","brewNow"):`${btn("Taste again","tasteAgain","s",same(s,o))}${btn("Brew it","brewNow")}`};}
+  case "brewing":
+    return {center:true,body:`${icon("cup")}<h2>Brewing your ${o.type.toLowerCase()}</h2><div class="bar"><i style="width:${S.brewP}%"></i></div><p class="mut">About ${Math.max(1,Math.ceil((100-S.brewP)/100*40))} seconds left</p>`};
+  case "ready":
+    return {center:true,body:`${icon("check")}<h2>Your coffee’s ready</h2><p class="mut">${full(o)}</p>`,actions:btn(S.who?"Take your cup":"Enjoy your coffee","done")};
+  }
+  return null;
+}
+function assemble(dev,p,ro){
+  if(!p)return "";const m=dev==="m";
+  const banner=ro&&m?`<div class="banner"><span>Controlled from ${nm()}’s phone</span><button class="btn s sm" data-act="useMachine">Use machine instead</button></div>`:"";
+  const head=`${banner}${p.top?`<div style="display:flex;flex-direction:column;gap:.35em">${p.top}</div>`:""}${p.title?`<h2>${p.title}</h2>`:""}${p.sub?`<p class="mut">${p.sub}</p>`:""}`;
+  const acts=p.actions?`<div class="actions">${p.actions}</div>`:"";
+  if(m&&p.slider)return `<div class="scr split ${ro?"ro":""}"><div class="col">${head}<div style="flex:1"></div>${acts}</div><div class="side">${p.body}</div></div>`;
+  return `<div class="scr ${p.center?"center":""} ${ro?"ro":""}">${head}<div class="body">${p.body||""}</div>${acts}</div>`;
+}
+function phoneIdle(note){const u=S.users[S.scn];
+  return `<div class="scr center">${S.notif?`<div class="notif"><b>${esc(S.notif.t)}</b>${esc(S.notif.d)}</div>`:""}<div class="body">${icon("tap")}<h2>Good morning, ${u.label}</h2><p class="mut">${note||"Tap your phone on the coffee machine’s tag to start."}</p></div></div>`;}
+function phoneHandoff(){const o=S.order;
+  return `<div class="scr center"><div class="body">${icon("send")}<p class="mut">Sent to the machine</p><h2>Place your cup under the spout</h2><p class="mut">${S.tasteFirst?"The machine will pour a small sip first, so you can taste it before the full cup.":"The machine takes it from here. Enjoy your coffee."}</p><p class="mut" style="font-size:.85em">${o.type} · ${short(o)}</p></div><div class="actions">${btn("Done","phoneDone","s")}</div></div>`;}
+function renderMachine(){const el=document.getElementById("mscreen");
+  if(S.ctrl==="phone"&&PRE.includes(S.step)){
+    if(S.live){el.innerHTML=assemble("m",parts("m"),true);return;}
+    el.innerHTML=`<div class="scr center"><div class="body">${icon("tap")}<h2>${nm()} is ordering on their phone</h2><p class="mut">The machine will ask for a cup when the order arrives.</p></div></div>`;return;}
+  el.innerHTML=assemble("m",parts("m"),false);}
+function renderPhone(){const el=document.getElementById("pscreen");const u=S.users[S.scn];
+  if(!u.phone){el.innerHTML=`<div class="nophone"><b style="color:#333;font-size:14px">No phone</b>The visitor has no app and no badge. They use the machine on its own.</div>`;return;}
+  if(S.ctrl==="phone"&&S.who===S.scn){el.innerHTML=assemble("p",parts("p"),false);return;}
+  if(S.handed&&S.who===S.scn&&!S.phoneDone){el.innerHTML=phoneHandoff();return;}
+  if(S.ctrl==="machine"&&S.who===S.scn&&PRE.includes(S.step)){el.innerHTML=phoneIdle("You’re using the machine’s screen. Tap your phone on the tag to switch back.");return;}
+  el.innerHTML=phoneIdle(S.handed?"Enjoy your coffee.":null);}
+
+/* demo coach */
+function hint(){
+  const st=STORIES[S.scn][S.story].id,o=S.order,P='#pscreen ',M='#mscreen ';
+  if(S.won)return null;
+  const common={place:["Place the cup on the tray under the spout.","#tray"],sip:["Take a sip, then tap “I’ve tasted it” on the machine.",M+'[data-act="tasted"]'],brewing:["Brewing… the machine shows the progress.",null],ready:["Ready. Take the cup.",M+'[data-act="done"]']};
+  const H={
+   usual:{idle:["Arjun walks up with his phone. Tap his phone on the machine’s tag.","#hwPhone"],home:["His usual is the first card. Tap Brew again.",P+'[data-act="brewAgain"][data-i="0"]']},
+   edit:{idle:["Tap Arjun’s phone on the machine’s tag.","#hwPhone"],home:["Tap Edit on his cappuccino.",P+'[data-act="edit"][data-i="0"]'],
+     edit:o&&o.swt>1?["Drag Sweetness all the way down to No sugar.",P+'.pill[data-key="swt"]']:["Now tap Review.",P+'[data-act="review"]'],
+     confirm:["The change is spelled out, and his usual stays safe. Tap Taste first.",P+'[data-act="taste"]'],
+     howis:["Tastes right. Tap Brew it.",M+'[data-act="brewNow"]']},
+   first:{idle:["Tap Riya’s phone on the machine’s tag.","#hwPhone"],home:["Riya’s new, so nothing is saved yet. Tap Start.",P+'[data-act="newOrder"]'],
+     "n-type":o&&o.type==="Latte"?["Tap Next.",P+'[data-act="goto"][data-v="n-str"]']:["She’d like a latte. Pick Latte.",P+'[data-act="type"][data-v="Latte"]'],
+     "n-str":o&&o.str===1?["Tap Next.",P+'[data-act="goto"][data-v="n-swt"]']:["She likes it mild. Drag down, or tap Mild.",P+'.pill[data-key="str"]'],
+     "n-swt":o&&o.swt===4?["Tap Review.",P+'[data-act="review"]']:["Make it Sweet.",P+'.pill[data-key="swt"]'],
+     confirm:["It’s her first coffee. Tap Taste first.",P+'[data-act="taste"]'],
+     howis:o&&o.str===1?["A little weak. Drag Strength up one level.",M+'.pill[data-key="str"]']:["Better. Tap Brew it.",M+'[data-act="brewNow"]']},
+   guest:{idle:["No phone, no badge. Tap “or start here” on the machine.",M+'[data-act="startHere"]'],
+     "n-type":o&&o.type==="Cappuccino"?["Tap Next.",M+'[data-act="goto"][data-v="n-str"]']:["Pick a Cappuccino.",M+'[data-act="type"][data-v="Cappuccino"]'],
+     "n-str":o&&o.str===5?["Tap Next.",M+'[data-act="goto"][data-v="n-swt"]']:["She wants it strong. Drag to the top, or tap Strong.",M+'.pill[data-key="str"]'],
+     "n-swt":o&&o.swt===2?["Tap Review.",M+'[data-act="review"]']:["Lightly sweet, please.",M+'.pill[data-key="swt"]'],
+     confirm:["Looks right. Tap Brew.",M+'[data-act="brew"]']}
+  };
+  return (H[st]&&H[st][S.step])||common[S.step]||["Keep going, or tap Restart to try again.",null];
+}
+function renderDemo(){
+  if(MODE!=="demo")return;
+  document.querySelectorAll(".nudge").forEach(n=>n.classList.remove("nudge"));
+  document.getElementById("cast").innerHTML=Object.entries(PEOPLE).map(([k,v])=>`<button class="who" data-act="scn" data-v="${k}" aria-pressed="${S.scn===k}"><b>${v.label}</b><small>${v.role}</small></button>`).join("");
+  const list=STORIES[S.scn],cur=list[S.story];
+  document.getElementById("story").innerHTML=`<div><div class="t">${cur.title}</div><p>${cur.intro}</p></div>${list.length>1?`<div class="chips2">${list.map((x,i)=>`<button class="sbtn" data-act="story" data-i="${i}" aria-pressed="${i===S.story}">${x.title}</button>`).join("")}</div>`:""}`;
+  const c=document.getElementById("coach");
+  if(S.won){c.className="coach win";const more=S.story+1<list.length?"Next: "+list[S.story+1].title:"Try the next person";
+    c.innerHTML=`<span class="step">Done</span><span>${cur.win}</span><span class="acts"><button data-act="restart">Play again</button><button data-act="nextStory">${more}</button></span>`;return;}
+  const h=hint();c.className="coach";
+  c.innerHTML=`<span class="step">Next</span><span>${h[0]}</span><span class="acts"><button data-act="restart">Restart</button></span>`;
+  if(h[1]){const t=document.querySelector(h[1]);if(t)t.classList.add("nudge");}
+}
+
+function renderPanel(){
+  const p=S.users[S.scn];
+  if(MODE==="full"){
+  document.getElementById("tabs").innerHTML=Object.entries(PEOPLE).map(([k,v])=>`<button class="tab" data-act="scn" data-v="${k}" aria-pressed="${S.scn===k}">${v.label}<small>${v.role}</small></button>`).join("");
+  document.getElementById("blurb").textContent=p.blurb;
+  document.getElementById("tasks").innerHTML=TASKS[S.scn].map((t,i)=>`<li><label><input type="checkbox" id="task-${S.scn}-${i}" data-task="${i}" ${S.tasks[S.scn][i]?"checked":""}><span class="n">${i+1}</span><span>${esc(t)}</span></label></li>`).join("");
+  document.getElementById("walk").disabled=!S.ctrl||!S.live;
+  document.getElementById("log").innerHTML=LOG.length?`<table><thead><tr><th>Person</th><th>Path</th><th>Tastes</th><th>Saved</th><th>Time</th></tr></thead><tbody>${LOG.map(r=>`<tr><td>${esc(r.who)}</td><td>${esc(r.path)}</td><td>${r.tastes}</td><td>${esc(r.end)}</td><td>${r.secs} s</td></tr>`).join("")}</tbody></table>`:'<div class="empty">Each finished coffee is logged here with its time.</div>';}
+  document.getElementById("hwPhone").disabled=!p.phone||(S.ctrl&&!(S.ctrl==="machine"&&S.who===S.scn&&PRE.includes(S.step)));
+  document.getElementById("hwBadge").disabled=!p.badge||!!S.ctrl;
+  document.getElementById("phoneLabel").textContent=p.phone?`${p.label}’s phone`:"No phone";
+  const tray=document.getElementById("tray");tray.disabled=S.step!=="place";tray.classList.toggle("want",S.step==="place");
+  tray.innerHTML=["sip","howis","brewing","ready"].includes(S.step)?'<span class="cup"></span>':(S.step==="place"?"Place cup here":"Cup tray");
+  document.getElementById("spoutzone").classList.toggle("pouring",S.step==="brewing");
+}
+function syncInputs(){const a=document.getElementById("milk"),b=document.getElementById("live");if(a)a.checked=S.milk;if(b)b.checked=S.live;}
+function render(){renderMachine();renderPhone();renderPanel();renderDemo();}
+setInterval(()=>{const c=document.getElementById("clock"),n=document.getElementById("clockNote");if(!c)return;
+  if(S.t0!=null){c.textContent=((performance.now()-S.t0)/1000).toFixed(1)+" s";n.textContent="Running";}
+  else if(S.secs!=null){c.textContent=S.secs.toFixed(1)+" s";n.textContent="Last coffee";}
+  else{c.textContent="0.0 s";n.textContent="Starts at the first tap";}},100);
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b||b.disabled)return;const a=ACT[b.dataset.act];if(!a)return;a(b);render();});
+document.addEventListener("change",e=>{if(e.target.id==="milk"){S.milk=e.target.checked;render();}else if(e.target.id==="live"){S.live=e.target.checked;render();}else if(e.target.dataset.task!=null){S.tasks[S.scn][+e.target.dataset.task]=e.target.checked;}});
+let drag=null;
+const devOf=el=>el.closest("#pscreen")?"p":"m";
+function setFromY(y){const r=drag.p.getBoundingClientRect();let v=Math.ceil((r.bottom-y)/r.height*5);v=Math.max(1,Math.min(5,v));
+  if(v!==S.order[drag.key]){S.order[drag.key]=v;patch(drag.p,v);if(drag.dev==="p")renderMachine();else renderPhone();}}
+function patch(p,v){p.querySelector(".fill").style.height=v*20+"%";p.setAttribute("aria-valuenow",v);p.setAttribute("aria-valuetext",NAMES[p.dataset.key][v-1]);
+  const sl=p.closest(".sl");if(sl)sl.querySelector(".val").textContent=NAMES[p.dataset.key][v-1];
+  const bw=p.closest(".bigwrap");if(bw)bw.querySelectorAll(".levels li").forEach((li,i)=>li.classList.toggle("on",5-i===v));}
+document.addEventListener("pointerdown",e=>{const p=e.target.closest(".pill");if(!p||p.closest(".ro"))return;e.preventDefault();p.setPointerCapture(e.pointerId);drag={p,key:p.dataset.key,dev:devOf(p)};setFromY(e.clientY);});
+document.addEventListener("pointermove",e=>{if(drag)setFromY(e.clientY);});
+const endDrag=()=>{if(drag){const {key,dev}=drag;drag=null;render();const f=document.querySelector(`#${dev==="p"?"pscreen":"mscreen"} .pill[data-key="${key}"]`);if(f)f.focus({preventScroll:true});}};
+document.addEventListener("pointerup",endDrag);document.addEventListener("pointercancel",endDrag);
+document.addEventListener("keydown",e=>{const p=e.target.closest&&e.target.closest(".pill");if(!p||p.closest(".ro"))return;
+  const d={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1}[e.key];if(!d)return;e.preventDefault();
+  const k=p.dataset.key,dev=devOf(p);S.order[k]=Math.max(1,Math.min(5,S.order[k]+d));render();
+  const f=document.querySelector(`#${dev==="p"?"pscreen":"mscreen"} .pill[data-key="${k}"]`);if(f)f.focus();});
+render();
+</script>
+
+</body>
+</html>

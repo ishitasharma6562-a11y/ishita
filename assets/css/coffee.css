@@ -196,3 +196,74 @@ a.cm-chapter:hover{ border-color:var(--ink); }
   .cm-next{ padding:26px 22px; }
   .cm-chapter{ padding:11px 16px; }
 }
+
+/* ---------- chapter switching ---------- */
+.cm-chapter{ font:inherit; cursor:pointer; text-align:left; }
+.cm-chapter[aria-pressed="true"]{ background:var(--ink); border-color:var(--ink); }
+.cm-chapter[aria-pressed="true"] .cm-chapter-no{ color:rgba(255,255,255,.62); }
+.cm-chapter[aria-pressed="true"] .cm-chapter-name{ color:var(--cream); }
+.cm-chapter[aria-pressed="false"]{ background:var(--white); }
+.cm-chapter[aria-pressed="false"]:hover{ border-color:var(--ink); }
+
+/* ---------- chapter 2 pieces ---------- */
+.cm-fig{ margin:30px 0 0; }
+.cm-fig img{
+  display:block; width:100%; height:auto;
+  border:1px solid var(--line); border-radius:var(--radius-md); background:var(--white);
+}
+.cm-note{ font-size:13.5px; line-height:1.6; color:var(--graphite); max-width:76ch; }
+
+/* Chapter 2 keeps the Figma file's band rhythm: plain, soft cream, dark.
+   The dark is the exact brown the exported plates are sitting on
+   (#422314), so a plate dissolves into its band instead of floating. */
+.cm-soft{ background:var(--cream-deep); border-top:0; }
+.cm-dark{ background:#422314; border-top:0; }
+.cm-dark .cm-h2{ color:var(--cream); }
+.cm-dark .cm-p{ color:#DFD4C6; }
+.cm-dark .cm-p strong{ color:var(--cream); }
+.cm-dark .cm-label{ color:#D8B894; }
+.cm-dark .cm-note{ color:#B7A796; }
+.cm-dark .cm-quote{ color:var(--cream); border-left-color:#D8B894; }
+.cm-dark .cm-back a{ color:var(--cream); }
+.cm-dark .cm-fig img{ border-color:rgba(255,255,255,.10); background:#422314; }
+.cm-soft .cm-fig img{ background:var(--cream-deep); }
+
+.cm-demo{
+  display:inline-flex; align-items:center; gap:9px;
+  background:var(--ink); color:var(--cream); text-decoration:none;
+  border-radius:999px; padding:15px 28px; font-size:16px; font-weight:700;
+  transition:transform .2s var(--ease);
+}
+.cm-demo:hover{ transform:translateY(-2px); }
+button.cm-demo{ border:0; font-family:inherit; cursor:pointer; }
+
+/* ---------- chapter 2 plates on small screens ----------
+   The Figma plates are 1220px wide with real UI copy on them. Squashed
+   into a 327px column the labels are ~4px tall, so below tablet width
+   the figure becomes a horizontal scroller at a width that stays
+   readable, and says so. */
+.cm-swipe{ display:none; }
+@media (max-width: 860px){
+  .cm-fig{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    background:var(--white);
+  }
+  .cm-fig img{
+    width:780px; max-width:none;
+    border:0; border-radius:0; background:transparent;
+  }
+  .cm-swipe{
+    display:block;
+    position:sticky; left:0;
+    width:100%;
+    padding:8px 12px 10px;
+    font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--graphite);
+  }
+  .cm-dark .cm-fig{ border-color:rgba(255,255,255,.14); background:#422314; }
+  .cm-dark .cm-swipe{ color:#B7A796; }
+  .cm-soft .cm-fig{ background:var(--cream-deep); }
+}
