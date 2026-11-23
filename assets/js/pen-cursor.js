@@ -184,12 +184,18 @@
   window.addEventListener('mousedown', () => document.documentElement.classList.add('pen-down'));
   window.addEventListener('mouseup', () => document.documentElement.classList.remove('pen-down'));
 
-  const HOT = 'a, button, [role="button"], summary, .skill-item, .thumb-frame';
+  // Over anything clickable the pen steps aside and the native pointer comes
+  // back — the nib's hotspot is its tip, so aiming at a link or a thumbnail
+  // with it is guesswork. The CSS does the hiding; this just says when.
+  const HOT = 'a, button, [role="button"], summary, label, select,' +
+              ' .skill-item, .thumb-frame, .thumb-hit';
+  // mouseover alone, recomputed from the element entered. Pairing it with
+  // mouseout flickers: crossing between a link and its own child fires
+  // out-then-over in one tick, and the class would drop and re-add.
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest && e.target.closest(HOT)) document.documentElement.classList.add('pen-hot');
-  });
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest && e.target.closest(HOT)) document.documentElement.classList.remove('pen-hot');
+    const hot = !!(e.target.closest && e.target.closest(HOT));
+    document.documentElement.classList.toggle('pen-hot', hot);
+    if (hot) { pts.length = 0; anchors.length = 0; }
   });
 
   // If the mouse is unplugged or the viewer switches to touch, bow out cleanly.

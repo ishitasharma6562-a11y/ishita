@@ -478,8 +478,27 @@ html.pen-live .pen-ink{ opacity:1; }
   paint-order:stroke fill;
 }
 
-html.pen-hot  .pen-cursor svg{ transform:scale(1.16) rotate(-6deg); }
 html.pen-down .pen-cursor svg{ transform:scale(.88); }
+
+/* Over anything clickable the pen gets out of the way: the real arrow-and-hand
+   pointer comes back and the ink stops. The nib's hotspot is its tip, down at
+   the bottom-left of the glyph, which makes aiming at a thumbnail or a link
+   guesswork — so a target hands the native cursor back and is easy to hit.
+   (0,2,2) so it outranks the cursor:none rules above. */
+@media (hover: hover) and (pointer: fine){
+  html.pen-on.pen-hot body *{ cursor:pointer; }
+  html.pen-on.pen-hot body{ cursor:pointer; }
+}
+html.pen-hot .pen-cursor,
+html.pen-hot .pen-ink{ opacity:0; }
+
+/* The whole thumbnail opens the project. It mirrors the card's own
+   "View project" link, so it is hidden from keyboard and screen readers
+   rather than offered twice. */
+.thumb-hit{
+  position:absolute; inset:0; z-index:6;
+  display:block; border-radius:inherit;
+}
 
 @media (prefers-reduced-motion: reduce){
   .pen-cursor{ display:none; }

@@ -257,3 +257,24 @@ if (initialVideo) initialVideo.play().catch(() => {});
 // ---------- footer year ----------
 const yearEl = document.querySelector('[data-year]');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// ---------- the whole thumbnail opens the project ----------
+// The card already carries one real link ("View project"), so rather than
+// write a second href into the markup five times and risk the two drifting
+// apart, each thumbnail gets a cover link cloned from its own card.
+// aria-hidden + tabindex -1: assistive tech and the keyboard keep using the
+// visible link, and don't hear the same destination announced twice.
+document.querySelectorAll('.project-slide-inner').forEach(card => {
+  const frame = card.querySelector('.thumb-frame');
+  const link = card.querySelector('.proj-link');
+  if (!frame || !link || frame.querySelector('.thumb-hit')) return;
+
+  const hit = document.createElement('a');
+  hit.className = 'thumb-hit';
+  hit.href = link.getAttribute('href');
+  hit.setAttribute('aria-hidden', 'true');
+  hit.setAttribute('tabindex', '-1');
+  if (link.target) hit.target = link.target;
+  if (link.rel) hit.rel = link.rel;
+  frame.append(hit);
+});

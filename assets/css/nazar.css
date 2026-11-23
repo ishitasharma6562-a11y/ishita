@@ -221,3 +221,160 @@
   .nz-opt-name{ min-width:0; }
   .nz-callout{ padding:18px 20px; }
 }
+
+/* ============================================================
+   THE DECK'S REASONING
+   Everything below carries copy that only existed in the Figma
+   Slides deck: why each name, colour and mark was picked, and
+   the lines the deck opens and closes on.
+   ============================================================ */
+
+/* A slide that is one sentence. Used for the opening "haan haan,
+   sun raha hoon" hook, which is the whole thesis in one line. */
+.nz-statement{
+  padding:var(--nz-sec-y) 0;
+  background:var(--nz-maroon);
+}
+.nz-statement p{
+  margin:0;
+  max-width:24ch;
+  font-size:clamp(30px, 4.6vw, 62px);
+  font-weight:700; line-height:1.14; letter-spacing:-0.02em;
+  color:var(--nz-sand);
+}
+.nz-statement em{ font-style:italic; }
+
+/* The deck's one-line framing above a section's detail — "Supreme once
+   sold a brick. It sold out." */
+.nz-brief-line{
+  margin:0 0 clamp(20px, 2.4vw, 32px);
+  max-width:30ch;
+  font-size:clamp(22px, 2.6vw, 34px);
+  font-weight:700; line-height:1.22; letter-spacing:-0.015em;
+}
+.nz-brief-line--spaced{ margin-top:clamp(32px, 4vw, 56px); }
+
+/* The argument a section lands on, set large enough to stop the scroll. */
+.nz-pullquote{
+  margin:clamp(28px, 3.4vw, 48px) 0 0;
+  padding-left:clamp(16px, 2vw, 26px);
+  border-left:3px solid var(--nz-maroon);
+  max-width:34ch;
+  font-size:clamp(20px, 2.3vw, 30px);
+  font-weight:600; line-height:1.3; letter-spacing:-0.01em;
+}
+.nz-pullquote em{ font-style:italic; }
+
+/* Mood board: each driver and the thing it actually became. */
+.nz-drivers{
+  list-style:none; margin:clamp(20px, 2.4vw, 32px) 0 0; padding:0;
+  display:grid; gap:1px; background:var(--line);
+  max-width:70ch;
+}
+.nz-drivers li{
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  padding:16px 20px; background:var(--cream);
+}
+.nz-driver{
+  font-size:17px; font-weight:700; min-width:110px;
+}
+.nz-driver-to{ font-size:16px; color:var(--graphite); }
+.nz-driver-to::before{ content:"\2192\00a0\00a0"; color:var(--nz-maroon); }
+
+/* The six explorations, each with the reason it exists. The boards carry
+   their own notes, but at a third of the page those are ~4px tall, so the
+   name and the reason are set in real text underneath. */
+.nz-explore figure{ margin:0; }
+.nz-explore figcaption{
+  display:grid; gap:4px;
+  padding:14px 2px 0;
+}
+.nz-ex-no{
+  font-size:11px; font-weight:700; letter-spacing:0.14em;
+  color:var(--nz-maroon);
+}
+.nz-ex-name{ font-size:17px; font-weight:700; line-height:1.3; }
+.nz-ex-why{ font-size:15px; line-height:1.55; color:var(--graphite); }
+
+/* The four tests a mark had to pass. */
+.nz-test{
+  margin:clamp(24px, 3vw, 36px) 0 clamp(24px, 3vw, 36px);
+  font-size:16px; line-height:1.6;
+}
+.nz-test span{
+  display:block; margin-bottom:6px;
+  font-size:11px; font-weight:700; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--nz-maroon);
+}
+
+/* Two verdicts side by side: why one lost, why the other won. */
+.nz-verdicts{
+  display:grid; gap:clamp(24px, 3vw, 40px);
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  margin-top:clamp(8px, 1vw, 16px);
+}
+
+/* Where the dot on the temple comes from. */
+.nz-origin{
+  margin:0 0 clamp(28px, 3.2vw, 44px);
+  max-width:28ch;
+  font-size:clamp(22px, 2.7vw, 36px);
+  font-weight:700; line-height:1.2; letter-spacing:-0.015em;
+}
+.nz-origin span{
+  display:block; margin-top:12px;
+  font-size:clamp(15px, 1.4vw, 18px); font-weight:500; color:var(--graphite);
+}
+
+/* Colour: the board shows the four grounds but names none of them. */
+.nz-swatches{
+  list-style:none; margin:clamp(24px, 3vw, 36px) 0 0; padding:0;
+  display:grid; gap:1px; background:var(--line);
+}
+.nz-swatches li{
+  display:grid; align-items:center; gap:4px 18px;
+  grid-template-columns:28px minmax(84px, auto) minmax(84px, auto) 1fr;
+  padding:16px 20px; background:var(--cream);
+}
+.nz-chip{
+  width:28px; height:28px; border-radius:50%;
+  border:1px solid rgba(23,21,15,.18);
+}
+.nz-sw-name{ font-size:17px; font-weight:700; }
+.nz-sw-hex{
+  font-size:14px; color:var(--graphite);
+  font-variant-numeric:tabular-nums;
+}
+.nz-sw-why{ font-size:15px; line-height:1.55; color:var(--graphite); }
+
+.nz-rule{
+  margin:clamp(16px, 1.8vw, 22px) 0 0;
+  font-size:14px; line-height:1.6; color:var(--graphite); max-width:62ch;
+}
+
+/* Applications: what each piece is doing, not just that it exists. */
+.nz-apps figure{ margin:0; }
+.nz-apps figcaption{
+  display:grid; gap:3px;
+  padding:14px 2px 0;
+}
+.nz-figure--tall figcaption{
+  padding-top:14px;
+  font-size:15px; line-height:1.55; color:var(--graphite);
+}
+
+/* The line the deck ends on. */
+.nz-signoff{
+  margin:0 0 clamp(28px, 3vw, 40px);
+  max-width:26ch;
+  font-size:clamp(22px, 2.6vw, 34px);
+  font-weight:700; line-height:1.22; letter-spacing:-0.015em;
+}
+
+@media (max-width: 640px){
+  .nz-swatches li{
+    grid-template-columns:28px 1fr;
+  }
+  .nz-swatches .nz-sw-hex{ grid-column:2; }
+  .nz-swatches .nz-sw-why{ grid-column:2; }
+}
